@@ -57,15 +57,8 @@
           <pre class="card__code"><code>const mateo = {
   nom: "Mathéo Favier",
   pseudo: ["metal54400", "metal54400_"],
-  projets: [
-    "Deepstone Studio",
-    "Deepstone (Minecraft)",
-    "Hébergeur Pterodactyl"
-  ],
-  discord: {
-    studio: "discord.gg/9f8uz3XNPf",
-    serveur: "discord.gg/r5WPfZajfN"
-  }
+  projets: ["Deepstone Studio", "Deepstone (Minecraft)", "Hébergeur Pterodactyl"],
+  discord: { studio: "discord.gg/9f8uz3XNPf", serveur: "discord.gg/r5WPfZajfN" }
 };</code></pre>
         </div>
       </div>
@@ -132,6 +125,7 @@
         </div>
 
         <div class="projects">
+          <!-- Projet 01 -->
           <article class="project">
             <div class="project__badge">Projet 01</div>
             <h3>Deepstone Studio</h3>
@@ -144,28 +138,36 @@
             </div>
           </article>
 
+          <!-- Projet 02 (MAINTENANCE) -->
           <article class="project">
             <div class="project__badge">Projet 02</div>
             <h3>Serveur Minecraft — Deepstone</h3>
             <p>
-              Serveur Minecraft communautaire : gameplay, événements, progression et expérience joueur.
+              Serveur Minecraft communautaire actuellement en <strong>maintenance</strong>.
+              Objectif : une expérience stable, optimisée et évolutive.
             </p>
 
             <div class="serverBox">
               <div class="serverBox__row">
-                <span class="muted tiny">IP :</span>
-                <code class="serverBox__ip" id="serverIp">A_RENSEIGNER</code>
+                <span class="muted tiny">Statut :</span>
+                <strong class="serverStatus maintenance">Maintenance</strong>
               </div>
-              <div class="serverBox__actions">
-                <button class="btn btn--ghost btn--tiny" type="button" id="copyIpBtn">Copier l’IP</button>
-                <a class="btn btn--ghost btn--tiny" href="https://discord.gg/r5WPfZajfN" target="_blank" rel="noreferrer">Discord Serveur</a>
-              </div>
+
               <p class="tiny muted" style="margin:10px 0 0;">
-                Remplace <code>A_RENSEIGNER</code> par ton IP ou domaine.
+                Le serveur est temporairement hors ligne pour améliorations (infrastructure, performances, contenu).
               </p>
+
+              <div class="serverBox__actions">
+                <a class="btn btn--ghost btn--tiny"
+                   href="https://discord.gg/r5WPfZajfN"
+                   target="_blank" rel="noreferrer">
+                  Suivre les annonces (Discord)
+                </a>
+              </div>
             </div>
           </article>
 
+          <!-- Projet 03 -->
           <article class="project">
             <div class="project__badge">Projet 03</div>
             <h3>Hébergeur Pterodactyl</h3>
@@ -188,6 +190,7 @@
             </div>
           </article>
 
+          <!-- Projet 04 -->
           <article class="project">
             <div class="project__badge">Projet 04</div>
             <h3>Portfolio (ce site)</h3>
