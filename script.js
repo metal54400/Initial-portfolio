@@ -35,3 +35,5 @@ form?.addEventListener("submit", (e) => {
   // Remplace l'email ici :
   window.location.href = `mailto:ton.email@example.com?subject=${subject}&body=${body}`;
 });
+
+
