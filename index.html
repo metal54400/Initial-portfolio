@@ -57,8 +57,15 @@
           <pre class="card__code"><code>const mateo = {
   nom: "Mathéo Favier",
   pseudo: ["metal54400", "metal54400_"],
-  projets: ["Deepstone Studio", "Deepstone (Minecraft)", "Hébergeur Pterodactyl"],
-  discord: { studio: "discord.gg/9f8uz3XNPf", serveur: "discord.gg/r5WPfZajfN" }
+  projets: [
+    "Deepstone Studio",
+    "Deepstone (Minecraft)",
+    "Hébergeur Pterodactyl"
+  ],
+  discord: {
+    studio: "discord.gg/9f8uz3XNPf",
+    serveur: "discord.gg/r5WPfZajfN"
+  }
 };</code></pre>
         </div>
       </div>
@@ -138,13 +145,13 @@
             </div>
           </article>
 
-          <!-- Projet 02 (MAINTENANCE) -->
+          <!-- Projet 02 -->
           <article class="project">
             <div class="project__badge">Projet 02</div>
             <h3>Serveur Minecraft — Deepstone</h3>
             <p>
               Serveur Minecraft communautaire actuellement en <strong>maintenance</strong>.
-              Objectif : une expérience stable, optimisée et évolutive.
+              Version visée : <strong>1.21.11</strong>.
             </p>
 
             <div class="serverBox">
@@ -153,17 +160,29 @@
                 <strong class="serverStatus maintenance">Maintenance</strong>
               </div>
 
-              <p class="tiny muted" style="margin:10px 0 0;">
-                Le serveur est temporairement hors ligne pour améliorations (infrastructure, performances, contenu).
-              </p>
+              <div class="serverBox__row" style="margin-top:10px;">
+                <span class="muted tiny">Version :</span>
+                <code class="serverBox__pill">1.21.11</code>
+              </div>
+
+              <div class="serverBox__row" style="margin-top:10px;">
+                <span class="muted tiny">IP :</span>
+                <code class="serverBox__ip" id="serverIp">5.48.143.126:25565</code>
+              </div>
 
               <div class="serverBox__actions">
+                <button class="btn btn--ghost btn--tiny" type="button" id="copyIpBtn">Copier l’IP</button>
                 <a class="btn btn--ghost btn--tiny"
                    href="https://discord.gg/r5WPfZajfN"
                    target="_blank" rel="noreferrer">
-                  Suivre les annonces (Discord)
+                  Discord Serveur
                 </a>
               </div>
+
+              <p class="tiny muted" style="margin:10px 0 0;">
+                Le serveur est temporairement hors ligne pour améliorations (performances, contenu, stabilité).
+                Suis les annonces sur Discord.
+              </p>
             </div>
           </article>
 
