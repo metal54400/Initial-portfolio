@@ -358,3 +358,48 @@ input:focus, textarea:focus{
   }
   .nav__links.is-open{display:flex}
 }
+
+.project__top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
+}
+
+.statusBadge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background: rgba(255,255,255,.04);
+  font-weight:900;
+  font-size:12px;
+  color: var(--text);
+  user-select:none;
+  white-space:nowrap;
+}
+
+.statusBadge__dot{
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background: #4dff88;
+  box-shadow: 0 0 0 0 rgba(77,255,136,.55);
+  animation: pulseDot 1.3s ease-in-out infinite;
+}
+
+/* Variante "dev" (vert) */
+.statusBadge--dev{
+  border-color: rgba(77,255,136,.35);
+  background: rgba(77,255,136,.10);
+}
+
+/* Animation du point */
+@keyframes pulseDot{
+  0%   { box-shadow: 0 0 0 0 rgba(77,255,136,.55); transform: scale(1); }
+  60%  { box-shadow: 0 0 0 10px rgba(77,255,136,0); transform: scale(1.05); }
+  100% { box-shadow: 0 0 0 0 rgba(77,255,136,0); transform: scale(1); }
+}
