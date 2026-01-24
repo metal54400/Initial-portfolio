@@ -33,7 +33,7 @@ form?.addEventListener("submit", (e) => {
   const body = encodeURIComponent(`Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
 
   // Remplace l'email ici :
-  window.location.href = `mailto:ton.email@example.com?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:deepstone.studio@gmail.com?subject=${subject}&body=${body}`;
 });
 
 
