@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfolio — Mathéo Favier (metal54400)</title>
-  <meta name="description" content="Portfolio de Mathéo Favier (metal54400) — Deepstone Studio, projets et contact." />
+  <meta name="description" content="Portfolio de Mathéo Favier (metal54400) — Deepstone Studio, serveur Minecraft Deepstone, hébergeur Pterodactyl." />
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
   <header class="header" id="top">
     <nav class="nav container">
@@ -24,12 +25,12 @@
 
     <section class="hero container">
       <div class="hero__text">
-        <p class="kicker">Créateur • Communauté • Projets</p>
+        <p class="kicker">Créateur • Communauté • Infrastructure</p>
         <h1>Salut, moi c’est <span>Mathéo Favier</span>.</h1>
         <p class="subtitle">
           Sous le pseudo <strong>metal54400</strong> (ou <strong>metal54400_</strong>),
-          je crée des projets autour du web et du gaming, dont <strong>Deepstone Studio</strong>
-          et le serveur Minecraft <strong>Deepstone</strong>.
+          je développe des projets autour du gaming et du web : <strong>Deepstone Studio</strong>,
+          le serveur Minecraft <strong>Deepstone</strong>, et un hébergement multi-jeux via <strong>Pterodactyl</strong>.
         </p>
 
         <div class="hero__cta">
@@ -40,9 +41,9 @@
         <div class="hero__meta">
           <a href="https://github.com/metal54400" target="_blank" rel="noreferrer">GitHub</a>
           <span>•</span>
-          <a href="#" target="_blank" rel="noreferrer">Discord / Serveur</a>
+          <a href="https://discord.gg/9f8uz3XNPf" target="_blank" rel="noreferrer">Discord Studio</a>
           <span>•</span>
-          <a href="#contact">Email</a>
+          <a href="https://discord.gg/r5WPfZajfN" target="_blank" rel="noreferrer">Discord Serveur</a>
         </div>
       </div>
 
@@ -56,8 +57,15 @@
           <pre class="card__code"><code>const mateo = {
   nom: "Mathéo Favier",
   pseudo: ["metal54400", "metal54400_"],
-  projets: ["Deepstone Studio", "Deepstone (Minecraft)"],
-  objectif: "Construire des projets cool + une communauté"
+  projets: [
+    "Deepstone Studio",
+    "Deepstone (Minecraft)",
+    "Hébergeur Pterodactyl"
+  ],
+  discord: {
+    studio: "discord.gg/9f8uz3XNPf",
+    serveur: "discord.gg/r5WPfZajfN"
+  }
 };</code></pre>
         </div>
       </div>
@@ -70,22 +78,28 @@
         <h2>À propos</h2>
         <p class="lead">
           Je m’appelle <strong>Mathéo Favier</strong>. Je construis des projets créatifs,
-          je développe une communauté, et je travaille sur l’identité et l’univers de <strong>Deepstone</strong>.
+          je développe une communauté, et je travaille sur l’univers de <strong>Deepstone</strong>.
         </p>
 
         <div class="grid-2">
           <div class="panel">
             <h3>Deepstone Studio</h3>
             <p>
-              Deepstone Studio est mon espace de création : projets, idées et contenus autour du gaming
-              et des expériences en ligne.
+              Mon espace de création : projets, idées et développement autour du gaming et des expériences en ligne.
+            </p>
+            <p class="muted tiny">
+              Discord : <a href="https://discord.gg/9f8uz3XNPf" target="_blank" rel="noreferrer">discord.gg/9f8uz3XNPf</a>
             </p>
           </div>
+
           <div class="panel">
             <h3>Serveur Minecraft Deepstone</h3>
             <p>
               Je développe et anime le serveur Minecraft <strong>Deepstone</strong> : communauté,
-              événements, et progression sur le long terme.
+              événements, et expérience joueur.
+            </p>
+            <p class="muted tiny">
+              Discord : <a href="https://discord.gg/r5WPfZajfN" target="_blank" rel="noreferrer">discord.gg/r5WPfZajfN</a>
             </p>
           </div>
         </div>
@@ -95,11 +109,13 @@
     <section class="section" id="skills">
       <div class="container">
         <h2>Compétences</h2>
-        <p class="muted">Ce que je touche / ce que je construis autour de mes projets.</p>
+        <p class="muted">Ce que je construis et gère autour de mes projets.</p>
 
         <div class="chips">
           <span class="chip">Gestion de communauté</span>
-          <span class="chip">Création de serveur Minecraft</span>
+          <span class="chip">Création/gestion de serveurs</span>
+          <span class="chip">Pterodactyl Panel</span>
+          <span class="chip">Infrastructure multi-jeux</span>
           <span class="chip">Organisation d’événements</span>
           <span class="chip">Branding / identité</span>
           <span class="chip">Git / GitHub</span>
@@ -112,7 +128,7 @@
       <div class="container">
         <div class="section__head">
           <h2>Projets</h2>
-          <p class="muted">Deux projets phares — Deepstone Studio & Deepstone Minecraft.</p>
+          <p class="muted">Deepstone Studio, Deepstone Minecraft, hébergement Pterodactyl.</p>
         </div>
 
         <div class="projects">
@@ -120,11 +136,10 @@
             <div class="project__badge">Projet 01</div>
             <h3>Deepstone Studio</h3>
             <p>
-              Studio / marque de création : je construis l’univers Deepstone et je lance des projets
-              autour du gaming et du web.
+              Studio / marque de création : je construis l’univers Deepstone et je lance des projets autour du gaming et du web.
             </p>
             <div class="project__links">
-              <a href="#" target="_blank" rel="noreferrer">Site / Page</a>
+              <a href="https://discord.gg/9f8uz3XNPf" target="_blank" rel="noreferrer">Discord Studio</a>
               <a href="https://github.com/metal54400" target="_blank" rel="noreferrer">GitHub</a>
             </div>
           </article>
@@ -135,21 +150,53 @@
             <p>
               Serveur Minecraft communautaire : gameplay, événements, progression et expérience joueur.
             </p>
-            <div class="project__links">
-              <a href="#" target="_blank" rel="noreferrer">Discord / Infos</a>
-              <a href="#" target="_blank" rel="noreferrer">IP / Site</a>
+
+            <div class="serverBox">
+              <div class="serverBox__row">
+                <span class="muted tiny">IP :</span>
+                <code class="serverBox__ip" id="serverIp">A_RENSEIGNER</code>
+              </div>
+              <div class="serverBox__actions">
+                <button class="btn btn--ghost btn--tiny" type="button" id="copyIpBtn">Copier l’IP</button>
+                <a class="btn btn--ghost btn--tiny" href="https://discord.gg/r5WPfZajfN" target="_blank" rel="noreferrer">Discord Serveur</a>
+              </div>
+              <p class="tiny muted" style="margin:10px 0 0;">
+                Remplace <code>A_RENSEIGNER</code> par ton IP ou domaine.
+              </p>
             </div>
           </article>
 
           <article class="project">
             <div class="project__badge">Projet 03</div>
+            <h3>Hébergeur Pterodactyl</h3>
+            <p>
+              Infrastructure d’hébergement basée sur <strong>Pterodactyl</strong> :
+              <strong>Minecraft</strong>, <strong>FiveM</strong>, <strong>bots Discord</strong>,
+              et autres jeux. <strong>Hytale</strong> est en <em>accès privé</em>.
+            </p>
+
+            <ul class="project__list">
+              <li>✔ Gestion multi-jeux</li>
+              <li>✔ Allocation CPU / RAM / Stockage</li>
+              <li>✔ Sécurité & maintenance</li>
+              <li>✔ Accès privé pour projets sensibles (Hytale)</li>
+            </ul>
+
+            <div class="project__links">
+              <a href="https://discord.gg/9f8uz3XNPf" target="_blank" rel="noreferrer">Discord Studio</a>
+              <a href="#" title="Panel privé">Panel privé</a>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project__badge">Projet 04</div>
             <h3>Portfolio (ce site)</h3>
             <p>
-              Mon portfolio open-source : page claire, responsive et simple à mettre à jour.
+              Mon portfolio open-source : page claire, responsive et facile à mettre à jour.
             </p>
             <div class="project__links">
               <a href="#top">Retour haut</a>
-              <a href="#" target="_blank" rel="noreferrer">Repo</a>
+              <a href="#" title="Ajoute le lien du repo ici">Repo</a>
             </div>
           </article>
         </div>
@@ -159,7 +206,7 @@
     <section class="section" id="contact">
       <div class="container">
         <h2>Contact</h2>
-        <p class="muted">Écris-moi (le bouton ouvre ton client mail).</p>
+        <p class="muted">Envoie-moi un message (le bouton ouvre ton client mail).</p>
 
         <form class="form" id="contactForm">
           <div class="grid-2">
@@ -196,7 +243,8 @@
       <p>© <span id="year"></span> Mathéo Favier — metal54400.</p>
       <div class="footer__links">
         <a href="https://github.com/metal54400" target="_blank" rel="noreferrer">GitHub</a>
-        <a href="#top">Haut</a>
+        <a href="https://discord.gg/9f8uz3XNPf" target="_blank" rel="noreferrer">Discord Studio</a>
+        <a href="https://discord.gg/r5WPfZajfN" target="_blank" rel="noreferrer">Discord Serveur</a>
       </div>
     </div>
   </footer>
