@@ -1,3 +1,7 @@
+// ==== Réglages rapides ====
+const TARGET_EMAIL = "deepstone.studio@gmail.com"; // <-- remplace par ton email
+// =========================
+
 // Menu mobile
 const toggle = document.querySelector(".nav__toggle");
 const links = document.querySelector(".nav__links");
@@ -8,7 +12,6 @@ if (toggle && links) {
     toggle.setAttribute("aria-expanded", String(open));
   });
 
-  // Fermer le menu quand on clique un lien
   links.querySelectorAll("a").forEach(a => {
     a.addEventListener("click", () => {
       links.classList.remove("is-open");
@@ -18,9 +21,10 @@ if (toggle && links) {
 }
 
 // Année footer
-document.getElementById("year").textContent = new Date().getFullYear();
+const yearEl = document.getElementById("year");
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// Formulaire -> mailto (simple sans backend)
+// Formulaire -> mailto
 const form = document.getElementById("contactForm");
 form?.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -32,8 +36,22 @@ form?.addEventListener("submit", (e) => {
   const subject = encodeURIComponent(`Contact Portfolio — ${name}`);
   const body = encodeURIComponent(`Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
 
-  // Remplace l'email ici :
-  window.location.href = `mailto:deepstone.studio@gmail.com?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:${TARGET_EMAIL}?subject=${subject}&body=${body}`;
 });
 
+// Copier l'IP
+const copyBtn = document.getElementById("copyIpBtn");
+const ipEl = document.getElementById("serverIp");
 
+copyBtn?.addEventListener("click", async () => {
+  const ip = ipEl?.textContent?.trim() || "";
+  if (!ip) return;
+
+  try {
+    await navigator.clipboard.writeText(ip);
+    copyBtn.textContent = "Copié ✅";
+    setTimeout(() => (copyBtn.textContent = "Copier l’IP"), 1200);
+  } catch {
+    alert("Impossible de copier automatiquement. Copie manuellement l'IP : " + ip);
+  }
+});
