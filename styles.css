@@ -262,18 +262,25 @@ h1 span{
   justify-content:space-between;
   gap:12px;
 }
-.serverBox__ip{
-  padding: 6px 10px;
-  border-radius: 12px;
-  border:1px solid var(--border);
-  background: rgba(255,255,255,.04);
-  color: var(--text);
-}
 .serverBox__actions{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
   margin-top: 10px;
+}
+
+/* Statut serveur */
+.serverStatus{
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 12px;
+  border: 1px solid var(--border);
+}
+.serverStatus.maintenance{
+  background: rgba(255, 190, 90, 0.15);
+  color: #ffcc66;
+  border-color: rgba(255, 190, 90, 0.4);
 }
 
 .form{
