@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio — Ton Nom</title>
-  <meta name="description" content="Portfolio de Ton Nom : projets, compétences et contact." />
+  <title>Portfolio — Mathéo Favier (metal54400)</title>
+  <meta name="description" content="Portfolio de Mathéo Favier (metal54400) — Deepstone Studio, projets et contact." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="header" id="top">
-    <nav class="nav">
-      <a class="logo" href="#top">TN<span>.</span></a>
+    <nav class="nav container">
+      <a class="logo" href="#top">MF<span>.</span></a>
+
       <button class="nav__toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+
       <div class="nav__links">
         <a href="#about">À propos</a>
         <a href="#skills">Compétences</a>
@@ -20,22 +22,25 @@
       </div>
     </nav>
 
-    <section class="hero">
+    <section class="hero container">
       <div class="hero__text">
-        <p class="kicker">Développeur / Designer / Étudiant</p>
-        <h1>Salut, moi c’est <span>Ton Nom</span>.</h1>
+        <p class="kicker">Créateur • Communauté • Projets</p>
+        <h1>Salut, moi c’est <span>Mathéo Favier</span>.</h1>
         <p class="subtitle">
-          Je construis des sites web modernes, rapides et beaux. Voici mes projets et comment me contacter.
+          Sous le pseudo <strong>metal54400</strong> (ou <strong>metal54400_</strong>),
+          je crée des projets autour du web et du gaming, dont <strong>Deepstone Studio</strong>
+          et le serveur Minecraft <strong>Deepstone</strong>.
         </p>
+
         <div class="hero__cta">
           <a class="btn" href="#projects">Voir mes projets</a>
           <a class="btn btn--ghost" href="#contact">Me contacter</a>
         </div>
 
         <div class="hero__meta">
-          <a href="https://github.com/TON-USERNAME" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://github.com/metal54400" target="_blank" rel="noreferrer">GitHub</a>
           <span>•</span>
-          <a href="https://www.linkedin.com/in/TON-PROFIL" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="#" target="_blank" rel="noreferrer">Discord / Serveur</a>
           <span>•</span>
           <a href="#contact">Email</a>
         </div>
@@ -48,11 +53,11 @@
             <div class="dot dot--y"></div>
             <div class="dot dot--g"></div>
           </div>
-          <pre class="card__code"><code>const moi = {
-  nom: "Ton Nom",
-  stack: ["HTML", "CSS", "JS"],
-  focus: "Web moderne",
-  dispo: true
+          <pre class="card__code"><code>const mateo = {
+  nom: "Mathéo Favier",
+  pseudo: ["metal54400", "metal54400_"],
+  projets: ["Deepstone Studio", "Deepstone (Minecraft)"],
+  objectif: "Construire des projets cool + une communauté"
 };</code></pre>
         </div>
       </div>
@@ -64,20 +69,23 @@
       <div class="container">
         <h2>À propos</h2>
         <p class="lead">
-          Décris-toi ici en 3–5 lignes : ton parcours, ce que tu aimes faire, ce que tu recherches.
+          Je m’appelle <strong>Mathéo Favier</strong>. Je construis des projets créatifs,
+          je développe une communauté, et je travaille sur l’identité et l’univers de <strong>Deepstone</strong>.
         </p>
 
         <div class="grid-2">
           <div class="panel">
-            <h3>Ce que je fais</h3>
+            <h3>Deepstone Studio</h3>
             <p>
-              Landing pages, sites vitrines, intégrations Figma → code, animations légères, optimisation perf & SEO.
+              Deepstone Studio est mon espace de création : projets, idées et contenus autour du gaming
+              et des expériences en ligne.
             </p>
           </div>
           <div class="panel">
-            <h3>Ce que je cherche</h3>
+            <h3>Serveur Minecraft Deepstone</h3>
             <p>
-              Stage / alternance / missions freelance. J’aime les projets clairs, utiles, et bien designés.
+              Je développe et anime le serveur Minecraft <strong>Deepstone</strong> : communauté,
+              événements, et progression sur le long terme.
             </p>
           </div>
         </div>
@@ -87,17 +95,15 @@
     <section class="section" id="skills">
       <div class="container">
         <h2>Compétences</h2>
-        <p class="muted">Quelques technos et outils que j’utilise.</p>
+        <p class="muted">Ce que je touche / ce que je construis autour de mes projets.</p>
 
         <div class="chips">
-          <span class="chip">HTML</span>
-          <span class="chip">CSS</span>
-          <span class="chip">JavaScript</span>
-          <span class="chip">Responsive</span>
+          <span class="chip">Gestion de communauté</span>
+          <span class="chip">Création de serveur Minecraft</span>
+          <span class="chip">Organisation d’événements</span>
+          <span class="chip">Branding / identité</span>
           <span class="chip">Git / GitHub</span>
-          <span class="chip">Figma</span>
-          <span class="chip">SEO</span>
-          <span class="chip">Node.js (option)</span>
+          <span class="chip">Web (HTML/CSS/JS)</span>
         </div>
       </div>
     </section>
@@ -106,37 +112,44 @@
       <div class="container">
         <div class="section__head">
           <h2>Projets</h2>
-          <p class="muted">Remplace les cartes avec tes vrais projets (screenshots + liens).</p>
+          <p class="muted">Deux projets phares — Deepstone Studio & Deepstone Minecraft.</p>
         </div>
 
         <div class="projects">
           <article class="project">
             <div class="project__badge">Projet 01</div>
-            <h3>Site vitrine — Restaurant</h3>
-            <p>Landing page responsive avec menu, galerie, CTA réservation, et optimisation perf.</p>
+            <h3>Deepstone Studio</h3>
+            <p>
+              Studio / marque de création : je construis l’univers Deepstone et je lance des projets
+              autour du gaming et du web.
+            </p>
             <div class="project__links">
-              <a href="#" target="_blank" rel="noreferrer">Demo</a>
-              <a href="#" target="_blank" rel="noreferrer">Code</a>
+              <a href="#" target="_blank" rel="noreferrer">Site / Page</a>
+              <a href="https://github.com/metal54400" target="_blank" rel="noreferrer">GitHub</a>
             </div>
           </article>
 
           <article class="project">
             <div class="project__badge">Projet 02</div>
-            <h3>Dashboard — Stats</h3>
-            <p>Tableau de bord avec graphiques simples et filtres (JS), design moderne.</p>
+            <h3>Serveur Minecraft — Deepstone</h3>
+            <p>
+              Serveur Minecraft communautaire : gameplay, événements, progression et expérience joueur.
+            </p>
             <div class="project__links">
-              <a href="#" target="_blank" rel="noreferrer">Demo</a>
-              <a href="#" target="_blank" rel="noreferrer">Code</a>
+              <a href="#" target="_blank" rel="noreferrer">Discord / Infos</a>
+              <a href="#" target="_blank" rel="noreferrer">IP / Site</a>
             </div>
           </article>
 
           <article class="project">
             <div class="project__badge">Projet 03</div>
-            <h3>Portfolio — Minimal</h3>
-            <p>Version alternative minimaliste, animations légères, accessibilité.</p>
+            <h3>Portfolio (ce site)</h3>
+            <p>
+              Mon portfolio open-source : page claire, responsive et simple à mettre à jour.
+            </p>
             <div class="project__links">
-              <a href="#" target="_blank" rel="noreferrer">Demo</a>
-              <a href="#" target="_blank" rel="noreferrer">Code</a>
+              <a href="#top">Retour haut</a>
+              <a href="#" target="_blank" rel="noreferrer">Repo</a>
             </div>
           </article>
         </div>
@@ -146,7 +159,7 @@
     <section class="section" id="contact">
       <div class="container">
         <h2>Contact</h2>
-        <p class="muted">Envoie-moi un message. (Le bouton utilise ton client mail.)</p>
+        <p class="muted">Écris-moi (le bouton ouvre ton client mail).</p>
 
         <form class="form" id="contactForm">
           <div class="grid-2">
@@ -159,6 +172,7 @@
               <input name="email" type="email" placeholder="ton@email.com" required />
             </label>
           </div>
+
           <label>
             Message
             <textarea name="message" rows="5" placeholder="Ton message..." required></textarea>
@@ -170,7 +184,7 @@
           </div>
 
           <p class="tiny muted">
-            Astuce : tu peux aussi mettre ton email et téléphone directement ici.
+            Remplace l’email dans <code>script.js</code> pour recevoir les messages.
           </p>
         </form>
       </div>
@@ -179,9 +193,9 @@
 
   <footer class="footer">
     <div class="container footer__inner">
-      <p>© <span id="year"></span> Ton Nom. Tous droits réservés.</p>
+      <p>© <span id="year"></span> Mathéo Favier — metal54400.</p>
       <div class="footer__links">
-        <a href="https://github.com/TON-USERNAME" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://github.com/metal54400" target="_blank" rel="noreferrer">GitHub</a>
         <a href="#top">Haut</a>
       </div>
     </div>
