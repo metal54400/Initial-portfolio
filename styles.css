@@ -88,6 +88,7 @@ a:hover{opacity:.9}
   box-shadow: none;
 }
 .btn--small{padding:10px 14px; font-weight:800}
+.btn--tiny{padding:9px 12px; font-weight:800; border-radius:12px}
 
 .hero{
   display:grid;
@@ -116,13 +117,14 @@ h1 span{
   color:transparent;
 }
 
-.subtitle{color:var(--muted); margin:0 0 18px; max-width:56ch}
+.subtitle{color:var(--muted); margin:0 0 18px; max-width:60ch}
 .hero__cta{display:flex; gap:12px; flex-wrap:wrap}
 
 .hero__meta{
   display:flex; gap:10px; align-items:center;
   margin-top:18px;
   color:var(--muted);
+  flex-wrap:wrap;
 }
 .hero__meta a{color:var(--muted)}
 .hero__meta a:hover{color:var(--text)}
@@ -153,7 +155,7 @@ h1 span{
 
 .section{padding:56px 0}
 .section h2{margin:0 0 10px; font-size:28px}
-.lead{color:var(--text); max-width:70ch}
+.lead{color:var(--text); max-width:76ch}
 .muted{color:var(--muted)}
 .tiny{font-size:13px}
 
@@ -198,7 +200,7 @@ h1 span{
 
 .projects{
   display:grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap:16px;
 }
 .project{
@@ -224,11 +226,13 @@ h1 span{
   margin-bottom:10px;
 }
 .project h3{margin:0 0 8px}
-.project p{margin:0 0 14px; color:var(--muted)}
+.project p{margin:0 0 12px; color:var(--muted)}
+
 .project__links{
   display:flex;
   gap:12px;
   align-items:center;
+  flex-wrap:wrap;
 }
 .project__links a{
   color:var(--text);
@@ -236,6 +240,41 @@ h1 span{
   border-bottom:1px dashed rgba(255,255,255,.25);
 }
 .project__links a:hover{border-bottom-color: rgba(255,255,255,.6)}
+
+.project__list{
+  margin: 10px 0 12px;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.project__list li{ margin-bottom: 6px; }
+
+.serverBox{
+  margin-top: 12px;
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,.12);
+  border-radius: 16px;
+  padding: 14px;
+}
+.serverBox__row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.serverBox__ip{
+  padding: 6px 10px;
+  border-radius: 12px;
+  border:1px solid var(--border);
+  background: rgba(255,255,255,.04);
+  color: var(--text);
+}
+.serverBox__actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top: 10px;
+}
 
 .form{
   margin-top:16px;
@@ -280,7 +319,7 @@ input:focus, textarea:focus{
   flex-wrap:wrap;
   color:var(--muted);
 }
-.footer__links{display:flex; gap:14px}
+.footer__links{display:flex; gap:14px; flex-wrap:wrap}
 .footer__links a{color:var(--muted)}
 .footer__links a:hover{color:var(--text)}
 
