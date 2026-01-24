@@ -262,6 +262,14 @@ h1 span{
   justify-content:space-between;
   gap:12px;
 }
+.serverBox__ip,
+.serverBox__pill{
+  padding: 6px 10px;
+  border-radius: 12px;
+  border:1px solid var(--border);
+  background: rgba(255,255,255,.04);
+  color: var(--text);
+}
 .serverBox__actions{
   display:flex;
   gap:10px;
