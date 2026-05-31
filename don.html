@@ -295,7 +295,7 @@
           <div class="w-10 h-10 rounded-xl bg-[rgba(88,101,242,.2)] border border-[rgba(88,101,242,.35)] flex items-center justify-center text-xl">💬</div>
           <div class="flex-1">
             <p class="font-semibold text-[14px]">Rejoins la communauté</p>
-            <p class="text-[#a9b4d0] text-[13px]">none</p>
+            <p class="text-[#a9b4d0] text-[13px]">discord.gg/rjgh5WDFbD</p>
           </div>
           <span class="text-[#a9b4d0] group-hover:translate-x-1 transition-transform">→</span>
         </a>
@@ -304,9 +304,21 @@
       <!-- RIGHT — Formulaire de don -->
       <div class="glass rounded-2xl p-6 fade-up delay-2">
         <h2 class="syne font-black text-xl mb-1">Faire un don</h2>
-        <p class="text-[#a9b4d0] text-[13px] mb-5">Choisis ou saisis le montant de ton choix.</p>
+        <p class="text-[#a9b4d0] text-[13px] mb-4">Choisis ta méthode et le montant de ton choix.</p>
 
-        <!-- Presets -->
+        <!-- Sélecteur méthode -->
+        <div class="flex gap-2 mb-5">
+          <button id="tabStripe" class="method-tab active-stripe py-2.5 rounded-[12px] flex items-center justify-center gap-2" onclick="switchMethod('stripe')">
+            <svg width="18" viewBox="0 0 60 25" fill="none"><path d="M27.5 10.5c0-1.4 1.1-2 2.9-2 2.6 0 5.9.8 8.5 2.2V4.2C36.3 2.8 33.8 2 30.4 2c-5.9 0-9.9 3.1-9.9 8.2 0 8 11 6.7 11 10.2 0 1.6-1.4 2.2-3.3 2.2-2.8 0-6.5-1.2-9.4-2.8v6.6c3.2 1.4 6.4 2 9.4 2 6.1 0 10.3-3 10.3-8.2-.1-8.6-11.1-7.1-11.1-9.7z" fill="currentColor"/></svg>
+            Carte · Stripe
+          </button>
+          <button id="tabPaypal" class="method-tab py-2.5 rounded-[12px] flex items-center justify-center gap-2" onclick="switchMethod('paypal')">
+            <svg width="14" height="18" viewBox="0 0 14 18" fill="none"><path d="M11.5 2C10.8 1.3 9.7 1 8.2 1H3.4c-.4 0-.7.3-.7.6L.5 13.9c0 .2.2.4.4.4H3.6l.7-4.2v.1c.1-.4.4-.6.7-.6h1.5c2.9 0 5.1-1.2 5.8-4.5 0-.3.1-.5.1-.8-.2-.9-.5-1.4-.9-1.9z" fill="#009cde"/><path d="M11.5 2l-.3-.1h-1.2H5.9c-.1 0-.2 0-.3.1-.2.1-.4.3-.5.6L4.2 10v.1c.1-.4.4-.6.7-.6h1.5c2.9 0 5.1-1.2 5.8-4.5 0-.3.1-.5.1-.8-.2-.4-.4-.7-.8-1.2z" fill="#012169"/></svg>
+            PayPal
+          </button>
+        </div>
+
+        <!-- Presets (communs) -->
         <div class="grid grid-cols-4 gap-2 mb-4" id="presets">
           <button class="preset rounded-xl py-2.5 text-[14px]" data-amount="2">2€</button>
           <button class="preset rounded-xl py-2.5 text-[14px]" data-amount="5">5€</button>
@@ -327,38 +339,54 @@
           <span id="amountValue" class="syne font-black text-xl gradient-text">0€</span>
         </div>
 
-        <!-- Stripe Card Element -->
-        <div class="mb-4">
-          <label class="block text-[13px] font-semibold text-[#a9b4d0] mb-2">Informations de paiement</label>
-          <div id="card-element"></div>
-          <p id="card-errors" class="text-[#ff6b6b] text-[12px] mt-2 hidden"></p>
+        <!-- ── BLOC STRIPE ── -->
+        <div id="stripeBlock">
+          <div class="mb-4">
+            <label class="block text-[13px] font-semibold text-[#a9b4d0] mb-2">Informations de paiement</label>
+            <div id="card-element"></div>
+            <p id="card-errors" class="text-[#ff6b6b] text-[12px] mt-2 hidden"></p>
+          </div>
+          <div class="mb-5">
+            <label class="block text-[13px] font-semibold text-[#a9b4d0] mb-2">Email (reçu facultatif)</label>
+            <input id="emailInput" type="email" placeholder="ton@email.com"
+              class="w-full px-4 py-3 rounded-[14px] bg-black/25 border border-white/10 text-[#e9eefc] outline-none focus:border-[rgba(124,92,255,.5)] focus:shadow-[0_0_0_3px_rgba(124,92,255,.12)] transition-all text-[14px] placeholder-white/20" />
+          </div>
+          <button id="payBtn" class="btn-pay w-full py-4 rounded-[14px] text-[16px] tracking-wide flex items-center justify-center gap-2.5" disabled>
+            <span id="payBtnText">Sélectionne un montant</span>
+            <span>🔒</span>
+          </button>
+          <div class="flex items-center justify-center gap-2 mt-3 text-[#a9b4d0] text-[12px]">
+            <svg width="34" viewBox="0 0 60 25" fill="none"><path d="M27.5 10.5c0-1.4 1.1-2 2.9-2 2.6 0 5.9.8 8.5 2.2V4.2C36.3 2.8 33.8 2 30.4 2c-5.9 0-9.9 3.1-9.9 8.2 0 8 11 6.7 11 10.2 0 1.6-1.4 2.2-3.3 2.2-2.8 0-6.5-1.2-9.4-2.8v6.6c3.2 1.4 6.4 2 9.4 2 6.1 0 10.3-3 10.3-8.2-.1-8.6-11.1-7.1-11.1-9.7z" fill="#a9b4d0"/></svg>
+            <span>Paiement sécurisé par Stripe · SSL</span>
+          </div>
         </div>
 
-        <!-- Email -->
-        <div class="mb-5">
-          <label class="block text-[13px] font-semibold text-[#a9b4d0] mb-2">Email (reçu facultatif)</label>
-          <input id="emailInput" type="email" placeholder="ton@email.com"
-            class="w-full px-4 py-3 rounded-[14px] bg-black/25 border border-white/10 text-[#e9eefc] outline-none focus:border-[rgba(124,92,255,.5)] focus:shadow-[0_0_0_3px_rgba(124,92,255,.12)] transition-all text-[14px] placeholder-white/20" />
-        </div>
+        <!-- ── BLOC PAYPAL ── -->
+        <div id="paypalBlock" class="hidden">
+          <div class="glass rounded-2xl p-5 mb-4 text-center border border-[rgba(0,156,222,.2)]">
+            <div class="flex items-center justify-center gap-2 mb-2">
+              <svg width="20" height="24" viewBox="0 0 14 18" fill="none"><path d="M11.5 2C10.8 1.3 9.7 1 8.2 1H3.4c-.4 0-.7.3-.7.6L.5 13.9c0 .2.2.4.4.4H3.6l.7-4.2v.1c.1-.4.4-.6.7-.6h1.5c2.9 0 5.1-1.2 5.8-4.5 0-.3.1-.5.1-.8-.2-.9-.5-1.4-.9-1.9z" fill="#009cde"/><path d="M11.5 2l-.3-.1h-1.2H5.9c-.1 0-.2 0-.3.1-.2.1-.4.3-.5.6L4.2 10v.1c.1-.4.4-.6.7-.6h1.5c2.9 0 5.1-1.2 5.8-4.5 0-.3.1-.5.1-.8-.2-.4-.4-.7-.8-1.2z" fill="#012169"/></svg>
+              <span class="syne font-black text-[15px] text-[#009cde]">Don via PayPal.me</span>
+            </div>
+            <p class="text-[#a9b4d0] text-[13px] mb-1">Tu seras redirigé vers PayPal avec le montant pré-rempli.</p>
+            <p class="text-[#a9b4d0] text-[12px]">Aucun compte PayPal requis · Carte bancaire acceptée.</p>
+          </div>
 
-        <!-- Submit -->
-        <button id="payBtn" class="btn-pay w-full py-4 rounded-[14px] text-[16px] tracking-wide flex items-center justify-center gap-2.5" disabled>
-          <span id="payBtnText">Sélectionne un montant</span>
-          <span id="payBtnIcon">🔒</span>
-        </button>
+          <button id="paypalBtn" class="btn-paypal w-full py-4 rounded-[14px] text-[16px] tracking-wide flex items-center justify-center gap-3" disabled>
+            <svg width="20" height="26" viewBox="0 0 14 18" fill="none"><path d="M11.5 2C10.8 1.3 9.7 1 8.2 1H3.4c-.4 0-.7.3-.7.6L.5 13.9c0 .2.2.4.4.4H3.6l.7-4.2v.1c.1-.4.4-.6.7-.6h1.5c2.9 0 5.1-1.2 5.8-4.5 0-.3.1-.5.1-.8-.2-.9-.5-1.4-.9-1.9z" fill="white"/><path d="M11.5 2l-.3-.1h-1.2H5.9c-.1 0-.2 0-.3.1-.2.1-.4.3-.5.6L4.2 10v.1c.1-.4.4-.6.7-.6h1.5c2.9 0 5.1-1.2 5.8-4.5 0-.3.1-.5.1-.8-.2-.4-.4-.7-.8-1.2z" fill="rgba(255,255,255,0.7)"/></svg>
+            <span id="paypalBtnText">Sélectionne un montant</span>
+          </button>
 
-        <!-- Stripe badge -->
-        <div class="flex items-center justify-center gap-2 mt-4 text-[#a9b4d0] text-[12px]">
-          <svg width="40" viewBox="0 0 60 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M27.5 10.5c0-1.4 1.1-2 2.9-2 2.6 0 5.9.8 8.5 2.2V4.2C36.3 2.8 33.8 2 30.4 2c-5.9 0-9.9 3.1-9.9 8.2 0 8 11 6.7 11 10.2 0 1.6-1.4 2.2-3.3 2.2-2.8 0-6.5-1.2-9.4-2.8v6.6c3.2 1.4 6.4 2 9.4 2 6.1 0 10.3-3 10.3-8.2-.1-8.6-11.1-7.1-11.1-9.7z" fill="#a9b4d0"/>
-          </svg>
-          <span>Paiement sécurisé par Stripe </span>
+          <div class="flex items-center justify-center gap-2 mt-3 text-[#a9b4d0] text-[12px]">
+            <span>🔒</span>
+            <span>Redirigé vers paypal.com · Sécurisé</span>
+          </div>
         </div>
 
         <!-- Config notice -->
         <div class="mt-4 p-3 rounded-xl border border-[rgba(245,197,66,.2)] bg-[rgba(245,197,66,.06)]">
           <p class="text-[12px] text-[#f5c542]">
-            ⚠️ <strong>Config requise :</strong> Remplace <code class="font-mono bg-black/20 px-1 rounded">pk_test_VOTRE_CLE</code> par ta vraie clé Stripe et connecte un backend pour finaliser les paiements.
+            ⚠️ <strong>Config requise :</strong> Remplace <code class="font-mono bg-black/20 px-1 rounded">pk_test_VOTRE_CLE</code> (Stripe) et <code class="font-mono bg-black/20 px-1 rounded">paypal.me/VOTRE_LIEN</code> (PayPal) dans le script.
           </p>
         </div>
       </div>
@@ -380,8 +408,12 @@
 
   <script>
     // ── STRIPE CONFIG ──────────────────────────────────────────────
-    // ⚠️ Remplace par ta vraie clé publique Stripe :
+    // ⚠️ Remplace par ta vraie clé PUBLIQUE Stripe (pk_live_... ou pk_test_...) :
     const STRIPE_PUBLIC_KEY = 'pk_live_51TYsYg2f2egcuUT4obSIMXsBBAVpzw0Gk18niYNgWQ5vhvV8nX5aAI6nZqEZ12RfHg1nmP2qjczVfPuX8Eb0ePzk00qDqtPro2';
+
+    // ⚠️ Remplace par l'URL de ton backend Railway/Render après déploiement :
+    // ex: 'https://orinstone-api.up.railway.app'
+    const BACKEND_URL = 'http://game-2.anda-cloud.com:25634';
     // ──────────────────────────────────────────────────────────────
 
     const stripe = Stripe(STRIPE_PUBLIC_KEY);
@@ -419,6 +451,36 @@
       else { err.classList.add('hidden'); }
     });
 
+    // ── PAYPAL CONFIG ─────────────────────────────────────────────
+    // ⚠️ Remplace par ton lien PayPal.me :
+    const PAYPAL_ME_URL = 'https://paypal.me/VOTRE_LIEN';
+    // ──────────────────────────────────────────────────────────────
+
+    // ── METHOD SWITCH ──────────────────────────────────────────────
+    let currentMethod = 'stripe';
+
+    function switchMethod(method) {
+      currentMethod = method;
+      const tabStripe  = document.getElementById('tabStripe');
+      const tabPaypal  = document.getElementById('tabPaypal');
+      const stripeBlock = document.getElementById('stripeBlock');
+      const paypalBlock = document.getElementById('paypalBlock');
+
+      if (method === 'stripe') {
+        tabStripe.className  = 'method-tab active-stripe py-2.5 rounded-[12px] flex items-center justify-center gap-2';
+        tabPaypal.className  = 'method-tab py-2.5 rounded-[12px] flex items-center justify-center gap-2';
+        stripeBlock.classList.remove('hidden');
+        paypalBlock.classList.add('hidden');
+      } else {
+        tabPaypal.className  = 'method-tab active-paypal py-2.5 rounded-[12px] flex items-center justify-center gap-2';
+        tabStripe.className  = 'method-tab py-2.5 rounded-[12px] flex items-center justify-center gap-2';
+        paypalBlock.classList.remove('hidden');
+        stripeBlock.classList.add('hidden');
+      }
+      // Re-apply amount state after switch
+      updateButtons();
+    }
+
     // ── MONTANT ────────────────────────────────────────────────────
     let selectedAmount = null;
 
@@ -428,19 +490,31 @@
     const amountValue = document.getElementById('amountValue');
     const payBtn = document.getElementById('payBtn');
     const payBtnText = document.getElementById('payBtnText');
+    const paypalBtn = document.getElementById('paypalBtn');
+    const paypalBtnText = document.getElementById('paypalBtnText');
 
-    function setAmount(val) {
-      selectedAmount = val;
-      if (val) {
+    function updateButtons() {
+      if (selectedAmount) {
         amountDisplay.classList.remove('hidden');
-        amountValue.textContent = val + '€';
-        payBtnText.textContent = `Donner ${val}€`;
+        amountValue.textContent = selectedAmount + '€';
+        // Stripe
+        payBtnText.textContent = `Donner ${selectedAmount}€ via Stripe`;
         payBtn.disabled = false;
+        // PayPal
+        paypalBtnText.textContent = `Donner ${selectedAmount}€ via PayPal`;
+        paypalBtn.disabled = false;
       } else {
         amountDisplay.classList.add('hidden');
         payBtnText.textContent = 'Sélectionne un montant';
         payBtn.disabled = true;
+        paypalBtnText.textContent = 'Sélectionne un montant';
+        paypalBtn.disabled = true;
       }
+    }
+
+    function setAmount(val) {
+      selectedAmount = val;
+      updateButtons();
     }
 
     presets.forEach(btn => {
@@ -458,24 +532,17 @@
       setAmount(val > 0 ? val : null);
     });
 
-    // ── PAIEMENT ───────────────────────────────────────────────────
+    // ── PAIEMENT STRIPE ────────────────────────────────────────────
     payBtn.addEventListener('click', async () => {
       if (!selectedAmount) return;
-
       payBtn.disabled = true;
       payBtnText.textContent = 'Traitement en cours…';
 
       /*
        * BACKEND REQUIS :
-       * Tu dois créer un endpoint côté serveur (Node.js, PHP, Python…)
-       * qui :
-       *   1. Reçoit { amount, currency } en POST
-       *   2. Crée un PaymentIntent via l'API Stripe
-       *   3. Retourne { clientSecret }
-       *
-       * Exemple endpoint : POST /api/create-payment-intent
-       *
-       * Décommente et adapte ce bloc une fois ton backend prêt :
+       * 1. Reçoit { amount, currency } en POST
+       * 2. Crée un PaymentIntent via l'API Stripe
+       * 3. Retourne { clientSecret }
        *
        * const res = await fetch('/api/create-payment-intent', {
        *   method: 'POST',
@@ -483,18 +550,58 @@
        *   body: JSON.stringify({ amount: Math.round(selectedAmount * 100), currency: 'eur' })
        * });
        * const { clientSecret } = await res.json();
-       *
-       * const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+       * const { error } = await stripe.confirmCardPayment(clientSecret, {
        *   payment_method: { card: cardElement }
        * });
-       *
-       * if (error) { ... } else { showSuccess(); }
+       * if (error) { payBtnText.textContent = error.message; payBtn.disabled = false; }
+       * else { showSuccess(); }
        */
 
-      // ── SIMULATION (à supprimer quand le backend est prêt) ──
-      await new Promise(r => setTimeout(r, 1800));
-      showSuccess();
-      // ────────────────────────────────────────────────────────
+      try {
+        // Appel au backend Railway/Render
+        const res = await fetch(`${BACKEND_URL}/api/create-payment-intent`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amount: Math.round(selectedAmount * 100), currency: 'eur' })
+        });
+
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || 'Erreur serveur');
+        }
+
+        const { clientSecret } = await res.json();
+
+        const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+          payment_method: { card: cardElement }
+        });
+
+        if (error) {
+          // Affiche l'erreur Stripe sous le champ carte
+          const errEl = document.getElementById('card-errors');
+          errEl.textContent = error.message;
+          errEl.classList.remove('hidden');
+          payBtnText.textContent = `Donner ${selectedAmount}€ via Stripe`;
+          payBtn.disabled = false;
+        } else if (paymentIntent.status === 'succeeded') {
+          showSuccess();
+        }
+
+      } catch (err) {
+        const errEl = document.getElementById('card-errors');
+        errEl.textContent = err.message || 'Une erreur est survenue. Réessaie.';
+        errEl.classList.remove('hidden');
+        payBtnText.textContent = `Donner ${selectedAmount}€ via Stripe`;
+        payBtn.disabled = false;
+      }
+    });
+
+    // ── PAIEMENT PAYPAL ────────────────────────────────────────────
+    paypalBtn.addEventListener('click', () => {
+      if (!selectedAmount) return;
+      // Construit l'URL PayPal.me avec le montant en EUR
+      const url = `${PAYPAL_ME_URL}/${selectedAmount}EUR`;
+      window.open(url, '_blank', 'noopener,noreferrer');
     });
 
     function showSuccess() {
