@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soutenir Orinstone — Don</title>
+  <meta name="description" content="Soutenez le serveur Minecraft Orinstone avec un don libre via Stripe." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://js.stripe.com/v3/"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand: #7c5cff;
+      --brand2: #19d3ff;
+      --gold: #f5c542;
+    }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background:
+        radial-gradient(ellipse 900px 500px at 15% 0%, rgba(124,92,255,.28), transparent 60%),
+        radial-gradient(ellipse 700px 400px at 85% 10%, rgba(25,211,255,.18), transparent 55%),
+        #080c16;
+    }
+    h1, h2, h3, .syne { font-family: 'Syne', sans-serif; }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #7c5cff, #19d3ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .gold-text {
+      background: linear-gradient(135deg, #f5c542, #ffaa00);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .btn-pay {
+      background: linear-gradient(135deg, #7c5cff, #19d3ff);
+      color: #06101a;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      transition: opacity .2s, transform .15s;
+    }
+    .btn-pay:hover { opacity: .92; transform: translateY(-1px); }
+    .btn-pay:active { transform: translateY(0); }
+    .btn-pay:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+
+    /* Preset amount pills */
+    .preset {
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: #c5cfe8;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      transition: all .15s;
+      cursor: pointer;
+    }
+    .preset:hover { border-color: rgba(124,92,255,.5); background: rgba(124,92,255,.1); color: #e9eefc; }
+    .preset.active {
+      border-color: #7c5cff;
+      background: rgba(124,92,255,.18);
+      color: #fff;
+      box-shadow: 0 0 0 3px rgba(124,92,255,.22);
+    }
+
+    /* Input */
+    .amount-input {
+      background: rgba(0,0,0,.28);
+      border: 1.5px solid rgba(255,255,255,.12);
+      color: #e9eefc;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 2rem;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .amount-input:focus {
+      border-color: rgba(124,92,255,.6);
+      box-shadow: 0 0 0 4px rgba(124,92,255,.15);
+    }
+    .amount-input::placeholder { color: rgba(255,255,255,.2); }
+
+    /* Stripe element */
+    #card-element {
+      background: rgba(0,0,0,.28);
+      border: 1.5px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      padding: 16px 14px;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    #card-element.focused {
+      border-color: rgba(124,92,255,.6);
+      box-shadow: 0 0 0 4px rgba(124,92,255,.15);
+    }
+
+    /* Glass card */
+    .glass {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.09);
+      backdrop-filter: blur(12px);
+    }
+
+    /* Particles canvas */
+    #particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .35; }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp .6s ease both; }
+    .delay-1 { animation-delay: .1s; }
+    .delay-2 { animation-delay: .2s; }
+    .delay-3 { animation-delay: .3s; }
+    .delay-4 { animation-delay: .45s; }
+
+    @keyframes pulseDot {
+      0%   { box-shadow: 0 0 0 0 rgba(77,255,136,.55); }
+      60%  { box-shadow: 0 0 0 8px rgba(77,255,136,0); }
+      100% { box-shadow: 0 0 0 0 rgba(77,255,136,0); }
+    }
+    .pulse-dot { animation: pulseDot 1.4s ease-in-out infinite; }
+
+    /* Success overlay */
+    #successOverlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(8,12,22,.88);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+    #successOverlay.show { display: flex; }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(.85); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .pop-in { animation: popIn .4s cubic-bezier(.34,1.56,.64,1) both; }
+
+    /* Method tabs */
+    .method-tab {
+      border: 1.5px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      color: #a9b4d0;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      transition: all .15s;
+      cursor: pointer;
+      flex: 1;
+    }
+    .method-tab:hover { border-color: rgba(255,255,255,.22); color: #e9eefc; }
+    .method-tab.active-stripe {
+      border-color: #7c5cff;
+      background: rgba(124,92,255,.14);
+      color: #fff;
+      box-shadow: 0 0 0 3px rgba(124,92,255,.18);
+    }
+    .method-tab.active-paypal {
+      border-color: #009cde;
+      background: rgba(0,156,222,.12);
+      color: #fff;
+      box-shadow: 0 0 0 3px rgba(0,156,222,.18);
+    }
+
+    /* PayPal button */
+    .btn-paypal {
+      background: linear-gradient(135deg, #003087, #009cde);
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      transition: opacity .2s, transform .15s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-paypal:hover { opacity: .92; transform: translateY(-1px); }
+    .btn-paypal:active { transform: translateY(0); }
+    .btn-paypal::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.15) 50%, transparent 60%);
+      background-size: 200% 100%;
+      background-position: -100% 0;
+      transition: background-position .5s;
+    }
+    .btn-paypal:hover::after { background-position: 200% 0; }
+
+    /* Shimmer on pay button */
+    .btn-pay::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.18) 50%, transparent 60%);
+      background-size: 200% 100%;
+      background-position: -100% 0;
+      transition: background-position .5s;
+    }
+    .btn-pay:hover::after { background-position: 200% 0; }
+    .btn-pay { position: relative; overflow: hidden; }
+  </style>
+</head>
+
+<body class="min-h-screen text-[#e9eefc] relative">
+
+  <canvas id="particles"></canvas>
+
+  <!-- NAV -->
+  <nav class="relative z-10 max-w-[960px] mx-auto px-5 py-5 flex items-center justify-between">
+    <a href="index.html" class="syne font-black text-lg tracking-tight flex items-center gap-2 text-[#a9b4d0] hover:text-white transition-colors">
+      <span class="text-xl">←</span> Retour
+    </a>
+    <div class="flex items-center gap-2 text-[13px] text-[#a9b4d0]">
+      <span class="w-2 h-2 rounded-full bg-[#4dff88] pulse-dot inline-block"></span>
+      Stripe · PayPal · Sécurisé
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <main class="relative z-10 max-w-[960px] mx-auto px-5 pt-6 pb-20">
+
+    <!-- Header -->
+    <div class="text-center mb-12 fade-up">
+      <div class="inline-flex items-center gap-2 px-3.5 py-2 rounded-full border border-[rgba(245,197,66,.25)] bg-[rgba(245,197,66,.08)] text-[#f5c542] text-[13px] font-semibold mb-5">
+        ⛏ Soutenir le serveur
+      </div>
+      <h1 class="text-[clamp(36px,5vw,64px)] font-black leading-[1.05] mb-4">
+        Aide <span class="gradient-text">Orinstone</span><br/>à grandir
+      </h1>
+      <p class="text-[#a9b4d0] max-w-[52ch] mx-auto text-[17px] leading-relaxed">
+        Chaque don contribue directement au serveur : hébergement, développement, nouveaux contenus et événements communautaires.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-[1fr_380px] gap-6 items-start">
+
+      <!-- LEFT — Infos -->
+      <div class="space-y-4 fade-up delay-1">
+
+        <!-- Stats -->
+        <div class="glass rounded-2xl p-5 grid grid-cols-3 gap-3 text-center">
+          <div>
+            <p class="text-[28px] font-black syne gold-text">100%</p>
+            <p class="text-[#a9b4d0] text-[13px] mt-0.5">Va au serveur</p>
+          </div>
+          <div class="border-x border-white/8">
+            <p class="text-[28px] font-black syne gradient-text">0€</p>
+            <p class="text-[#a9b4d0] text-[13px] mt-0.5">Minimum</p>
+          </div>
+          <div>
+            <p class="text-[28px] font-black syne text-[#4dff88]">✔</p>
+            <p class="text-[#a9b4d0] text-[13px] mt-0.5">Sécurisé Stripe</p>
+          </div>
+        </div>
+
+        <!-- À quoi ça sert -->
+        <div class="glass rounded-2xl p-5">
+          <h3 class="syne font-black text-base mb-3 text-white">À quoi sert ton don ?</h3>
+          <ul class="space-y-2.5">
+            <li class="flex items-start gap-3">
+              <span class="w-7 h-7 rounded-xl bg-[rgba(124,92,255,.15)] border border-[rgba(124,92,255,.3)] flex items-center justify-center text-sm shrink-0">🖥</span>
+              <div>
+                <p class="font-semibold text-[14px]">Hébergement & performances</p>
+                <p class="text-[#a9b4d0] text-[13px]">Serveurs plus puissants, moins de lag.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-7 h-7 rounded-xl bg-[rgba(25,211,255,.12)] border border-[rgba(25,211,255,.25)] flex items-center justify-center text-sm shrink-0">⚙️</span>
+              <div>
+                <p class="font-semibold text-[14px]">Développement de contenu</p>
+                <p class="text-[#a9b4d0] text-[13px]">Nouveaux modes de jeu, maps, plugins.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-7 h-7 rounded-xl bg-[rgba(245,197,66,.12)] border border-[rgba(245,197,66,.25)] flex items-center justify-center text-sm shrink-0">🎉</span>
+              <div>
+                <p class="font-semibold text-[14px]">Événements communautaires</p>
+                <p class="text-[#a9b4d0] text-[13px]">Tournois, concours, récompenses.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Discord -->
+        <a href="https://discord.gg/rjgh5WDFbD" target="_blank" rel="noreferrer"
+          class="glass rounded-2xl p-4 flex items-center gap-4 hover:bg-white/5 transition-colors group">
+          <div class="w-10 h-10 rounded-xl bg-[rgba(88,101,242,.2)] border border-[rgba(88,101,242,.35)] flex items-center justify-center text-xl">💬</div>
+          <div class="flex-1">
+            <p class="font-semibold text-[14px]">Rejoins la communauté</p>
+            <p class="text-[#a9b4d0] text-[13px]">none</p>
+          </div>
+          <span class="text-[#a9b4d0] group-hover:translate-x-1 transition-transform">→</span>
+        </a>
+      </div>
+
+      <!-- RIGHT — Formulaire de don -->
+      <div class="glass rounded-2xl p-6 fade-up delay-2">
+        <h2 class="syne font-black text-xl mb-1">Faire un don</h2>
+        <p class="text-[#a9b4d0] text-[13px] mb-5">Choisis ou saisis le montant de ton choix.</p>
+
+        <!-- Presets -->
+        <div class="grid grid-cols-4 gap-2 mb-4" id="presets">
+          <button class="preset rounded-xl py-2.5 text-[14px]" data-amount="2">2€</button>
+          <button class="preset rounded-xl py-2.5 text-[14px]" data-amount="5">5€</button>
+          <button class="preset rounded-xl py-2.5 text-[14px]" data-amount="10">10€</button>
+          <button class="preset rounded-xl py-2.5 text-[14px]" data-amount="20">20€</button>
+        </div>
+
+        <!-- Montant libre -->
+        <div class="relative mb-5">
+          <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[#a9b4d0] text-2xl font-black syne">€</span>
+          <input id="amountInput" type="number" min="1" step="1" placeholder="Autre montant"
+            class="amount-input w-full pl-10 pr-4 py-4 rounded-[14px] text-right" />
+        </div>
+
+        <!-- Affichage montant choisi -->
+        <div id="amountDisplay" class="text-center mb-5 hidden">
+          <span class="text-[13px] text-[#a9b4d0]">Tu vas donner </span>
+          <span id="amountValue" class="syne font-black text-xl gradient-text">0€</span>
+        </div>
+
+        <!-- Stripe Card Element -->
+        <div class="mb-4">
+          <label class="block text-[13px] font-semibold text-[#a9b4d0] mb-2">Informations de paiement</label>
+          <div id="card-element"></div>
+          <p id="card-errors" class="text-[#ff6b6b] text-[12px] mt-2 hidden"></p>
+        </div>
+
+        <!-- Email -->
+        <div class="mb-5">
+          <label class="block text-[13px] font-semibold text-[#a9b4d0] mb-2">Email (reçu facultatif)</label>
+          <input id="emailInput" type="email" placeholder="ton@email.com"
+            class="w-full px-4 py-3 rounded-[14px] bg-black/25 border border-white/10 text-[#e9eefc] outline-none focus:border-[rgba(124,92,255,.5)] focus:shadow-[0_0_0_3px_rgba(124,92,255,.12)] transition-all text-[14px] placeholder-white/20" />
+        </div>
+
+        <!-- Submit -->
+        <button id="payBtn" class="btn-pay w-full py-4 rounded-[14px] text-[16px] tracking-wide flex items-center justify-center gap-2.5" disabled>
+          <span id="payBtnText">Sélectionne un montant</span>
+          <span id="payBtnIcon">🔒</span>
+        </button>
+
+        <!-- Stripe badge -->
+        <div class="flex items-center justify-center gap-2 mt-4 text-[#a9b4d0] text-[12px]">
+          <svg width="40" viewBox="0 0 60 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M27.5 10.5c0-1.4 1.1-2 2.9-2 2.6 0 5.9.8 8.5 2.2V4.2C36.3 2.8 33.8 2 30.4 2c-5.9 0-9.9 3.1-9.9 8.2 0 8 11 6.7 11 10.2 0 1.6-1.4 2.2-3.3 2.2-2.8 0-6.5-1.2-9.4-2.8v6.6c3.2 1.4 6.4 2 9.4 2 6.1 0 10.3-3 10.3-8.2-.1-8.6-11.1-7.1-11.1-9.7z" fill="#a9b4d0"/>
+          </svg>
+          <span>Paiement sécurisé par Stripe </span>
+        </div>
+
+        <!-- Config notice -->
+        <div class="mt-4 p-3 rounded-xl border border-[rgba(245,197,66,.2)] bg-[rgba(245,197,66,.06)]">
+          <p class="text-[12px] text-[#f5c542]">
+            ⚠️ <strong>Config requise :</strong> Remplace <code class="font-mono bg-black/20 px-1 rounded">pk_test_VOTRE_CLE</code> par ta vraie clé Stripe et connecte un backend pour finaliser les paiements.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- SUCCESS OVERLAY -->
+  <div id="successOverlay">
+    <div class="glass rounded-3xl p-10 max-w-[420px] text-center pop-in border border-[rgba(77,255,136,.2)]">
+      <div class="text-6xl mb-4">⛏</div>
+      <h2 class="syne font-black text-3xl mb-2 text-[#4dff88]">Merci !</h2>
+      <p class="text-[#a9b4d0] mb-2">Ton don a bien été reçu.</p>
+      <p class="text-[#a9b4d0] text-[14px] mb-6">Tu contribues directement au développement d'Orinstone. La communauté te remercie ! 🎉</p>
+      <a href="index.html" class="btn-pay inline-flex items-center gap-2 px-6 py-3 rounded-[14px] text-[15px]">
+        Retour au portfolio
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // ── STRIPE CONFIG ──────────────────────────────────────────────
+    // ⚠️ Remplace par ta vraie clé publique Stripe :
+    const STRIPE_PUBLIC_KEY = 'pk_live_51TYsYg2f2egcuUT4obSIMXsBBAVpzw0Gk18niYNgWQ5vhvV8nX5aAI6nZqEZ12RfHg1nmP2qjczVfPuX8Eb0ePzk00qDqtPro2';
+    // ──────────────────────────────────────────────────────────────
+
+    const stripe = Stripe(STRIPE_PUBLIC_KEY);
+    const elements = stripe.elements({
+      appearance: {
+        theme: 'night',
+        variables: {
+          colorPrimary: '#7c5cff',
+          colorBackground: 'rgba(0,0,0,0)',
+          colorText: '#e9eefc',
+          colorDanger: '#ff6b6b',
+          fontFamily: 'DM Sans, sans-serif',
+          borderRadius: '12px',
+        }
+      }
+    });
+
+    const cardElement = elements.create('card', {
+      style: {
+        base: {
+          color: '#e9eefc',
+          fontFamily: 'DM Sans, sans-serif',
+          fontSize: '15px',
+          '::placeholder': { color: 'rgba(255,255,255,.25)' },
+        },
+        invalid: { color: '#ff6b6b' }
+      }
+    });
+    cardElement.mount('#card-element');
+    cardElement.on('focus', () => document.getElementById('card-element').classList.add('focused'));
+    cardElement.on('blur',  () => document.getElementById('card-element').classList.remove('focused'));
+    cardElement.on('change', (e) => {
+      const err = document.getElementById('card-errors');
+      if (e.error) { err.textContent = e.error.message; err.classList.remove('hidden'); }
+      else { err.classList.add('hidden'); }
+    });
+
+    // ── MONTANT ────────────────────────────────────────────────────
+    let selectedAmount = null;
+
+    const presets = document.querySelectorAll('.preset');
+    const amountInput = document.getElementById('amountInput');
+    const amountDisplay = document.getElementById('amountDisplay');
+    const amountValue = document.getElementById('amountValue');
+    const payBtn = document.getElementById('payBtn');
+    const payBtnText = document.getElementById('payBtnText');
+
+    function setAmount(val) {
+      selectedAmount = val;
+      if (val) {
+        amountDisplay.classList.remove('hidden');
+        amountValue.textContent = val + '€';
+        payBtnText.textContent = `Donner ${val}€`;
+        payBtn.disabled = false;
+      } else {
+        amountDisplay.classList.add('hidden');
+        payBtnText.textContent = 'Sélectionne un montant';
+        payBtn.disabled = true;
+      }
+    }
+
+    presets.forEach(btn => {
+      btn.addEventListener('click', () => {
+        presets.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        amountInput.value = '';
+        setAmount(parseInt(btn.dataset.amount));
+      });
+    });
+
+    amountInput.addEventListener('input', () => {
+      presets.forEach(b => b.classList.remove('active'));
+      const val = parseFloat(amountInput.value);
+      setAmount(val > 0 ? val : null);
+    });
+
+    // ── PAIEMENT ───────────────────────────────────────────────────
+    payBtn.addEventListener('click', async () => {
+      if (!selectedAmount) return;
+
+      payBtn.disabled = true;
+      payBtnText.textContent = 'Traitement en cours…';
+
+      /*
+       * BACKEND REQUIS :
+       * Tu dois créer un endpoint côté serveur (Node.js, PHP, Python…)
+       * qui :
+       *   1. Reçoit { amount, currency } en POST
+       *   2. Crée un PaymentIntent via l'API Stripe
+       *   3. Retourne { clientSecret }
+       *
+       * Exemple endpoint : POST /api/create-payment-intent
+       *
+       * Décommente et adapte ce bloc une fois ton backend prêt :
+       *
+       * const res = await fetch('/api/create-payment-intent', {
+       *   method: 'POST',
+       *   headers: { 'Content-Type': 'application/json' },
+       *   body: JSON.stringify({ amount: Math.round(selectedAmount * 100), currency: 'eur' })
+       * });
+       * const { clientSecret } = await res.json();
+       *
+       * const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+       *   payment_method: { card: cardElement }
+       * });
+       *
+       * if (error) { ... } else { showSuccess(); }
+       */
+
+      // ── SIMULATION (à supprimer quand le backend est prêt) ──
+      await new Promise(r => setTimeout(r, 1800));
+      showSuccess();
+      // ────────────────────────────────────────────────────────
+    });
+
+    function showSuccess() {
+      document.getElementById('successOverlay').classList.add('show');
+    }
+
+    // ── PARTICLES ──────────────────────────────────────────────────
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let W, H, dots = [];
+
+    function resize() {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    for (let i = 0; i < 60; i++) {
+      dots.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        r: Math.random() * 1.4 + .4,
+        vx: (Math.random() - .5) * .25,
+        vy: (Math.random() - .5) * .25,
+        o: Math.random() * .5 + .2,
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      dots.forEach(d => {
+        d.x += d.vx; d.y += d.vy;
+        if (d.x < 0) d.x = W;
+        if (d.x > W) d.x = 0;
+        if (d.y < 0) d.y = H;
+        if (d.y > H) d.y = 0;
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(124,92,255,${d.o})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+  </script>
+</body>
+</html>
