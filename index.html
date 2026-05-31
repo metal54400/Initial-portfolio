@@ -1,307 +1,352 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfolio — Mathéo Favier (metal54400)</title>
-  <meta name="description" content="Portfolio de Mathéo Favier (metal54400) — Deepstone Studio, serveur Minecraft Deepstone, hébergeur Pterodactyl." />
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Portfolio de Mathéo Favier (metal54400) — Orinstone Studio, serveur Minecraft Orinstone." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#0b0f19',
+            panel: '#11182a',
+            brand: '#7c5cff',
+            brand2: '#19d3ff',
+          },
+          fontFamily: {
+            sans: ['ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Arial', 'sans-serif'],
+            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+          },
+          animation: {
+            pulseDot: 'pulseDot 1.3s ease-in-out infinite',
+          },
+          keyframes: {
+            pulseDot: {
+              '0%':   { boxShadow: '0 0 0 0 rgba(77,255,136,.55)', transform: 'scale(1)' },
+              '60%':  { boxShadow: '0 0 0 10px rgba(77,255,136,0)', transform: 'scale(1.05)' },
+              '100%': { boxShadow: '0 0 0 0 rgba(77,255,136,0)', transform: 'scale(1)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background:
+        radial-gradient(900px 500px at 20% 10%, rgba(124,92,255,.35), transparent 60%),
+        radial-gradient(800px 500px at 90% 20%, rgba(25,211,255,.22), transparent 55%),
+        #0b0f19;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #7c5cff, #19d3ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #7c5cff, #19d3ff);
+      color: #06101a;
+    }
+    .animate-pulse-dot {
+      animation: pulseDot 1.3s ease-in-out infinite;
+    }
+    @keyframes pulseDot {
+      0%   { box-shadow: 0 0 0 0 rgba(77,255,136,.55); transform: scale(1); }
+      60%  { box-shadow: 0 0 0 10px rgba(77,255,136,0); transform: scale(1.05); }
+      100% { box-shadow: 0 0 0 0 rgba(77,255,136,0); transform: scale(1); }
+    }
+    .project-card:hover { transform: translateY(-3px); background: rgba(255,255,255,.05); }
+  </style>
 </head>
 
-<body>
-  <header class="header" id="top">
-    <nav class="nav container">
-      <a class="logo" href="#top">MF<span>.</span></a>
+<body class="text-[#e9eefc] leading-relaxed font-sans">
 
-      <button class="nav__toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+  <!-- NAV -->
+  <header class="px-5 pb-10 pt-5" id="top">
+    <nav class="max-w-[1060px] mx-auto flex items-center justify-between gap-4 sticky top-0 py-2.5 backdrop-blur-md z-50">
+      <a href="#top" class="font-black text-xl tracking-tight">MF<span class="text-[#19d3ff]">.</span></a>
 
-      <div class="nav__links">
-        <a href="#about">À propos</a>
-        <a href="#skills">Compétences</a>
-        <a href="#projects">Projets</a>
-        <a href="#contact" class="btn btn--small">Contact</a>
+      <button id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false"
+        class="md:hidden border border-white/10 bg-white/5 text-[#e9eefc] px-3 py-2.5 rounded-xl cursor-pointer">☰</button>
+
+      <div id="navLinks" class="hidden md:flex items-center gap-4">
+        <a href="#about" class="text-[#a9b4d0] hover:text-[#e9eefc] transition-colors">À propos</a>
+        <a href="#skills" class="text-[#a9b4d0] hover:text-[#e9eefc] transition-colors">Compétences</a>
+        <a href="#projects" class="text-[#a9b4d0] hover:text-[#e9eefc] transition-colors">Projets</a>
+        <a href="#contact" class="btn-primary font-bold px-3.5 py-2.5 rounded-[14px] shadow-lg text-sm">Contact</a>
       </div>
     </nav>
 
-    <section class="hero container">
-      <div class="hero__text">
-        <p class="kicker">Créateur • Communauté • Infrastructure</p>
-        <h1>Salut, moi c’est <span>Mathéo Favier</span>.</h1>
-        <p class="subtitle">
-          Sous le pseudo <strong>metal54400</strong> (ou <strong>metal54400_</strong>),
-          je développe des projets autour du gaming et du web : <strong>Deepstone Studio</strong>,
-          le serveur Minecraft <strong>Deepstone</strong>, et un hébergement multi-jeux via <strong>Pterodactyl</strong>.
+    <!-- HERO -->
+    <section class="max-w-[1060px] mx-auto grid md:grid-cols-[1.25fr_.9fr] gap-6 items-center pt-7">
+      <div>
+        <p class="text-[#a9b4d0] font-bold tracking-wide mb-2.5">Créateur • Communauté • Infrastructure</p>
+        <h1 class="text-[clamp(34px,4vw,52px)] font-black leading-[1.1] mb-2.5">
+          Salut, moi c'est <span class="gradient-text">Mathéo Favier</span>.
+        </h1>
+        <p class="text-[#a9b4d0] mb-5 max-w-[60ch]">
+          Sous le pseudo <strong class="text-[#e9eefc]">metal54400</strong> (ou <strong class="text-[#e9eefc]">metal54400_</strong>),
+          je développe des projets autour du gaming et du web : <strong class="text-[#e9eefc]">Orinstone Studio</strong>
+          et le serveur Minecraft <strong class="text-[#e9eefc]">Orinstone</strong>.
         </p>
-
-        <div class="hero__cta">
-          <a class="btn" href="#projects">Voir mes projets</a>
-          <a class="btn btn--ghost" href="#contact">Me contacter</a>
+        <div class="flex gap-3 flex-wrap">
+          <a href="#projects" class="btn-primary font-bold px-4 py-3 rounded-[14px] shadow-lg inline-flex items-center">Voir mes projets</a>
+          <a href="#contact" class="bg-white/5 border border-white/10 text-[#e9eefc] font-bold px-4 py-3 rounded-[14px] inline-flex items-center hover:bg-white/10 transition-colors">Me contacter</a>
         </div>
-
-        <div class="hero__meta">
-          <a href="https://github.com/metal54400" target="_blank" rel="noreferrer">GitHub</a>
+        <div class="flex gap-2.5 items-center mt-5 text-[#a9b4d0] flex-wrap text-sm">
+          <a href="https://github.com/metal54400" target="_blank" rel="noreferrer" class="hover:text-[#e9eefc] transition-colors">GitHub</a>
           <span>•</span>
-          <a href="https://discord.gg/9f8uz3XNPf" target="_blank" rel="noreferrer">Discord Studio</a>
+          <a href="https://discord.gg/9f8uz3XNPf" target="_blank" rel="noreferrer" class="hover:text-[#e9eefc] transition-colors">Discord Studio</a>
           <span>•</span>
-          <a href="https://discord.gg/r5WPfZajfN" target="_blank" rel="noreferrer">Discord Serveur</a>
+          <a href="https://discord.gg/r5WPfZajfN" target="_blank" rel="noreferrer" class="hover:text-[#e9eefc] transition-colors">Discord Serveur</a>
         </div>
       </div>
 
-      <div class="hero__card" aria-hidden="true">
-        <div class="card">
-          <div class="card__top">
-            <div class="dot dot--r"></div>
-            <div class="dot dot--y"></div>
-            <div class="dot dot--g"></div>
-          </div>
-          <pre class="card__code"><code>const mateo = {
+      <!-- Code card -->
+      <div aria-hidden="true" class="border border-white/10 bg-white/5 rounded-[18px] shadow-2xl overflow-hidden">
+        <div class="flex gap-2 px-3.5 py-3.5 border-b border-white/10 bg-black/10">
+          <div class="w-2.5 h-2.5 rounded-full bg-[#ff5a5a] opacity-90"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-[#ffd24a] opacity-90"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-[#4dff88] opacity-90"></div>
+        </div>
+        <pre class="p-4 text-[#dfe8ff] text-[13px] font-mono overflow-auto"><code>const mateo = {
   nom: "Mathéo Favier",
   pseudo: ["metal54400", "metal54400_"],
   projets: [
-    "Deepstone Studio",
-    "Deepstone (Minecraft)",
-    "Hébergeur Pterodactyl"
+    "Orinstone Studio",
+    "Orinstone (Minecraft)"
   ],
   discord: {
     studio: "discord.gg/9f8uz3XNPf",
     serveur: "discord.gg/r5WPfZajfN"
   }
 };</code></pre>
-        </div>
       </div>
     </section>
   </header>
 
   <main>
-    <section class="section" id="about">
-      <div class="container">
-        <h2>À propos</h2>
-        <p class="lead">
-          Je m’appelle <strong>Mathéo Favier</strong>. Je construis des projets créatifs,
-          je développe une communauté, et je travaille sur l’univers de <strong>Deepstone</strong>.
+    <!-- À PROPOS -->
+    <section class="py-14 px-5" id="about">
+      <div class="max-w-[1060px] mx-auto">
+        <h2 class="text-[28px] font-black mb-2.5">À propos</h2>
+        <p class="max-w-[76ch] mb-4">
+          Je m'appelle <strong>Mathéo Favier</strong>. Je construis des projets créatifs,
+          je développe une communauté, et je travaille sur l'univers de <strong>Orinstone</strong>.
         </p>
-
-        <div class="grid-2">
-          <div class="panel">
-            <h3>Deepstone Studio</h3>
-            <p>
-              Mon espace de création : projets, idées et développement autour du gaming et des expériences en ligne.
-            </p>
-            <p class="muted tiny">
-              Discord : <a href="https://discord.gg/9f8uz3XNPf" target="_blank" rel="noreferrer">discord.gg/9f8uz3XNPf</a>
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+          <div class="border border-white/10 bg-white/[.03] rounded-[18px] p-4.5 p-[18px]">
+            <h3 class="font-black text-lg mb-2">Orinstone Studio</h3>
+            <p class="text-[#a9b4d0]">Mon espace de création : projets, idées et développement autour du gaming et des expériences en ligne.</p>
+            <p class="text-[#a9b4d0] text-[13px] mt-2">
+              Discord : <a href="https://discord.gg/9f8uz3XNPf" target="_blank" rel="noreferrer" class="hover:text-[#e9eefc] transition-colors">discord.gg/9f8uz3XNPf</a>
             </p>
           </div>
-
-          <div class="panel">
-            <h3>Serveur Minecraft Deepstone</h3>
-            <p>
-              Je développe et anime le serveur Minecraft <strong>Deepstone</strong> : communauté,
-              événements, et expérience joueur.
-            </p>
-            <p class="muted tiny">
-              Discord : <a href="https://discord.gg/r5WPfZajfN" target="_blank" rel="noreferrer">discord.gg/r5WPfZajfN</a>
+          <div class="border border-white/10 bg-white/[.03] rounded-[18px] p-[18px]">
+            <h3 class="font-black text-lg mb-2">Serveur Minecraft Orinstone</h3>
+            <p class="text-[#a9b4d0]">Je développe et anime le serveur Minecraft <strong class="text-[#e9eefc]">Orinstone</strong> : communauté, événements, et expérience joueur.</p>
+            <p class="text-[#a9b4d0] text-[13px] mt-2">
+              Discord : <a href="https://discord.gg/r5WPfZajfN" target="_blank" rel="noreferrer" class="hover:text-[#e9eefc] transition-colors">discord.gg/r5WPfZajfN</a>
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="skills">
-      <div class="container">
-        <h2>Compétences</h2>
-        <p class="muted">Ce que je construis et gère autour de mes projets.</p>
-
-        <div class="chips">
-          <span class="chip">Gestion de communauté</span>
-          <span class="chip">Création/gestion de serveurs</span>
-          <span class="chip">Pterodactyl Panel</span>
-          <span class="chip">Infrastructure multi-jeux</span>
-          <span class="chip">Organisation d’événements</span>
-          <span class="chip">Branding / identité</span>
-          <span class="chip">Git / GitHub</span>
-          <span class="chip">Web (HTML/CSS/JS)</span>
+    <!-- COMPÉTENCES -->
+    <section class="py-14 px-5" id="skills">
+      <div class="max-w-[1060px] mx-auto">
+        <h2 class="text-[28px] font-black mb-1">Compétences</h2>
+        <p class="text-[#a9b4d0] mb-4">Ce que je construis et gère autour de mes projets.</p>
+        <div class="flex flex-wrap gap-2.5 mt-3.5">
+          {["Gestion de communauté","Création/gestion de serveurs","Pterodactyl Panel","Infrastructure multi-jeux","Organisation d'événements","Branding / identité","Git / GitHub","Web (HTML/CSS/JS)"].map(s =>
+            `<span class="px-3 py-2.5 rounded-full border border-white/10 bg-white/[.04] text-[#e9eefc] font-bold text-[13px]">${s}</span>`
+          ).join('')}
         </div>
       </div>
     </section>
 
-    <section class="section" id="projects">
-      <div class="container">
-        <div class="section__head">
-          <h2>Projets</h2>
-          <p class="muted">Deepstone Studio, Deepstone Minecraft, hébergement Pterodactyl.</p>
+    <!-- PROJETS -->
+    <section class="py-14 px-5" id="projects">
+      <div class="max-w-[1060px] mx-auto">
+        <div class="flex items-end justify-between gap-4 flex-wrap mb-4">
+          <h2 class="text-[28px] font-black">Projets</h2>
+          <p class="text-[#a9b4d0]">Orinstone Studio & Orinstone Minecraft.</p>
         </div>
+        <div class="grid md:grid-cols-2 gap-4">
 
-        <div class="projects">
-          <!-- Projet 01 -->
-          <article class="project">
-            <div class="project__badge">Projet 01</div>
-            <h3>Deepstone Studio</h3>
-            <p>
-              Studio / marque de création : je construis l’univers Deepstone et je lance des projets autour du gaming et du web.
-            </p>
-            <div class="project__links">
-              <a href="https://discord.gg/9f8uz3XNPf" target="_blank" rel="noreferrer">Discord Studio</a>
-              <a href="https://github.com/metal54400" target="_blank" rel="noreferrer">GitHub</a>
+          <!-- Orinstone Studio -->
+          <article class="project-card border border-white/10 bg-white/[.03] rounded-[18px] p-[18px] transition-all duration-150">
+            <div class="inline-block px-2.5 py-1.5 rounded-full border border-white/10 bg-black/10 text-[#a9b4d0] font-black text-[12px] mb-2.5">Projet 01</div>
+            <h3 class="font-black text-lg mb-2">Orinstone Studio</h3>
+            <p class="text-[#a9b4d0] mb-3">Studio / marque de création : je construis l'univers Orinstone et je lance des projets autour du gaming et du web.</p>
+            <div class="flex gap-3 flex-wrap items-center">
+              <a href="https://discord.gg/9f8uz3XNPf" target="_blank" rel="noreferrer" class="font-black border-b border-dashed border-white/25 hover:border-white/60 transition-colors">Discord Studio</a>
+              <a href="https://github.com/metal54400" target="_blank" rel="noreferrer" class="font-black border-b border-dashed border-white/25 hover:border-white/60 transition-colors">GitHub</a>
             </div>
           </article>
 
-          <!-- Projet 02 -->
-          <article class="project">
-            <div class="project__badge">Projet 02</div>
-            <h3>Serveur Minecraft — Deepstone</h3>
-            <p>
-              Serveur Minecraft communautaire actuellement en <strong>maintenance</strong>.
-              Version visée : <strong>1.21.11</strong>.
+          <!-- Orinstone Minecraft -->
+          <article class="project-card border border-white/10 bg-white/[.03] rounded-[18px] p-[18px] transition-all duration-150">
+            <div class="flex items-center justify-between gap-3 mb-2.5">
+              <div class="inline-block px-2.5 py-1.5 rounded-full border border-white/10 bg-black/10 text-[#a9b4d0] font-black text-[12px]">Projet 02</div>
+              <span class="inline-flex items-center gap-2 px-2.5 py-1.5 rounded-full border border-[rgba(77,255,136,.35)] bg-[rgba(77,255,136,.10)] font-black text-[12px] select-none whitespace-nowrap">
+                <span class="w-2 h-2 rounded-full bg-[#4dff88] animate-pulse-dot inline-block"></span>
+                En développement
+              </span>
+            </div>
+            <h3 class="font-black text-lg mb-2">Serveur Minecraft — Orinstone</h3>
+            <p class="text-[#a9b4d0] mb-3">
+              Serveur Minecraft communautaire actuellement en développement.
             </p>
-
-            <div class="serverBox">
-              <div class="serverBox__row">
-                <span class="muted tiny">Statut :</span>
-                <strong class="serverStatus maintenance">Maintenance</strong>
+            <div class="mt-3 border border-white/10 bg-black/10 rounded-[16px] p-3.5">
+              <div class="flex items-center justify-between gap-3">
+                <span class="text-[#a9b4d0] text-[13px]">Statut :</span>
+                <strong class="px-3 py-1.5 rounded-full border border-white/10 font-black text-[12px] bg-[rgba(77,255,136,.12)] text-[#4dff88] border-[rgba(77,255,136,.35)]">En développement</strong>
               </div>
-
-              <div class="serverBox__row" style="margin-top:10px;">
-                <span class="muted tiny">Version :</span>
-                <code class="serverBox__pill">1.21.11</code>
+              <div class="flex items-center justify-between gap-3 mt-2.5">
+                <span class="text-[#a9b4d0] text-[13px]">IP :</span>
+                <code id="serverIp" class="px-2.5 py-1.5 rounded-[12px] border border-white/10 bg-white/[.04] text-[#e9eefc] text-sm">5.48.143.126:25565</code>
               </div>
-
-              <div class="serverBox__row" style="margin-top:10px;">
-                <span class="muted tiny">IP :</span>
-                <code class="serverBox__ip" id="serverIp">5.48.143.126:25565</code>
-              </div>
-
-              <div class="serverBox__actions">
-                <button class="btn btn--ghost btn--tiny" type="button" id="copyIpBtn">Copier l’IP</button>
-                <a class="btn btn--ghost btn--tiny"
-                   href="https://discord.gg/r5WPfZajfN"
-                   target="_blank" rel="noreferrer">
+              <div class="flex gap-2.5 flex-wrap mt-2.5">
+                <button id="copyIpBtn" type="button"
+                  class="bg-white/[.04] border border-white/10 text-[#e9eefc] font-black px-3 py-2 rounded-[12px] text-[12px] cursor-pointer hover:bg-white/10 transition-colors">
+                  Copier l'IP
+                </button>
+                <a href="https://discord.gg/r5WPfZajfN" target="_blank" rel="noreferrer"
+                  class="bg-white/[.04] border border-white/10 text-[#e9eefc] font-black px-3 py-2 rounded-[12px] text-[12px] hover:bg-white/10 transition-colors">
                   Discord Serveur
                 </a>
               </div>
-
-              <p class="tiny muted" style="margin:10px 0 0;">
-                Le serveur est temporairement hors ligne pour améliorations (performances, contenu, stabilité).
-                Suis les annonces sur Discord.
+              <p class="text-[13px] text-[#a9b4d0] mt-2.5">
+                Le serveur est en cours de construction. Suis les annonces sur Discord.
               </p>
             </div>
           </article>
 
-          <!-- Projet 03 -->
-          <article class="project">
-            <div class="project__badge">Projet 03</div>
-            <h3>Hébergeur Pterodactyl</h3>
-            <p>
-              Infrastructure d’hébergement basée sur <strong>Pterodactyl</strong> :
-              <strong>Minecraft</strong>, <strong>FiveM</strong>, <strong>bots Discord</strong>,
-              et autres jeux. <strong>Hytale</strong> est en <em>accès privé</em>.
-            </p>
-
-            <ul class="project__list">
-              <li>✔ Gestion multi-jeux</li>
-              <li>✔ Allocation CPU / RAM / Stockage</li>
-              <li>✔ Sécurité & maintenance</li>
-              <li>✔ Accès privé pour projets sensibles (Hytale)</li>
-            </ul>
-
-            <div class="project__links">
-              <a href="https://discord.gg/9f8uz3XNPf" target="_blank" rel="noreferrer">Discord Studio</a>
-              <a href="#" title="Panel privé">Panel privé</a>
-            </div>
-          </article>
-
-          <!-- Projet 04 -->
-          <article class="project">
-            <div class="project__badge">Projet 04</div>
-            <h3>Portfolio (ce site)</h3>
-            <p>
-              Mon portfolio open-source : page claire, responsive et facile à mettre à jour.
-            </p>
-            <div class="project__links">
-              <a href="#top">Retour haut</a>
-              <a href="#" title="Ajoute le lien du repo ici">Repo</a>
-            </div>
-          </article>
-
-          <article class="project">
-  <div class="project__top">
-    <div class="project__badge">Projet 05</div>
-    <span class="statusBadge statusBadge--dev" title="Projet en cours">
-      <span class="statusBadge__dot" aria-hidden="true"></span>
-      En développement
-    </span>
-  </div>
-  <!-- Projet 05 -->
-  <h3>RPG 2D — Python (Pygame)</h3>
-  <p>
-    Développement d’un <strong>RPG en 2D</strong> codé en <strong>Python</strong> avec <strong>Pygame</strong>.
-    Sortie prévue : <strong>septembre 2026</strong>.
-  </p>
-
-  <ul class="project__list">
-    <li>✔ Tech : Python + Pygame</li>
-    <li>✔ Gameplay : exploration, quêtes, combats</li>
-    <li>✔ Progression, inventaire, narration</li>
-    <li>✔ Devlog / suivi via Discord</li>
-  </ul>
-
-  <div class="project__links">
-    <a href="https://discord.gg/9f8uz3XNPf" target="_blank" rel="noreferrer">
-      Suivre le développement (Discord Studio)
-    </a>
-    <a href="#" title="À venir">Code / Devlog (bientôt)</a>
-  </div>
-</article>
-
         </div>
       </div>
     </section>
 
-    <section class="section" id="contact">
-      <div class="container">
-        <h2>Contact</h2>
-        <p class="muted">Envoie-moi un message (le bouton ouvre ton client mail).</p>
-
-        <form class="form" id="contactForm">
-          <div class="grid-2">
-            <label>
+    <!-- CONTACT -->
+    <section class="py-14 px-5" id="contact">
+      <div class="max-w-[1060px] mx-auto">
+        <h2 class="text-[28px] font-black mb-1">Contact</h2>
+        <p class="text-[#a9b4d0] mb-4">Envoie-moi un message (le bouton ouvre ton client mail).</p>
+        <form id="contactForm" class="border border-white/10 bg-white/[.03] rounded-[18px] p-[18px] mt-4">
+          <div class="grid md:grid-cols-2 gap-4 mb-3">
+            <label class="block font-black">
               Nom
-              <input name="name" type="text" placeholder="Ton nom" required />
+              <input name="name" type="text" placeholder="Ton nom" required
+                class="w-full mt-2 px-3 py-3 rounded-[14px] border border-white/10 bg-black/20 text-[#e9eefc] outline-none focus:border-[rgba(124,92,255,.55)] focus:shadow-[0_0_0_4px_rgba(124,92,255,.18)] transition-all" />
             </label>
-            <label>
+            <label class="block font-black">
               Email
-              <input name="email" type="email" placeholder="ton@email.com" required />
+              <input name="email" type="email" placeholder="ton@email.com" required
+                class="w-full mt-2 px-3 py-3 rounded-[14px] border border-white/10 bg-black/20 text-[#e9eefc] outline-none focus:border-[rgba(124,92,255,.55)] focus:shadow-[0_0_0_4px_rgba(124,92,255,.18)] transition-all" />
             </label>
           </div>
-
-          <label>
+          <label class="block font-black mb-3">
             Message
-            <textarea name="message" rows="5" placeholder="Ton message..." required></textarea>
+            <textarea name="message" rows="5" placeholder="Ton message..." required
+              class="w-full mt-2 px-3 py-3 rounded-[14px] border border-white/10 bg-black/20 text-[#e9eefc] outline-none focus:border-[rgba(124,92,255,.55)] focus:shadow-[0_0_0_4px_rgba(124,92,255,.18)] transition-all resize-none"></textarea>
           </label>
-
-          <div class="form__actions">
-            <button class="btn" type="submit">Envoyer</button>
-            <a class="btn btn--ghost" href="#top">Remonter</a>
+          <div class="flex gap-3 flex-wrap mt-2.5">
+            <button type="submit" class="btn-primary font-bold px-4 py-3 rounded-[14px] shadow-lg">Envoyer</button>
+            <a href="#top" class="bg-white/[.04] border border-white/10 text-[#e9eefc] font-bold px-4 py-3 rounded-[14px] hover:bg-white/10 transition-colors">Remonter</a>
           </div>
-
-          <p class="tiny muted">
-            Remplace l’email dans <code>script.js</code> pour recevoir les messages.
+          <p class="text-[13px] text-[#a9b4d0] mt-3">
+            Remplace l'email dans <code class="font-mono">script.js</code> pour recevoir les messages.
           </p>
         </form>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer__inner">
+  <footer class="py-7 border-t border-white/10 bg-black/15 px-5">
+    <div class="max-w-[1060px] mx-auto flex items-center justify-between gap-3.5 flex-wrap text-[#a9b4d0]">
       <p>© <span id="year"></span> Mathéo Favier — metal54400.</p>
-      <div class="footer__links">
-        <a href="https://github.com/metal54400" target="_blank" rel="noreferrer">GitHub</a>
-        <a href="https://discord.gg/9f8uz3XNPf" target="_blank" rel="noreferrer">Discord Studio</a>
-        <a href="https://discord.gg/r5WPfZajfN" target="_blank" rel="noreferrer">Discord Serveur</a>
+      <div class="flex gap-3.5 flex-wrap">
+        <a href="https://github.com/metal54400" target="_blank" rel="noreferrer" class="hover:text-[#e9eefc] transition-colors">GitHub</a>
+        <a href="https://discord.gg/9f8uz3XNPf" target="_blank" rel="noreferrer" class="hover:text-[#e9eefc] transition-colors">Discord Studio</a>
+        <a href="https://discord.gg/r5WPfZajfN" target="_blank" rel="noreferrer" class="hover:text-[#e9eefc] transition-colors">Discord Serveur</a>
       </div>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    // Skills chips render
+    const chipsContainer = document.querySelector('#skills .flex.flex-wrap');
+    if (chipsContainer && chipsContainer.innerHTML.includes('{[')) {
+      const skills = ["Gestion de communauté","Création/gestion de serveurs","Pterodactyl Panel","Infrastructure multi-jeux","Organisation d'événements","Branding / identité","Git / GitHub","Web (HTML/CSS/JS)"];
+      chipsContainer.innerHTML = skills.map(s =>
+        `<span class="px-3 py-2.5 rounded-full border border-white/10 bg-white/[.04] text-[#e9eefc] font-bold text-[13px]">${s}</span>`
+      ).join('');
+    }
+
+    // Année footer
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // Menu mobile
+    const toggle = document.getElementById("navToggle");
+    const links = document.getElementById("navLinks");
+    if (toggle && links) {
+      toggle.addEventListener("click", () => {
+        const open = links.classList.toggle("hidden");
+        links.classList.toggle("flex", !open);
+        links.classList.toggle("flex-col", !open);
+        links.classList.toggle("absolute", !open);
+        links.classList.toggle("right-5", !open);
+        links.classList.toggle("top-[58px]", !open);
+        links.classList.toggle("border", !open);
+        links.classList.toggle("border-white/10", !open);
+        links.classList.toggle("bg-[rgba(10,14,24,.92)]", !open);
+        links.classList.toggle("rounded-[16px]", !open);
+        links.classList.toggle("shadow-2xl", !open);
+        links.classList.toggle("p-3.5", !open);
+        toggle.setAttribute("aria-expanded", String(!open));
+      });
+      links.querySelectorAll("a").forEach(a => {
+        a.addEventListener("click", () => {
+          links.className = "hidden md:flex items-center gap-4";
+          toggle.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+
+    // Email contact
+    const TARGET_EMAIL = "deepstone.studio@gmail.com";
+    const form = document.getElementById("contactForm");
+    form?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const name = data.get("name");
+      const email = data.get("email");
+      const message = data.get("message");
+      const subject = encodeURIComponent(`Contact Portfolio — ${name}`);
+      const body = encodeURIComponent(`Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+      window.location.href = `mailto:${TARGET_EMAIL}?subject=${subject}&body=${body}`;
+    });
+
+    // Copier IP
+    const copyBtn = document.getElementById("copyIpBtn");
+    const ipEl = document.getElementById("serverIp");
+    copyBtn?.addEventListener("click", async () => {
+      const ip = ipEl?.textContent?.trim() || "";
+      if (!ip) return;
+      try {
+        await navigator.clipboard.writeText(ip);
+        copyBtn.textContent = "Copié ✅";
+        setTimeout(() => (copyBtn.textContent = "Copier l'IP"), 1200);
+      } catch {
+        alert("Impossible de copier automatiquement. IP : " + ip);
+      }
+    });
+  </script>
 </body>
 </html>
