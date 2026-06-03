@@ -65,9 +65,9 @@
             <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
                 <a href="#about" class="hover:text-slate-100 transition-colors">Vision</a>
                 <a href="#studio" class="hover:text-slate-100 transition-colors">Orinstone Studio</a>
-                <a href="#parcours" class="hover:text-slate-100 transition-colors">Parcours & Diplômes</a>
+                <a href="#plugins" class="hover:text-slate-100 transition-colors text-brand2">Plugins</a>
+                <a href="#parcours" class="hover:text-slate-100 transition-colors">Parcours</a>
                 <a href="#skills" class="hover:text-slate-100 transition-colors">Compétences</a>
-                <a href="#socials" class="hover:text-slate-100 transition-colors">Réseaux</a>
                 <a href="#donate" class="hover:text-slate-100 transition-colors text-accent">Soutenir</a>
                 <a href="#contact" class="btn-gradient px-5 py-2.5 rounded-xl font-bold shadow-lg shadow-brand/10 hover:opacity-90 transition-opacity text-slate-950">Me contacter</a>
             </div>
@@ -79,9 +79,9 @@
         <div id="mobileMenu" class="hidden md:hidden absolute top-20 left-0 w-full bg-panel border-b border-white/10 p-6 flex flex-col gap-4 text-center font-semibold">
             <a href="#about" class="mobile-link py-2 text-slate-400">Vision</a>
             <a href="#studio" class="mobile-link py-2 text-slate-400">Orinstone Studio</a>
+            <a href="#plugins" class="mobile-link py-2 text-brand2">Plugins</a>
             <a href="#parcours" class="mobile-link py-2 text-slate-400">Parcours & Diplômes</a>
             <a href="#skills" class="mobile-link py-2 text-slate-400">Compétences</a>
-            <a href="#socials" class="mobile-link py-2 text-slate-400">Réseaux</a>
             <a href="#donate" class="mobile-link py-2 text-accent">Soutenir</a>
             <a href="#contact" class="btn-gradient py-3 rounded-xl text-slate-950">Me contacter</a>
         </div>
@@ -99,7 +99,7 @@
                 </p>
                 <div class="flex flex-wrap gap-4">
                     <a href="#studio" class="btn-gradient px-6 py-3.5 rounded-xl font-bold shadow-xl shadow-brand/10 hover:opacity-90 transition-opacity">Explorer le Studio</a>
-                    <a href="#parcours" class="bg-white/5 border border-white/10 hover:bg-white/10 px-6 py-3.5 rounded-xl font-bold transition-all">Diplômes & Parcours</a>
+                    <a href="#plugins" class="bg-white/5 border border-white/10 hover:bg-white/10 px-6 py-3.5 rounded-xl font-bold transition-all">Nos Plugins Open Source</a>
                 </div>
             </div>
 
@@ -186,6 +186,134 @@
                     La branche <strong>Gaming & Gestion de communauté</strong>. Notre serveur Minecraft Survie fait office de laboratoire d'expérimentation en conditions réelles. Il permet de parfaire le déploiement technique et de tester nos stratégies de fidélisation et de communication client.
                 </p>
                 <div class="text-xs font-mono text-slate-500 uppercase tracking-wider">Pôle Gaming & Communauté</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="plugins" class="py-24 px-6 border-t border-white/5 bg-panel/30">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-xs font-mono text-brand uppercase tracking-widest mb-3">Développement open source</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-slate-100">Les Plugins de l'Écosystème Orinstone</h3>
+                <p class="text-slate-400 max-w-2xl mx-auto mt-4 text-sm md:text-base">
+                    Afin d'alimenter nos serveurs et proposer une expérience sur-mesure et sécurisée, Orinstone Studio conçoit et maintient ses propres architectures logicielles et plugins.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <div class="bg-panel border border-white/5 p-6 rounded-2xl flex flex-col justify-between hover:border-brand/30 transition-all group">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-brand text-2xl"><i class="fa-solid fa-comments"></i></div>
+                            <span class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 bg-brand/10 text-brand rounded border border-brand/20">Chat Pro</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-100 mb-2 group-hover:text-brand transition-colors">OrinstoneChat</h4>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-6">Gestion dynamique et modulaire du tchat en jeu. Système de salons, filtres avancés et mise en forme customisée pour les grades.</p>
+                    </div>
+                    <a href="https://github.com/metal54400/OrinstoneChat" target="_blank" class="text-xs font-semibold text-brand2 flex items-center gap-1.5 hover:underline">
+                        Code Source <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                    </a>
+                </div>
+
+                <div class="bg-panel border border-white/5 p-6 rounded-2xl flex flex-col justify-between hover:border-accent/30 transition-all group">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-accent text-2xl"><i class="fa-solid fa-shield-halved"></i></div>
+                            <span class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 bg-accent/10 text-accent rounded border border-accent/20">Sécurité</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-100 mb-2 group-hover:text-accent transition-colors">OrinstoneAuthy</h4>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-6">Système d'authentification robuste sécurisant les comptes des joueurs directement en jeu contre le vol de session.</p>
+                    </div>
+                    <a href="https://github.com/metal54400/OrinstoneAuthy" target="_blank" class="text-xs font-semibold text-brand2 flex items-center gap-1.5 hover:underline">
+                        Code Source <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                    </a>
+                </div>
+
+                <div class="bg-panel border border-white/5 p-6 rounded-2xl flex flex-col justify-between hover:border-brand2/30 transition-all group">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-brand2 text-2xl"><i class="fa-solid fa-users"></i></div>
+                            <span class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 bg-brand2/10 text-brand2 rounded border border-brand2/20">Social</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-100 mb-2 group-hover:text-brand2 transition-colors">OrinstoneTeams</h4>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-6">Module de regroupement de joueurs permettant de fonder des équipes, partager des objectifs et interagir en communauté.</p>
+                    </div>
+                    <a href="https://github.com/metal54400/OrinstoneTeams" target="_blank" class="text-xs font-semibold text-brand2 flex items-center gap-1.5 hover:underline">
+                        Code Source <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                    </a>
+                </div>
+
+                <div class="bg-panel border border-white/5 p-6 rounded-2xl flex flex-col justify-between hover:border-purple-400/30 transition-all group">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-purple-400 text-2xl"><i class="fa-solid fa-microphone"></i></div>
+                            <span class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 bg-purple-400/10 text-purple-400 rounded border border-purple-400/20">Audio</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-100 mb-2 group-hover:text-purple-400 transition-colors">OrinstoneVoiceChat</h4>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-6">Interfaçage et outils pour le chat vocal de proximité, maximisant l'immersion et les interactions RP sur le serveur.</p>
+                    </div>
+                    <a href="https://github.com/metal54400/OrinstoneVoiceChat" target="_blank" class="text-xs font-semibold text-brand2 flex items-center gap-1.5 hover:underline">
+                        Code Source <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                    </a>
+                </div>
+
+                <div class="bg-panel border border-white/5 p-6 rounded-2xl flex flex-col justify-between hover:border-amber-400/30 transition-all group">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-amber-400 text-2xl"><i class="fa-solid fa-gavel"></i></div>
+                            <span class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 bg-amber-400/10 text-amber-400 rounded border border-amber-400/20">Économie</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-100 mb-2 group-hover:text-amber-400 transition-colors">OrinstoneAuction</h4>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-6">Hôtel des ventes entièrement virtualisé. Permet aux joueurs de fluidifier l'économie interne en vendant et achetant aux enchères.</p>
+                    </div>
+                    <a href="https://github.com/metal54400/OrinstoneAuction" target="_blank" class="text-xs font-semibold text-brand2 flex items-center gap-1.5 hover:underline">
+                        Code Source <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                    </a>
+                </div>
+
+                <div class="bg-panel border border-white/5 p-6 rounded-2xl flex flex-col justify-between hover:border-pink-400/30 transition-all group">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-pink-400 text-2xl"><i class="fa-solid fa-star"></i></div>
+                            <span class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 bg-pink-400/10 text-pink-400 rounded border border-pink-400/20">Statut</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-100 mb-2 group-hover:text-pink-400 transition-colors">OrinstoneRep</h4>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-6">Système d'évaluation et de réputation entre joueurs, idéal pour valoriser les membres de confiance de la communauté.</p>
+                    </div>
+                    <a href="https://github.com/metal54400/OrinstoneRep" target="_blank" class="text-xs font-semibold text-brand2 flex items-center gap-1.5 hover:underline">
+                        Code Source <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                    </a>
+                </div>
+
+                <div class="bg-panel border border-white/5 p-6 rounded-2xl flex flex-col justify-between hover:border-red-400/30 transition-all group">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-red-400 text-2xl"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                            <span class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 bg-red-400/10 text-red-400 rounded border border-red-400/20">Équilibrage</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-100 mb-2 group-hover:text-red-400 transition-colors">OrinstoneNerf</h4>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-6">Outil avancé d'équilibrage du gameplay modifiant finement les statistiques des objets, armes et enchantements d'origine.</p>
+                    </div>
+                    <a href="https://github.com/metal54400/OrinstoneNerf" target="_blank" class="text-xs font-semibold text-brand2 flex items-center gap-1.5 hover:underline">
+                        Code Source <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                    </a>
+                </div>
+
+                <div class="bg-panel border border-white/5 p-6 rounded-2xl flex flex-col justify-between hover:border-slate-400/50 transition-all group">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-slate-400 text-2xl"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                            <span class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 bg-white/5 text-slate-300 rounded border border-white/10">Core</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-100 mb-2 group-hover:text-white transition-colors">OrinstoneUtils</h4>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-6">Boîte à outils centrale regroupant l'ensemble des commandes essentielles, optimisations de code et scripts transversaux.</p>
+                    </div>
+                    <a href="https://github.com/metal54400/OrinstoneUtils" target="_blank" class="text-xs font-semibold text-brand2 flex items-center gap-1.5 hover:underline">
+                        Code Source <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                    </a>
+                </div>
+
             </div>
         </div>
     </section>
