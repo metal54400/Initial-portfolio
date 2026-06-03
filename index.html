@@ -65,7 +65,6 @@
 
 <body class="text-[#e9eefc] leading-relaxed font-sans">
 
-  <!-- NAV -->
   <header class="px-5 pb-10 pt-5" id="top">
     <nav class="max-w-[1060px] mx-auto flex items-center justify-between gap-4 sticky top-0 py-2.5 backdrop-blur-md z-50">
       <a href="#top" class="font-black text-xl tracking-tight">MF<span class="text-[#19d3ff]">.</span></a>
@@ -81,17 +80,14 @@
       </div>
     </nav>
 
-    <!-- HERO -->
     <section class="max-w-[1060px] mx-auto grid md:grid-cols-[1.25fr_.9fr] gap-6 items-center pt-7">
       <div>
-        <p class="text-[#a9b4d0] font-bold tracking-wide mb-2.5">Créateur • Communauté • Infrastructure</p>
+        <p class="text-[#a9b4d0] font-bold tracking-wide mb-2.5">Relation Client • Informatique • Infrastructures</p>
         <h1 class="text-[clamp(34px,4vw,52px)] font-black leading-[1.1] mb-2.5">
           Salut, moi c'est <span class="gradient-text">Mathéo Favier</span>.
         </h1>
         <p class="text-[#a9b4d0] mb-5 max-w-[60ch]">
-          Sous le pseudo <strong class="text-[#e9eefc]">metal54400</strong> (ou <strong class="text-[#e9eefc]">metal54400_</strong>),
-          je développe des projets autour du gaming et du web : <strong class="text-[#e9eefc]">Orinstone Studio</strong>
-          et le serveur Minecraft <strong class="text-[#e9eefc]">Orinstone</strong>.
+          Sous le pseudo <strong class="text-[#e9eefc]">metal54400</strong>, je combine mes compétences en commerce et ma passion pour la tech à travers la gestion d'<strong>Orinstone Studio</strong> et le développement de serveurs.
         </p>
         <div class="flex gap-3 flex-wrap">
           <a href="#projects" class="btn-primary font-bold px-4 py-3 rounded-[14px] shadow-lg inline-flex items-center">Voir mes projets</a>
@@ -106,7 +102,6 @@
         </div>
       </div>
 
-      <!-- Code card -->
       <div aria-hidden="true" class="border border-white/10 bg-white/5 rounded-[18px] shadow-2xl overflow-hidden">
         <div class="flex gap-2 px-3.5 py-3.5 border-b border-white/10 bg-black/10">
           <div class="w-2.5 h-2.5 rounded-full bg-[#ff5a5a] opacity-90"></div>
@@ -115,62 +110,81 @@
         </div>
         <pre class="p-4 text-[#dfe8ff] text-[13px] font-mono overflow-auto"><code>const mateo = {
   nom: "Mathéo Favier",
-  pseudo: ["metal54400", "metal54400_"],
+  parcours: "2nd Métiers de la Relation Client",
+  futur: "Bac Pro MCVA",
+  objectif: "Titre RNCP Informatique @ Belval Université",
   projets: [
     "Orinstone Studio",
     "Orinstone (Minecraft)"
-  ],
-  discord: {
-    studio: "none",
-    serveur: "discord.gg/rjgh5WDFbD"
-  }
+  ]
 };</code></pre>
       </div>
     </section>
   </header>
 
   <main>
-    <!-- À PROPOS -->
     <section class="py-14 px-5" id="about">
       <div class="max-w-[1060px] mx-auto">
-        <h2 class="text-[28px] font-black mb-2.5">À propos</h2>
-        <p class="max-w-[76ch] mb-4">
-          Je m'appelle <strong>Mathéo Favier</strong>. Je construis des projets créatifs,
-          je développe une communauté, et je travaille sur l'univers de <strong>Orinstone</strong>.
+        <h2 class="text-[28px] font-black mb-2.5">À propos & Parcours</h2>
+        <p class="max-w-[76ch] mb-6">
+          Je m'appelle <strong>Mathéo Favier</strong>. Passionné par l'informatique et le contact humain, je construis un parcours hybride mêlant l'art de la relation client et la gestion technique d'infrastructures numériques.
         </p>
-        <div class="grid md:grid-cols-2 gap-4 mt-4">
-          <div class="border border-white/10 bg-white/[.03] rounded-[18px] p-4.5 p-[18px]">
+        
+        <div class="border border-white/10 bg-white/[.02] rounded-[18px] p-5 mb-6">
+          <h3 class="font-black text-lg mb-4 text-[#19d3ff]">🎓 Mon Parcours Scolaire</h3>
+          <div class="space-y-4 font-sm">
+            <div class="flex gap-4 items-start">
+              <div class="bg-[#4dff88]/20 text-[#4dff88] px-2.5 py-1 rounded-md text-xs font-bold mt-1 whitespace-nowrap">Actuel</div>
+              <div>
+                <p class="font-bold text-[#e9eefc]">Seconde — Métiers de la Relation Client (MRC)</p>
+                <p class="text-[#a9b4d0] text-sm">Apprentissage des bases de la communication, de la négociation et de la gestion de la relation client.</p>
+              </div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <div class="bg-[#7c5cff]/20 text-[#7c5cff] px-2.5 py-1 rounded-md text-xs font-bold mt-1 whitespace-nowrap">À venir</div>
+              <div>
+                <p class="font-bold text-[#e9eefc]">Bac Pro MCVA (Métiers du Commerce et de la Vente Option A)</p>
+                <p class="text-[#a9b4d0] text-sm">Orientation vers l'animation et la gestion de l'espace commercial, parfait pour le community management.</p>
+              </div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <div class="bg-white/10 text-[#a9b4d0] px-2.5 py-1 rounded-md text-xs font-bold mt-1 whitespace-nowrap">Objectif</div>
+              <div>
+                <p class="font-bold text-[#e9eefc]">Formation RNCP dans l'Informatique</p>
+                <p class="text-[#a9b4d0] text-sm">Poursuite d'études supérieure à <strong>Belval Université</strong> pour valider mes compétences techniques en développement et gestion système.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="border border-white/10 bg-white/[.03] rounded-[18px] p-[18px]">
             <h3 class="font-black text-lg mb-2">Orinstone Studio</h3>
             <p class="text-[#a9b4d0]">Mon espace de création : projets, idées et développement autour du gaming et des expériences en ligne.</p>
             <p class="text-[#a9b4d0] text-[13px] mt-2">
-              Discord : <a href="https://discord.gg/9f8uz3XNPf" target="_blank" rel="noreferrer" class="hover:text-[#e9eefc] transition-colors">discord.gg/9f8uz3XNPf</a>
+              Discord : <a href="https://discord.gg/9f8uz3XNPf" target="_blank" rel="noreferrer" class="hover:text-[#e9eefc] transition-colors">9f8uz3XNPf</a>
             </p>
           </div>
           <div class="border border-white/10 bg-white/[.03] rounded-[18px] p-[18px]">
             <h3 class="font-black text-lg mb-2">Serveur Minecraft Orinstone</h3>
-            <p class="text-[#a9b4d0]">Je développe et anime le serveur Minecraft <strong class="text-[#e9eefc]">Orinstone</strong> : communauté, événements, et expérience joueur.</p>
+            <p class="text-[#a9b4d0]">Je développe et anime le serveur Minecraft communautaire : gestion d'équipe, événements et fidélisation.</p>
             <p class="text-[#a9b4d0] text-[13px] mt-2">
-              Discord : <a href="https://discord.gg/r5WPfZajfN" target="_blank" rel="noreferrer" class="hover:text-[#e9eefc] transition-colors">discord.gg/r5WPfZajfN</a>
+              Discord : <a href="https://discord.gg/r5WPfZajfN" target="_blank" rel="noreferrer" class="hover:text-[#e9eefc] transition-colors">r5WPfZajfN</a>
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- COMPÉTENCES -->
     <section class="py-14 px-5" id="skills">
       <div class="max-w-[1060px] mx-auto">
         <h2 class="text-[28px] font-black mb-1">Compétences</h2>
-        <p class="text-[#a9b4d0] mb-4">Ce que je construis et gère autour de mes projets.</p>
+        <p class="text-[#a9b4d0] mb-4">Ce que j'applique au quotidien entre mes cours et mes projets.</p>
         <div class="flex flex-wrap gap-2.5 mt-3.5">
-          {["Gestion de communauté","Création/gestion de serveurs","Pterodactyl Panel","Infrastructure multi-jeux","Organisation d'événements","Branding / identité","Git / GitHub","Web (HTML/CSS/JS)"].map(s =>
-            `<span class="px-3 py-2.5 rounded-full border border-white/10 bg-white/[.04] text-[#e9eefc] font-bold text-[13px]">${s}</span>`
-          ).join('')}
-        </div>
+          </div>
       </div>
     </section>
 
-    <!-- PROJETS -->
     <section class="py-14 px-5" id="projects">
       <div class="max-w-[1060px] mx-auto">
         <div class="flex items-end justify-between gap-4 flex-wrap mb-4">
@@ -179,18 +193,16 @@
         </div>
         <div class="grid md:grid-cols-2 gap-4">
 
-          <!-- Orinstone Studio -->
           <article class="project-card border border-white/10 bg-white/[.03] rounded-[18px] p-[18px] transition-all duration-150">
             <div class="inline-block px-2.5 py-1.5 rounded-full border border-white/10 bg-black/10 text-[#a9b4d0] font-black text-[12px] mb-2.5">Projet 01</div>
             <h3 class="font-black text-lg mb-2">Orinstone Studio</h3>
-            <p class="text-[#a9b4d0] mb-3">Studio / marque de création : je construis l'univers Orinstone et je lance des projets autour du gaming et du web.</p>
+            <p class="text-[#a9b4d0] mb-3">Studio de création : je construis l'univers Orinstone et je lance des projets axés sur le gaming et le web.</p>
             <div class="flex gap-3 flex-wrap items-center">
-              <a href="#" target="_blank" rel="noreferrer" class="font-black border-b border-dashed border-white/25 hover:border-white/60 transition-colors">Discord Studio</a>
+              <a href="https://discord.gg/9f8uz3XNPf" target="_blank" rel="noreferrer" class="font-black border-b border-dashed border-white/25 hover:border-white/60 transition-colors">Discord Studio</a>
               <a href="https://github.com/metal54400" target="_blank" rel="noreferrer" class="font-black border-b border-dashed border-white/25 hover:border-white/60 transition-colors">GitHub</a>
             </div>
           </article>
 
-          <!-- Orinstone Minecraft -->
           <article class="project-card border border-white/10 bg-white/[.03] rounded-[18px] p-[18px] transition-all duration-150">
             <div class="flex items-center justify-between gap-3 mb-2.5">
               <div class="inline-block px-2.5 py-1.5 rounded-full border border-white/10 bg-black/10 text-[#a9b4d0] font-black text-[12px]">Projet 02</div>
@@ -210,21 +222,18 @@
               </div>
               <div class="flex items-center justify-between gap-3 mt-2.5">
                 <span class="text-[#a9b4d0] text-[13px]">IP :</span>
-                <code id="serverIp" class="px-2.5 py-1.5 rounded-[12px] border border-white/10 bg-white/[.04] text-[#e9eefc] text-sm">none</code>
+                <code id="serverIp" class="px-2.5 py-1.5 rounded-[12px] border border-white/10 bg-white/[.04] text-[#e9eefc] text-sm">play.orinstone.fr</code>
               </div>
               <div class="flex gap-2.5 flex-wrap mt-2.5">
                 <button id="copyIpBtn" type="button"
                   class="bg-white/[.04] border border-white/10 text-[#e9eefc] font-black px-3 py-2 rounded-[12px] text-[12px] cursor-pointer hover:bg-white/10 transition-colors">
                   Copier l'IP
                 </button>
-                <a href="https://discord.gg/rjgh5WDFbD" target="_blank" rel="noreferrer"
+                <a href="https://discord.gg/r5WPfZajfN" target="_blank" rel="noreferrer"
                   class="bg-white/[.04] border border-white/10 text-[#e9eefc] font-black px-3 py-2 rounded-[12px] text-[12px] hover:bg-white/10 transition-colors">
                   Discord Serveur
                 </a>
               </div>
-              <p class="text-[13px] text-[#a9b4d0] mt-2.5">
-                Le serveur est en cours de construction. Suis les annonces sur Discord.
-              </p>
             </div>
           </article>
 
@@ -232,11 +241,10 @@
       </div>
     </section>
 
-    <!-- CONTACT -->
     <section class="py-14 px-5" id="contact">
       <div class="max-w-[1060px] mx-auto">
         <h2 class="text-[28px] font-black mb-1">Contact</h2>
-        <p class="text-[#a9b4d0] mb-4">Envoie-moi un message (le bouton ouvre ton client mail).</p>
+        <p class="text-[#a9b4d0] mb-4">Un projet, une question ou une opportunité d'alternance ? Laisse-moi un message.</p>
         <form id="contactForm" class="border border-white/10 bg-white/[.03] rounded-[18px] p-[18px] mt-4">
           <div class="grid md:grid-cols-2 gap-4 mb-3">
             <label class="block font-black">
@@ -259,9 +267,6 @@
             <button type="submit" class="btn-primary font-bold px-4 py-3 rounded-[14px] shadow-lg">Envoyer</button>
             <a href="#top" class="bg-white/[.04] border border-white/10 text-[#e9eefc] font-bold px-4 py-3 rounded-[14px] hover:bg-white/10 transition-colors">Remonter</a>
           </div>
-          <p class="text-[13px] text-[#a9b4d0] mt-3">
-            Remplace l'email dans <code class="font-mono">script.js</code> pour recevoir les messages.
-          </p>
         </form>
       </div>
     </section>
@@ -272,23 +277,33 @@
       <p>© <span id="year"></span> Mathéo Favier — metal54400.</p>
       <div class="flex gap-3.5 flex-wrap">
         <a href="https://github.com/metal54400" target="_blank" rel="noreferrer" class="hover:text-[#e9eefc] transition-colors">GitHub</a>
-        <a href="#" target="_blank" rel="noreferrer" class="hover:text-[#e9eefc] transition-colors">Discord Studio</a>
-        <a href="https://discord.gg/rjgh5WDFbD" target="_blank" rel="noreferrer" class="hover:text-[#e9eefc] transition-colors">Discord Serveur</a>
+        <a href="https://discord.gg/9f8uz3XNPf" target="_blank" rel="noreferrer" class="hover:text-[#e9eefc] transition-colors">Discord Studio</a>
+        <a href="https://discord.gg/r5WPfZajfN" target="_blank" rel="noreferrer" class="hover:text-[#e9eefc] transition-colors">Discord Serveur</a>
       </div>
     </div>
   </footer>
 
   <script>
-    // Skills chips render
+    // Liste mise à jour des compétences (mélange commerce et tech)
+    const skills = [
+      "Relation Client & Accueil",
+      "Fidélisation de communauté",
+      "Gestion de serveurs (Pterodactyl Panel)",
+      "Infrastructure de jeux",
+      "Communication & Vente (MCVA)",
+      "Git / GitHub",
+      "Bases Web (HTML/CSS/JS)",
+      "Organisation d'événements"
+    ];
+    
     const chipsContainer = document.querySelector('#skills .flex.flex-wrap');
-    if (chipsContainer && chipsContainer.innerHTML.includes('{[')) {
-      const skills = ["Gestion de communauté","Création/gestion de serveurs","Pterodactyl Panel","Infrastructure multi-jeux","Organisation d'événements","Branding / identité","Git / GitHub","Web (HTML/CSS/JS)"];
+    if (chipsContainer) {
       chipsContainer.innerHTML = skills.map(s =>
         `<span class="px-3 py-2.5 rounded-full border border-white/10 bg-white/[.04] text-[#e9eefc] font-bold text-[13px]">${s}</span>`
       ).join('');
     }
 
-    // Année footer
+    // Année footer automatique
     const yearEl = document.getElementById("year");
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
