@@ -1,229 +1,428 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio — Mathéo Favier (metal54400_)</title>
-  <meta name="description" content="Portfolio de Mathéo Favier (metal54400) — Orinstone Studio, serveur Minecraft Orinstone." />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            bg: '#0b0f19',
-            panel: '#11182a',
-            brand: '#7c5cff',
-            brand2: '#19d3ff',
-          },
-          fontFamily: {
-            sans: ['ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Arial', 'sans-serif'],
-            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
-          },
-          animation: {
-            pulseDot: 'pulseDot 1.3s ease-in-out infinite',
-          },
-          keyframes: {
-            pulseDot: {
-              '0%':   { boxShadow: '0 0 0 0 rgba(77,255,136,.55)', transform: 'scale(1)' },
-              '60%':  { boxShadow: '0 0 0 10px rgba(77,255,136,0)', transform: 'scale(1.05)' },
-              '100%': { boxShadow: '0 0 0 0 rgba(77,255,136,0)', transform: 'scale(1)' },
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathéo Favier — Portfolio Professionnel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bg: '#050810',
+                        panel: '#0b0f19',
+                        panelLight: '#111827',
+                        brand: '#7c5cff',
+                        brand2: '#19d3ff',
+                        accent: '#4dff88',
+                    },
+                    fontFamily: {
+                        sans: ['Urbanist', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                }
             }
-          }
         }
-      }
-    }
-  </script>
-  <style>
-    body {
-      background:
-        radial-gradient(900px 500px at 20% 10%, rgba(124,92,255,.35), transparent 60%),
-        radial-gradient(800px 500px at 90% 20%, rgba(25,211,255,.22), transparent 55%),
-        #0b0f19;
-    }
-    .gradient-text {
-      background: linear-gradient(135deg, #7c5cff, #19d3ff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, #7c5cff, #19d3ff);
-      color: #06101a;
-    }
-    .animate-pulse-dot {
-      animation: pulseDot 1.3s ease-in-out infinite;
-    }
-    @keyframes pulseDot {
-      0%   { box-shadow: 0 0 0 0 rgba(77,255,136,.55); transform: scale(1); }
-      60%  { box-shadow: 0 0 0 10px rgba(77,255,136,0); transform: scale(1.05); }
-      100% { box-shadow: 0 0 0 0 rgba(77,255,136,0); transform: scale(1); }
-    }
-    .project-card:hover { transform: translateY(-3px); background: rgba(255,255,255,.05); }
-  </style>
+    </script>
+    <style>
+        body {
+            background: 
+                radial-gradient(circle at 15% 15%, rgba(124, 92, 255, 0.12), transparent 45%),
+                radial-gradient(circle at 85% 65%, rgba(25, 211, 255, 0.08), transparent 45%),
+                #050810;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #7c5cff, #19d3ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .btn-gradient {
+            background: linear-gradient(135deg, #7c5cff, #19d3ff);
+            color: #050810;
+        }
+        .animate-pulse-dot {
+            animation: pulseDot 1.5s ease-in-out infinite;
+        }
+        @keyframes pulseDot {
+            0% { box-shadow: 0 0 0 0 rgba(77, 255, 136, 0.4); transform: scale(1); }
+            70% { box-shadow: 0 0 0 12px rgba(77, 255, 136, 0); transform: scale(1.03); }
+            100% { box-shadow: 0 0 0 0 rgba(77, 255, 136, 0); transform: scale(1); }
+        }
+    </style>
 </head>
+<body class="text-slate-200 font-sans antialiased">
 
-<body class="text-[#e9eefc] leading-relaxed font-sans">
+    <nav class="fixed top-0 left-0 w-full backdrop-blur-xl bg-bg/70 border-b border-white/5 z-50 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#home" class="text-xl font-extrabold tracking-tight">MF<span class="text-brand2">.</span></a>
+            
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
+                <a href="#about" class="hover:text-slate-100 transition-colors">Vision</a>
+                <a href="#studio" class="hover:text-slate-100 transition-colors">Orinstone Studio</a>
+                <a href="#parcours" class="hover:text-slate-100 transition-colors">Parcours & Diplômes</a>
+                <a href="#skills" class="hover:text-slate-100 transition-colors">Compétences</a>
+                <a href="#socials" class="hover:text-slate-100 transition-colors">Réseaux</a>
+                <a href="#contact" class="btn-gradient px-5 py-2.5 rounded-xl font-bold shadow-lg shadow-brand/10 hover:opacity-90 transition-opacity text-slate-950">Me contacter</a>
+            </div>
 
-  <header class="px-5 pb-10 pt-5" id="top">
-    <nav class="max-w-[1060px] mx-auto flex items-center justify-between gap-4 sticky top-0 py-2.5 backdrop-blur-md z-50">
-      <a href="#top" class="font-black text-xl tracking-tight">MF<span class="text-[#19d3ff]">.</span></a>
-
-      <button id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false"
-        class="md:hidden border border-white/10 bg-white/5 text-[#e9eefc] px-3 py-2.5 rounded-xl cursor-pointer">☰</button>
-
-      <div id="navLinks" class="hidden md:flex items-center gap-4">
-        <a href="#about" class="text-[#a9b4d0] hover:text-[#e9eefc] transition-colors">À propos</a>
-        <a href="#skills" class="text-[#a9b4d0] hover:text-[#e9eefc] transition-colors">Compétences</a>
-        <a href="#projects" class="text-[#a9b4d0] hover:text-[#e9eefc] transition-colors">Projets</a>
-        <a href="#contact" class="btn-primary font-bold px-3.5 py-2.5 rounded-[14px] shadow-lg text-sm">Contact</a>
-      </div>
+            <button id="mobileMenuBtn" class="md:hidden text-2xl p-2 focus:outline-none" aria-label="Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden absolute top-20 left-0 w-full bg-panel border-b border-white/10 p-6 flex flex-col gap-4 text-center font-semibold">
+            <a href="#about" class="mobile-link py-2 text-slate-400">Vision</a>
+            <a href="#studio" class="mobile-link py-2 text-slate-400">Orinstone Studio</a>
+            <a href="#parcours" class="mobile-link py-2 text-slate-400">Parcours & Diplômes</a>
+            <a href="#skills" class="mobile-link py-2 text-slate-400">Compétences</a>
+            <a href="#socials" class="mobile-link py-2 text-slate-400">Réseaux</a>
+            <a href="#contact" class="btn-gradient py-3 rounded-xl text-slate-950">Me contacter</a>
+        </div>
     </nav>
 
-    <section class="max-w-[1060px] mx-auto grid md:grid-cols-[1.25fr_.9fr] gap-6 items-center pt-7">
-      <div>
-        <p class="text-[#a9b4d0] font-bold tracking-wide mb-2.5">Relation Client • Code • Design 3D</p>
-        <h1 class="text-[clamp(34px,4vw,52px)] font-black leading-[1.1] mb-2.5">
-          Salut, moi c'est <span class="gradient-text">Mathéo Favier</span>.
-        </h1>
-        <p class="text-[#a9b4d0] mb-5 max-w-[60ch]">
-          Sous le pseudo <strong class="text-[#e9eefc]">metal54400</strong>, je développe un profil polyvalent : du commerce aux compétences de pointe en informatique et design 3D pour propulser <strong>Orinstone Studio</strong>.
-        </p>
-        <div class="flex gap-3 flex-wrap">
-          <a href="#projects" class="btn-primary font-bold px-4 py-3 rounded-[14px] shadow-lg inline-flex items-center">Voir mes projets</a>
-          <a href="#contact" class="bg-white/5 border border-white/10 text-[#e9eefc] font-bold px-4 py-3 rounded-[14px] inline-flex items-center hover:bg-white/10 transition-colors">Me contacter</a>
-        </div>
-      </div>
-
-      <div aria-hidden="true" class="border border-white/10 bg-white/5 rounded-[18px] shadow-2xl overflow-hidden">
-        <div class="flex gap-2 px-3.5 py-3.5 border-b border-white/10 bg-black/10">
-          <div class="w-2.5 h-2.5 rounded-full bg-[#ff5a5a] opacity-90"></div>
-          <div class="w-2.5 h-2.5 rounded-full bg-[#ffd24a] opacity-90"></div>
-          <div class="w-2.5 h-2.5 rounded-full bg-[#4dff88] opacity-90"></div>
-        </div>
-        <pre class="p-4 text-[#dfe8ff] text-[13px] font-mono overflow-auto"><code>const mateo = {
-  lycee: "2nd MRC -> Bac Pro MCVA",
-  creatif: ["Graphisme", "Modélisation 3D"],
-  apres_bac: "Cursus Informatique (5 ans)",
-  ecole_visee: "42 Luxembourg (RNCP @ Belval)",
-  projets: "Orinstone Studio"
-};</code></pre>
-      </div>
-    </section>
-  </header>
-
-  <main>
-    <section class="py-14 px-5" id="about">
-      <div class="max-w-[1060px] mx-auto">
-        <h2 class="text-[28px] font-black mb-2.5">Parcours & Objectifs</h2>
-        <p class="max-w-[76ch] mb-6">
-          Mon objectif est de devenir un créateur technique complet. J'associe une solide formation commerciale initiale à des projets graphiques poussés, avant de me spécialiser pleinement dans le développement de haut niveau.
-        </p>
-        
-        <div class="border border-white/10 bg-white/[.02] rounded-[18px] p-5 mb-6">
-          <h3 class="font-black text-lg mb-4 text-[#19d3ff]">🎓 Ma Feuille de Route</h3>
-          <div class="space-y-4">
-            <div class="flex gap-4 items-start">
-              <div class="bg-[#4dff88]/20 text-[#4dff88] px-2.5 py-1 rounded-md text-xs font-bold mt-1 whitespace-nowrap">Au Lycée</div>
-              <div>
-                <p class="font-bold text-[#e9eefc]">Seconde MRC & Passage en Bac Pro MCVA</p>
-                <p class="text-[#a9b4d0] text-sm">Apprentissage de la gestion client, de l'écoute active et des mécaniques de communication indispensables pour encadrer et animer des communautés en ligne.</p>
-              </div>
+    <header id="home" class="min-h-screen flex items-center justify-center pt-24 px-6">
+        <div class="max-w-6xl w-full grid md:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
+            <div>
+                <span class="font-mono text-brand2 text-sm tracking-widest uppercase block mb-3">Profil Professionnel & Alternance</span>
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight leading-none mb-6">
+                    Mathéo <span class="gradient-text">Favier</span>
+                </h1>
+                <p class="text-xl text-slate-400 max-w-[54ch] mb-8 leading-relaxed">
+                    Sous le pseudo <strong class="text-slate-200 font-semibold">metal54400_</strong>, je développe un profil hybride unique. Alliant compétences de pointe en informatique (SysAdmin, Fullstack) et une formation commerciale rigoureuse, je me prépare à propulser mon entreprise.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#studio" class="btn-gradient px-6 py-3.5 rounded-xl font-bold shadow-xl shadow-brand/10 hover:opacity-90 transition-opacity">Explorer le Studio</a>
+                    <a href="#parcours" class="bg-white/5 border border-white/10 hover:bg-white/10 px-6 py-3.5 rounded-xl font-bold transition-all">Diplômes & Parcours</a>
+                </div>
             </div>
-            <div class="flex gap-4 items-start">
-              <div class="bg-[#7c5cff]/20 text-[#7c5cff] px-2.5 py-1 rounded-md text-xs font-bold mt-1 whitespace-nowrap">En Parallèle</div>
-              <div>
-                <p class="font-bold text-[#e9eefc]">Formations : Graphisme & Modélisation 3D</p>
-                <p class="text-[#a9b4d0] text-sm">Développement de mes compétences visuelles pour concevoir l'ensemble de l'identité graphique et des assets 3D de mes serveurs et marques.</p>
-              </div>
+
+            <div class="border border-white/10 bg-panel/60 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden hidden md:block">
+                <div class="flex gap-2 px-4 py-3.5 border-b border-white/5 bg-black/20">
+                    <div class="w-3 h-3 rounded-full bg-[#ff5a5a]/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-[#ffd24a]/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-[#4dff88]/80"></div>
+                </div>
+                <div class="p-6 font-mono text-sm text-brand2/90 space-y-2">
+                    <p><span class="text-slate-500"># Statut Actuel</span></p>
+                    <p><span class="text-slate-400">const</span> entrepreneur = {</p>
+                    <p class="pl-4">nom: <span class="text-accent">"Mathéo Favier"</span>,</p>
+                    <p class="pl-4">statut: <span class="text-accent">"Diplômé & En formation"</span>,</p>
+                    <p class="pl-4">role: <span class="text-accent">"CEO / Fondateur"</span>,</p>
+                    <p class="pl-4">holding: <span class="text-accent">"Orinstone Studio"</span></p>
+                    <p>};</p>
+                </div>
             </div>
-            <div class="flex gap-4 items-start">
-              <div class="bg-[#19d3ff]/20 text-[#19d3ff] px-2.5 py-1 rounded-md text-xs font-bold mt-1 whitespace-nowrap">Après le Bac</div>
-              <div>
-                <p class="font-bold text-[#e9eefc]">Expertise Tech — Cursus RNCP de 5 ans à 42 Luxembourg</p>
-                <p class="text-[#a9b4d0] text-sm">Dès l'obtention de mon Bac, je prévois d'intégrer la prestigieuse école <strong>42 Luxembourg</strong> (située sur le campus de Belval). Un cursus de 5 ans axé sur le code en autonomie pour décrocher un titre RNCP de haut niveau d'expert en informatique.</p>
-              </div>
+        </div>
+    </header>
+
+    <section id="about" class="py-24 px-6 border-t border-white/5 bg-panel/20">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-xs font-mono text-brand uppercase tracking-widest mb-3">Vision Stratégique</h2>
+            <h3 class="text-3xl md:text-4xl font-bold mb-6 text-slate-100">L'alliance de la Tech et du Commerce</h3>
+            <p class="text-lg text-slate-400 leading-relaxed mb-8">
+                Actuellement en quête d'opportunités d'alternance dans le secteur commercial, j'apporte une double plus-value : l'esprit logique et analytique d'un développeur, combiné à la fibre relationnelle requise pour le commerce moderne et la gestion client.
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
+                <div class="p-4 bg-panel border border-white/5 rounded-xl"><p class="text-2xl font-bold text-slate-100 mb-1">2026</p><p class="text-xs text-slate-500 uppercase font-mono">Bac MCVA</p></div>
+                <div class="p-4 bg-panel border border-white/5 rounded-xl"><p class="text-2xl font-bold text-brand2 mb-1">5 ans</p><p class="text-xs text-slate-500 uppercase font-mono">Visée 42 Lux</p></div>
+                <div class="p-4 bg-panel border border-white/5 rounded-xl"><p class="text-2xl font-bold text-brand mb-1">10+</p><p class="text-xs text-slate-500 uppercase font-mono">Langages Tech</p></div>
+                <div class="p-4 bg-panel border border-white/5 rounded-xl"><p class="text-2xl font-bold text-accent mb-1">100%</p><p class="text-xs text-slate-500 uppercase font-mono">Déterminé</p></div>
             </div>
-          </div>
         </div>
-      </div>
     </section>
 
-    <section class="py-14 px-5" id="skills">
-      <div class="max-w-[1060px] mx-auto">
-        <h2 class="text-[28px] font-black mb-1">Compétences</h2>
-        <p class="text-[#a9b4d0] mb-4">Un éventail de compétences mêlant logique technique, sens du client et création visuelle.</p>
-        <div class="flex flex-wrap gap-2.5 mt-3.5" id="skillsContainer">
+    <section id="studio" class="py-24 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-xs font-mono text-brand2 uppercase tracking-widest mb-3">Structure d'Entreprise</h2>
+            <h3 class="text-3xl md:text-4xl font-bold text-slate-100">L'Écosystème Orinstone Studio</h3>
         </div>
-      </div>
-    </section>
 
-    <section class="py-14 px-5" id="projects">
-      <div class="max-w-[1060px] mx-auto">
-        <h2 class="text-[28px] font-black mb-4">Projets</h2>
-        <div class="grid md:grid-cols-2 gap-4">
-          <article class="project-card border border-white/10 bg-white/[.03] rounded-[18px] p-[18px]">
-            <h3 class="font-black text-lg mb-2">Orinstone Studio</h3>
-            <p class="text-[#a9b4d0] mb-3">Ma marque globale de création. C'est ici que je fusionne mon sens de la relation client, le graphisme, la modélisation 3D et le développement.</p>
-            <a href="https://github.com/metal54400" target="_blank" class="font-black border-b border-dashed border-white/25 hover:border-white/60">GitHub</a>
-          </article>
-
-          <article class="project-card border border-white/10 bg-white/[.03] rounded-[18px] p-[18px]">
-            <h3 class="font-black text-lg mb-2">Minecraft Orinstone</h3>
-            <p class="text-[#a9b4d0] mb-3">Serveur communautaire en développement. Un parfait écosystème pour appliquer concrètement mes compétences réseaux, de gestion de serveurs et d'animation.</p>
-            <div class="flex items-center gap-2 text-sm text-[#4dff88]">
-              <span class="w-2 h-2 rounded-full bg-[#4dff88] animate-pulse-dot"></span>
-              En construction
+        <div class="bg-gradient-to-br from-panel to-panelLight border border-brand/20 p-8 md:p-10 rounded-2xl shadow-xl relative overflow-hidden mb-8 group">
+            <div class="absolute top-0 right-0 p-8 text-brand/5 group-hover:text-brand/10 transition-colors pointer-events-none">
+                <i class="fa-solid fa-cubes text-9xl"></i>
             </div>
-          </article>
+            <div class="flex items-center gap-3 mb-4">
+                <span class="bg-brand/10 text-brand text-xs font-mono px-3 py-1 rounded-full border border-brand/20 font-bold uppercase tracking-wider">Vaisseau Mère / Entité Principale</span>
+            </div>
+            <h4 class="text-3xl font-extrabold text-slate-100 mb-4">Orinstone Studio</h4>
+            <p class="text-slate-400 text-lg leading-relaxed max-w-4xl">
+                C'est mon <strong>studio de développement central</strong>. C'est au sein de cette entité que s'organise la création globale : conception de <strong>jeux vidéo</strong> immersifs, programmation de <strong>sites web</strong> sur-mesure et développement d'applications logicielles innovantes. Le studio pilote l'intégralité de la direction artistique et technique.
+            </p>
         </div>
-      </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-panel border border-white/5 p-6 md:p-8 rounded-2xl hover:border-brand/40 transition-all duration-300">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-brand/10 flex items-center justify-center text-brand"><i class="fa-solid fa-server"></i></div>
+                        <h5 class="text-xl font-bold text-slate-100">Orinheberge</h5>
+                    </div>
+                    <span class="text-xs bg-amber-500/10 text-amber-400 px-2.5 py-1 rounded-md border border-amber-500/20 font-mono">En attente / Planification</span>
+                </div>
+                <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                    Une branche exclusivement dédiée à <strong>l'infrastructure Cloud et à la virtualisation</strong>. Conçue comme une solution d'hébergement VPS managée via Pterodactyl, elle exploitera une couche d'automatisation robuste en Node.js pour garantir flexibilité et performances aux créations du studio.
+                </p>
+                <div class="text-xs font-mono text-slate-500 uppercase tracking-wider">Pôle Cloud & SysAdmin</div>
+            </div>
+
+            <div class="bg-panel border border-white/5 p-6 md:p-8 rounded-2xl hover:border-brand2/40 transition-all duration-300">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-brand2/10 flex items-center justify-center text-brand2"><i class="fa-solid fa-gamepad"></i></div>
+                        <h5 class="text-xl font-bold text-slate-100">ᴏʀɪɴꜱᴛᴏɴᴇ ・ꜱᴇʀᴠᴇʀ</h5>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs text-accent font-medium">
+                        <span class="w-2 h-2 rounded-full bg-accent animate-pulse-dot"></span> Dev Actif
+                    </div>
+                </div>
+                <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                    La branche <strong>Gaming & Gestion de communauté</strong>. Notre serveur Minecraft Survie fait office de laboratoire d'expérimentation en conditions réelles. Il permet de parfaire le déploiement technique et de tester nos stratégies de fidélisation et de communication client.
+                </p>
+                <div class="text-xs font-mono text-slate-500 uppercase tracking-wider">Pôle Gaming & Communauté</div>
+            </div>
+        </div>
     </section>
 
-    <section class="py-14 px-5" id="contact">
-      <div class="max-w-[1060px] mx-auto text-center">
-        <h2 class="text-[28px] font-black mb-4">Contact</h2>
-        <form id="contactForm" class="max-w-md mx-auto border border-white/10 bg-white/[.03] rounded-[18px] p-6 text-left">
-          <input name="name" type="text" placeholder="Nom" required class="w-full mb-3 px-3 py-3 rounded-[14px] border border-white/10 bg-black/20 text-[#e9eefc] outline-none focus:border-brand transition-all" />
-          <textarea name="message" rows="4" placeholder="Ton message..." required class="w-full mb-3 px-3 py-3 rounded-[14px] border border-white/10 bg-black/20 text-[#e9eefc] outline-none focus:border-brand transition-all"></textarea>
-          <button type="submit" class="w-full btn-primary font-bold py-3 rounded-[14px] shadow-lg">Envoyer l'email</button>
-        </form>
-      </div>
+    <section id="parcours" class="py-24 px-6 border-t border-white/5 bg-panel/10">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-xs font-mono text-brand uppercase tracking-widest mb-3">Feuille de Route</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-slate-100">Diplômes, Cursus & Expériences</h3>
+            </div>
+
+            <div class="space-y-12">
+                <div>
+                    <h4 class="text-sm font-mono text-slate-500 uppercase tracking-widest border-b border-white/5 pb-2 mb-6">Diplômes Obtenus & Cursus</h4>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="p-5 bg-panel/60 border border-accent/20 rounded-xl relative overflow-hidden">
+                            <div class="absolute top-0 right-0 p-3 text-accent/10"><i class="fa-solid fa-graduation-cap text-4xl"></i></div>
+                            <span class="text-xs font-mono text-accent block mb-1">Diplôme Obtenu</span>
+                            <h5 class="text-lg font-bold text-slate-100 mb-1">Brevet des Collèges</h5>
+                            <p class="text-sm text-slate-400">Validation des compétences fondamentales académiques et initiales.</p>
+                        </div>
+                        <div class="p-5 bg-panel/60 border border-brand2/20 rounded-xl relative overflow-hidden">
+                            <div class="absolute top-0 right-0 p-3 text-brand2/10"><i class="fa-solid fa-graduation-cap text-4xl"></i></div>
+                            <span class="text-xs font-mono text-brand2 block mb-1">Diplôme Obtenu</span>
+                            <h5 class="text-lg font-bold text-slate-100 mb-1">Certification Générale</h5>
+                            <p class="text-sm text-slate-400">Spécialisation et validation des acquis initiaux en Commerce.</p>
+                        </div>
+                        <div class="p-5 bg-panel border border-white/5 rounded-xl">
+                            <span class="text-xs font-mono text-slate-400 block mb-1">En Préparation (2024 - 2026)</span>
+                            <h5 class="text-lg font-bold text-slate-100 mb-1">Bac Professionnel MCVA</h5>
+                            <p class="text-sm text-slate-400">Lycée Alfred Reiser (Longlaville). Métiers du Commerce et de la Vente, Option A (Animation et Gestion de l'Espace Commercial).</p>
+                        </div>
+                        <div class="p-5 bg-panel border border-white/5 rounded-xl">
+                            <span class="text-xs font-mono text-brand block mb-1">Objectif Post-Bac</span>
+                            <h5 class="text-lg font-bold text-slate-100 mb-1">École 42 Luxembourg</h5>
+                            <p class="text-sm text-slate-400">Cursus d'excellence de 5 ans en ingénierie logicielle et systèmes visé sur le Campus de Belval.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-mono text-slate-500 uppercase tracking-widest border-b border-white/5 pb-2 mb-6">Expériences Professionnelles (PFMP)</h4>
+                    <div class="border border-white/5 bg-panel/40 rounded-xl overflow-hidden shadow-lg">
+                        <div class="p-5 md:p-6 border-b border-white/5 grid md:grid-cols-[1fr_2fr] gap-4 items-start hover:bg-white/[0.01] transition-colors">
+                            <div>
+                                <span class="text-sm font-mono text-brand2 block mb-1">2025 - 2026</span>
+                                <h5 class="text-lg font-bold text-slate-100">Carrefour City Longwy</h5>
+                                <p class="text-xs text-slate-500">PFMP N°2</p>
+                            </div>
+                            <p class="text-slate-400 text-sm leading-relaxed">Pratique approfondie de la relation client de proximité, encaissement, gestion dynamique des rayons, vente assistée et optimisation des flux de marchandises.</p>
+                        </div>
+
+                        <div class="p-5 md:p-6 grid md:grid-cols-[1fr_2fr] gap-4 items-start hover:bg-white/[0.01] transition-colors">
+                            <div>
+                                <span class="text-sm font-mono text-brand2 block mb-1">2024 - 2025</span>
+                                <h5 class="text-lg font-bold text-slate-100">Kiosque P+R Bouillon</h5>
+                                <p class="text-xs text-slate-500">PFMP N°1</p>
+                            </div>
+                            <p class="text-slate-400 text-sm leading-relaxed">Développement des compétences d'accueil et d'orientation, traitement direct des demandes clients en environnement à forte affluence.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-  </main>
 
-  <footer class="py-7 border-t border-white/10 text-center text-[#a9b4d0]">
-    <p>© <span id="year"></span> Mathéo Favier — metal54400.</p>
-  </footer>
+    <section id="skills" class="py-24 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-xs font-mono text-brand2 uppercase tracking-widest mb-3">Compétences Clés</h2>
+            <h3 class="text-3xl md:text-4xl font-bold text-slate-100">Expertise Technique & Outils</h3>
+        </div>
 
-  <script>
-    const skills = [
-      "Relation Client (MRC/MCVA)",
-      "Graphisme & Branding",
-      "Modélisation 3D (Assets / Design)",
-      "Gestion de serveurs (Pterodactyl)",
-      "Algorithmie & Résolution de problèmes",
-      "Fidélisation de communauté",
-      "Git / GitHub",
-      "HTML / CSS"
-    ];
-    
-    const container = document.getElementById('skillsContainer');
-    if (container) {
-      container.innerHTML = skills.map(s =>
-        `<span class="px-3 py-2.5 rounded-full border border-white/10 bg-white/[.04] text-[#e9eefc] font-bold text-[13px]">${s}</span>`
-      ).join('');
-    }
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-panel border border-white/5 p-6 rounded-xl flex flex-col justify-between">
+                <div>
+                    <div class="text-brand text-2xl mb-4"><i class="fa-solid fa-code"></i></div>
+                    <h4 class="text-lg font-bold text-slate-100 mb-3">Développement</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Maîtrise des concepts de programmation à travers un large panel de langages.</p>
+                </div>
+                <div class="flex flex-wrap gap-1.5 text-xs font-mono text-brand2">
+                    <span>Node.js</span> • <span>Python</span> • <span>JavaScript</span> • <span>PHP</span> • <span>Java</span> • <span>C/C++</span> • <span>C#</span> • <span>Lua</span>
+                </div>
+            </div>
 
-    document.getElementById("year").textContent = new Date().getFullYear();
+            <div class="bg-panel border border-white/5 p-6 rounded-xl flex flex-col justify-between">
+                <div>
+                    <div class="text-brand2 text-2xl mb-4"><i class="fa-solid fa-network-wired"></i></div>
+                    <h4 class="text-lg font-bold text-slate-100 mb-3">Systèmes & Web</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Gestion d'architectures web, bases de données et infrastructures serveurs.</p>
+                </div>
+                <div class="flex flex-wrap gap-1.5 text-xs font-mono text-accent">
+                    <span>Linux</span> • <span>Pterodactyl</span> • <span>SQL</span> • <span>HTML5</span> • <span>CSS3</span> • <span>DevOps</span>
+                </div>
+            </div>
 
-    const TARGET_EMAIL = "deepstone.studio@gmail.com";
-    document.getElementById("contactForm")?.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const name = e.target.name.value;
-      const message = e.target.message.value;
-      window.location.href = `mailto:${TARGET_EMAIL}?subject=Contact Portfolio&body=Nom: ${name}%0A%0AMessage: ${message}`;
-    });
-  </script>
+            <div class="bg-panel border border-white/5 p-6 rounded-xl flex flex-col justify-between">
+                <div>
+                    <div class="text-[#2563eb] text-2xl mb-4"><i class="fa-solid fa-file-invoice"></i></div>
+                    <h4 class="text-lg font-bold text-slate-100 mb-3">Bureautique Pro</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Utilisation experte des outils de productivité pour le suivi commercial et administratif.</p>
+                </div>
+                <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-300">
+                    <span class="bg-[#107c41]/10 text-[#107c41] px-2 py-0.5 rounded border border-[#107c41]/20 font-bold">Excel</span>
+                    <span class="bg-[#2b579a]/10 text-[#2b579a] px-2 py-0.5 rounded border border-[#2b579a]/20 font-bold">Word</span>
+                    <span class="bg-[#b7472a]/10 text-[#b7472a] px-2 py-0.5 rounded border border-[#b7472a]/20 font-bold">PowerPoint</span>
+                </div>
+            </div>
+
+            <div class="bg-panel border border-white/5 p-6 rounded-xl flex flex-col justify-between">
+                <div>
+                    <div class="text-accent text-2xl mb-4"><i class="fa-solid fa-user-tie"></i></div>
+                    <h4 class="text-lg font-bold text-slate-100 mb-3">Commerce & Relation</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">Compétences métiers validées sur le terrain lors des immersions en magasin.</p>
+                </div>
+                <div class="flex flex-wrap gap-1.5 text-xs text-slate-300 font-semibold">
+                    <span class="bg-white/5 px-2 py-0.5 rounded">Relation Client</span>
+                    <span class="bg-white/5 px-2 py-0.5 rounded">Gestion de Rayon</span>
+                    <span class="bg-white/5 px-2 py-0.5 rounded">Esprit d'équipe</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 bg-panel/40 border border-white/5 p-6 rounded-xl grid md:grid-cols-4 gap-4 text-center items-center">
+            <div class="text-sm font-mono text-slate-500 uppercase tracking-wider text-left hidden md:block">Compétences Linguistiques</div>
+            <div class="p-3 bg-bg border border-white/5 rounded-lg"><p class="text-sm font-bold text-slate-200">Allemand</p><p class="text-xs font-mono text-brand">Niveau A2</p></div>
+            <div class="p-3 bg-bg border border-white/5 rounded-lg"><p class="text-sm font-bold text-slate-200">Anglais</p><p class="text-xs font-mono text-brand2">Niveau A2</p></div>
+            <div class="p-3 bg-bg border border-white/5 rounded-lg"><p class="text-sm font-bold text-slate-200">Luxembourgeois</p><p class="text-xs font-mono text-accent">Niveau A1</p></div>
+        </div>
+    </section>
+
+    <section id="socials" class="py-24 px-6 border-t border-white/5 bg-panel/10">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-xs font-mono text-brand uppercase tracking-widest mb-3">Écosystème Digital</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-slate-100">Mes Réseaux Sociaux</h3>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <a href="https://github.com/metal54400" target="_blank" class="bg-panel border border-white/5 p-5 rounded-xl text-center hover:border-white/50 transition-colors group block">
+                    <div class="text-3xl text-slate-400 group-hover:text-white mb-3 transition-colors"><i class="fa-brands fa-github"></i></div>
+                    <p class="text-sm font-bold text-slate-200">GitHub</p>
+                    <span class="text-xs font-mono text-slate-500">metal54400</span>
+                </a>
+                <a href="https://discord.com" target="_blank" class="bg-panel border border-white/5 p-5 rounded-xl text-center hover:border-[#5865F2]/50 transition-colors group block">
+                    <div class="text-3xl text-slate-400 group-hover:text-[#5865F2] mb-3 transition-colors"><i class="fa-brands fa-discord"></i></div>
+                    <p class="text-sm font-bold text-slate-200">Discord</p>
+                    <span class="text-xs font-mono text-slate-500">metal54400</span>
+                </a>
+                <a href="https://tiktok.com/@metal54400" target="_blank" class="bg-panel border border-white/5 p-5 rounded-xl text-center hover:border-[#00f2fe]/50 transition-colors group block">
+                    <div class="text-3xl text-slate-400 group-hover:text-[#00f2fe] mb-3 transition-colors"><i class="fa-brands fa-tiktok"></i></div>
+                    <p class="text-sm font-bold text-slate-200">TikTok</p>
+                    <span class="text-xs font-mono text-slate-500">metal54400</span>
+                </a>
+                <a href="https://open.spotify.com" target="_blank" class="bg-panel border border-white/5 p-5 rounded-xl text-center hover:border-[#1ED760]/50 transition-colors group block">
+                    <div class="text-3xl text-slate-400 group-hover:text-[#1ED760] mb-3 transition-colors"><i class="fa-brands fa-spotify"></i></div>
+                    <p class="text-sm font-bold text-slate-200">Spotify</p>
+                    <span class="text-xs font-mono text-slate-500">METal54</span>
+                </a>
+                <a href="https://instagram.com/matheocillierfavier54" target="_blank" class="bg-panel border border-white/5 p-5 rounded-xl text-center hover:border-[#E1306C]/50 transition-colors group block">
+                    <div class="text-3xl text-slate-400 group-hover:text-[#E1306C] mb-3 transition-colors"><i class="fa-brands fa-instagram"></i></div>
+                    <p class="text-sm font-bold text-slate-200">Instagram</p>
+                    <span class="text-xs font-mono text-slate-500">matheocillierfavier54</span>
+                </a>
+                <a href="https://snapchat.com/add/matheo54400" target="_blank" class="bg-panel border border-white/5 p-5 rounded-xl text-center hover:border-[#FFFC00]/50 transition-colors group block">
+                    <div class="text-3xl text-slate-400 group-hover:text-[#FFFC00] mb-3 transition-colors"><i class="fa-brands fa-snapchat"></i></div>
+                    <p class="text-sm font-bold text-slate-200">Snapchat</p>
+                    <span class="text-xs font-mono text-slate-500">matheo54400</span>
+                </a>
+                <a href="https://x.com/MCillierFaviier" target="_blank" class="bg-panel border border-white/5 p-5 rounded-xl text-center hover:border-white/50 transition-colors group block">
+                    <div class="text-3xl text-slate-400 group-hover:text-white mb-3 transition-colors"><i class="fa-brands fa-x-twitter"></i></div>
+                    <p class="text-sm font-bold text-slate-200">Twitter (X)</p>
+                    <span class="text-xs font-mono text-slate-500">MCillierFaviier</span>
+                </a>
+                <a href="https://facebook.com" target="_blank" class="bg-panel border border-white/5 p-5 rounded-xl text-center hover:border-[#1877F2]/50 transition-colors group block">
+                    <div class="text-3xl text-slate-400 group-hover:text-[#1877F2] mb-3 transition-colors"><i class="fa-brands fa-facebook"></i></div>
+                    <p class="text-sm font-bold text-slate-200">Facebook</p>
+                    <span class="text-xs font-mono text-slate-500">Matheo Rammstein</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 px-6 border-t border-white/5 bg-panel/20">
+        <div class="max-w-xl mx-auto text-center">
+            <h2 class="text-xs font-mono text-brand uppercase tracking-widest mb-3">Opportunités</h2>
+            <h3 class="text-3xl font-bold mb-4 text-slate-100">Prêt pour une collaboration ?</h3>
+            <p class="text-slate-400 mb-8 text-sm md:text-base">Ouvert aux propositions d'alternance et d'échange autour de vos infrastructures ou projets commerciaux.</p>
+            
+            <form id="contactForm" class="bg-panel border border-white/10 rounded-2xl p-6 text-left space-y-4 shadow-xl">
+                <div>
+                    <label class="block text-xs font-mono text-slate-400 uppercase tracking-wider mb-2" for="name">Nom / Entreprise</label>
+                    <input id="name" name="name" type="text" required class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-slate-200 outline-none focus:border-brand transition-colors text-sm" placeholder="Votre nom" />
+                </div>
+                <div>
+                    <label class="block text-xs font-mono text-slate-400 uppercase tracking-wider mb-2" for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" required class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-slate-200 outline-none focus:border-brand transition-colors text-sm resize-none" placeholder="Votre proposition ou message..."></textarea>
+                </div>
+                <button type="submit" class="w-full btn-gradient py-3.5 rounded-xl font-bold text-slate-950 text-sm shadow-lg hover:opacity-95 transition-opacity transform active:scale-[0.99]">
+                    Envoyer le mail
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="py-10 border-t border-white/5 text-center text-xs text-slate-500 font-mono">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p>© <span id="year"></span> Mathéo Favier — Tous droits réservés.</p>
+            <div class="flex gap-6 text-slate-400">
+                <a href="https://github.com/metal54400" target="_blank" class="hover:text-brand2 transition-colors"><i class="fa-brands fa-github text-lg"></i></a>
+                <span class="text-slate-700">|</span>
+                <span>Longwy, France</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        const menuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn?.addEventListener('click', () => {
+            mobileMenu?.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu?.classList.add('hidden');
+            });
+        });
+
+        const TARGET_EMAIL = "matheocillierfavier@gmail.com";
+        document.getElementById("contactForm")?.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const name = encodeURIComponent(e.target.name.value);
+            const message = encodeURIComponent(e.target.message.value);
+            window.location.href = `mailto:${TARGET_EMAIL}?subject=Contact Pro - Portfolio&body=Bonjour Mathéo,%0A%0A${message}%0A%0ACordialement,%0A${name}`;
+        });
+    </script>
 </body>
 </html>
