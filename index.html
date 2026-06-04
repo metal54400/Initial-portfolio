@@ -1,637 +1,1458 @@
 <!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mathéo Favier — Portfolio Professionnel</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        bg: '#050810',
-                        panel: '#0b0f19',
-                        panelLight: '#111827',
-                        brand: '#7c5cff',
-                        brand2: '#19d3ff',
-                        accent: '#4dff88',
-                    },
-                    fontFamily: {
-                        sans: ['Urbanist', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                    },
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            background: 
-                radial-gradient(circle at 15% 15%, rgba(124, 92, 255, 0.12), transparent 45%),
-                radial-gradient(circle at 85% 65%, rgba(25, 211, 255, 0.08), transparent 45%),
-                #050810;
-        }
-        .gradient-text {
-            background: linear-gradient(135deg, #7c5cff, #19d3ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .btn-gradient {
-            background: linear-gradient(135deg, #7c5cff, #19d3ff);
-            color: #050510;
-        }
-        .animate-pulse-dot {
-            animation: pulseDot 1.5s ease-in-out infinite;
-        }
-        @keyframes pulseDot {
-            0% { box-shadow: 0 0 0 0 rgba(77, 255, 136, 0.4); transform: scale(1); }
-            70% { box-shadow: 0 0 0 12px rgba(77, 255, 136, 0); transform: scale(1.03); }
-            100% { box-shadow: 0 0 0 0 rgba(77, 255, 136, 0); transform: scale(1); }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathéo Favier — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Fira+Code:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --bg: #03050d;
+    --surface: #080c18;
+    --surface2: #0d1220;
+    --border: rgba(255,255,255,0.06);
+    --border-bright: rgba(0,255,200,0.25);
+    --cyan: #00ffc8;
+    --cyan-dim: #00c49a;
+    --amber: #ffb800;
+    --rose: #ff4f7b;
+    --slate: #8899bb;
+    --text: #dde4f0;
+    --text-dim: #5a6a88;
+    --glow-cyan: 0 0 40px rgba(0,255,200,0.12);
+    --glow-amber: 0 0 40px rgba(255,184,0,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 16px; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    antialiased: true;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    position: fixed;
+    width: 8px; height: 8px;
+    background: var(--cyan);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s;
+    mix-blend-mode: screen;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 32px; height: 32px;
+    border: 1px solid rgba(0,255,200,0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.15s ease;
+    mix-blend-mode: screen;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.4;
+  }
+
+  /* BACKGROUND GRADIENTS */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 10% 0%, rgba(0,255,200,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 90% 80%, rgba(255,184,0,0.05) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 60% 40%, rgba(255,79,123,0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* SCANLINES */
+  .scanlines {
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.03) 2px,
+      rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* LAYOUT */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 10; }
+  .container-narrow { max-width: 900px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 10; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(3,5,13,0.8);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Fira Code', monospace;
+    font-size: 1rem;
+    color: var(--cyan);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-logo span { color: var(--text-dim); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    color: var(--slate);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--cyan); }
+
+  .nav-cta {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.5rem 1.2rem;
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    text-decoration: none;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nav-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--cyan);
+    transform: translateX(-100%);
+    transition: transform 0.2s;
+    z-index: -1;
+  }
+
+  .nav-cta:hover { color: var(--bg); }
+  .nav-cta:hover::before { transform: translateX(0); }
+
+  /* MOBILE NAV */
+  .mobile-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 1.25rem;
+    cursor: pointer;
+  }
+
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    gap: 1.2rem;
+  }
+
+  .mobile-menu a {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    color: var(--slate);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* HERO */
+  #home {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 68px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--cyan);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--cyan);
+  }
+
+  h1 {
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+    color: #fff;
+  }
+
+  h1 .name-accent {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--cyan);
+    display: block;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--slate);
+    line-height: 1.75;
+    max-width: 42ch;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-desc strong { color: var(--text); font-weight: 600; }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.75rem;
+    background: var(--cyan);
+    color: var(--bg);
+    font-family: 'Fira Code', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  }
+
+  .btn-primary:hover {
+    background: #fff;
+    box-shadow: 0 0 30px rgba(0,255,200,0.4);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.75rem;
+    border: 1px solid var(--border-bright);
+    color: var(--cyan);
+    font-family: 'Fira Code', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    transition: all 0.2s;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  }
+
+  .btn-secondary:hover {
+    background: rgba(0,255,200,0.05);
+    border-color: var(--cyan);
+  }
+
+  /* TERMINAL CARD */
+  .terminal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: var(--glow-cyan), inset 0 1px 0 rgba(255,255,255,0.04);
+    position: relative;
+  }
+
+  .terminal::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  }
+
+  .terminal-bar {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0,0,0,0.3);
+  }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #ff5555; }
+  .dot-y { background: #ffb800; }
+  .dot-g { background: #50fa7b; }
+
+  .terminal-label {
+    margin-left: auto;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+
+  .terminal-body {
+    padding: 1.5rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.78rem;
+    line-height: 1.9;
+  }
+
+  .t-comment { color: var(--text-dim); }
+  .t-keyword { color: #ff79c6; }
+  .t-string { color: var(--cyan); }
+  .t-key { color: var(--slate); }
+  .t-cursor {
+    display: inline-block;
+    width: 2px; height: 1em;
+    background: var(--cyan);
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+    margin-left: 2px;
+  }
+
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  /* STATS ROW */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    border: 1px solid var(--border);
+    background: var(--border);
+    margin-top: 3rem;
+  }
+
+  .stat-item {
+    background: var(--surface);
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .stat-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+  }
+
+  /* SECTIONS */
+  section { position: relative; z-index: 10; }
+
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-header {
+    margin-bottom: 4rem;
+  }
+
+  .section-header.centered { text-align: center; }
+
+  .section-tag {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--cyan);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-tag::before {
+    content: '//';
+    color: var(--text-dim);
+  }
+
+  h2.section-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #fff;
+    line-height: 1.1;
+  }
+
+  /* CARD BASE */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.75rem;
+    position: relative;
+    transition: border-color 0.25s, box-shadow 0.25s;
+    overflow: hidden;
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .card:hover { border-color: var(--border-bright); box-shadow: var(--glow-cyan); }
+  .card:hover::after { opacity: 1; }
+
+  /* BADGE */
+  .badge {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid;
+    display: inline-block;
+  }
+
+  .badge-cyan { color: var(--cyan); border-color: rgba(0,255,200,0.3); background: rgba(0,255,200,0.05); }
+  .badge-amber { color: var(--amber); border-color: rgba(255,184,0,0.3); background: rgba(255,184,0,0.05); }
+  .badge-rose { color: var(--rose); border-color: rgba(255,79,123,0.3); background: rgba(255,79,123,0.05); }
+  .badge-slate { color: var(--slate); border-color: rgba(136,153,187,0.3); background: rgba(136,153,187,0.05); }
+  .badge-green { color: #50fa7b; border-color: rgba(80,250,123,0.3); background: rgba(80,250,123,0.05); }
+
+  /* PULSE DOT */
+  .pulse-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+  }
+  .pulse-dot::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    animation: pulseRing 1.5s ease-out infinite;
+    opacity: 0;
+  }
+  @keyframes pulseRing { 0%{transform:scale(0.8);opacity:0.8} 100%{transform:scale(2);opacity:0} }
+
+  /* SECTION ABOUT */
+  #about { padding: 8rem 0; background: linear-gradient(180deg, transparent, var(--surface) 50%, transparent); }
+
+  /* SECTION STUDIO */
+  #studio { padding: 8rem 0; }
+
+  .studio-hero {
+    border: 1px solid rgba(0,255,200,0.15);
+    background: linear-gradient(135deg, var(--surface) 0%, rgba(0,255,200,0.03) 100%);
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .studio-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--cyan-dim), transparent);
+  }
+
+  .studio-hero-bg {
+    position: absolute;
+    bottom: -1rem;
+    right: -1rem;
+    font-size: 10rem;
+    color: rgba(0,255,200,0.03);
+    line-height: 1;
+    pointer-events: none;
+    transition: color 0.3s;
+  }
+
+  .studio-hero:hover .studio-hero-bg { color: rgba(0,255,200,0.06); }
+
+  /* SECTION PLUGINS */
+  #plugins { padding: 8rem 0; background: var(--surface); }
+
+  .plugins-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+
+  .plugin-card {
+    background: var(--bg);
+    padding: 1.75rem;
+    transition: background 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .plugin-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .plugin-card:hover { background: var(--surface2); }
+  .plugin-card:hover::before { transform: scaleX(1); }
+
+  .plugin-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+  .plugin-cat {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.4rem;
+  }
+  .plugin-name { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+  .plugin-desc { font-size: 0.8rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 1.25rem; }
+  .plugin-links { display: flex; flex-direction: column; gap: 0.5rem; border-top: 1px solid var(--border); padding-top: 1rem; margin-top: auto; }
+  .plugin-link {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.65rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  /* SECTION ARCHIVES */
+  #archives { padding: 8rem 0; opacity: 0.9; }
+
+  /* SECTION PARCOURS */
+  #parcours { padding: 8rem 0; background: var(--surface); }
+
+  .timeline { display: flex; flex-direction: column; gap: 0; position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, var(--cyan), transparent);
+  }
+
+  .timeline-item {
+    padding-left: 2.5rem;
+    padding-bottom: 2.5rem;
+    position: relative;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -3px;
+    top: 6px;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan);
+  }
+
+  .timeline-meta {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.65rem;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+  }
+
+  .timeline-title { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 0.3rem; }
+  .timeline-sub { font-family: 'Fira Code', monospace; font-size: 0.68rem; color: var(--text-dim); margin-bottom: 0.6rem; }
+  .timeline-desc { font-size: 0.85rem; color: var(--slate); line-height: 1.7; }
+
+  /* SECTION SKILLS */
+  #skills { padding: 8rem 0; }
+
+  .skills-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .skill-card { background: var(--surface); padding: 1.75rem; }
+  .skill-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+  .skill-title { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 1rem; }
+  .skill-tags { font-family: 'Fira Code', monospace; font-size: 0.65rem; color: var(--text-dim); line-height: 1.8; }
+
+  /* SECTION SOCIALS */
+  #socials { padding: 8rem 0; background: var(--surface); }
+
+  .socials-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+
+  .social-card {
+    background: var(--bg);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.2s;
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .social-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    transform: scaleX(0);
+    transition: transform 0.25s;
+  }
+
+  .social-card:hover { background: var(--surface2); }
+  .social-card:hover::before { transform: scaleX(1); }
+
+  .social-icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; color: var(--text-dim); transition: color 0.2s; }
+  .social-name { font-size: 0.85rem; font-weight: 700; color: var(--text); display: block; margin-bottom: 0.2rem; }
+  .social-handle { font-family: 'Fira Code', monospace; font-size: 0.6rem; color: var(--text-dim); }
+
+  /* SECTION DONATE */
+  #donate { padding: 8rem 0; }
+
+  .donate-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 600px; margin: 0 auto; }
+
+  .donate-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2.5rem;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .donate-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    transition: opacity 0.25s;
+    opacity: 0;
+  }
+
+  .donate-card:hover { border-color: var(--border-bright); box-shadow: var(--glow-cyan); }
+  .donate-card:hover::before { opacity: 1; }
+
+  .donate-icon { font-size: 2rem; }
+  .donate-label { font-size: 1rem; font-weight: 700; color: #fff; }
+
+  /* SECTION CONTACT */
+  #contact { padding: 8rem 0; background: var(--surface); }
+
+  .contact-form { max-width: 560px; margin: 0 auto; }
+
+  .form-field { margin-bottom: 1rem; }
+  .form-field input,
+  .form-field textarea {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 0.9rem 1.1rem;
+    color: var(--text);
+    font-family: 'Fira Code', monospace;
+    font-size: 0.78rem;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+  }
+
+  .form-field input:focus,
+  .form-field textarea:focus { border-color: var(--cyan); }
+
+  .form-field input::placeholder,
+  .form-field textarea::placeholder { color: var(--text-dim); }
+
+  .form-submit {
+    width: 100%;
+    padding: 1rem;
+    background: var(--cyan);
+    color: var(--bg);
+    border: none;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+  }
+
+  .form-submit:hover { background: #fff; box-shadow: 0 0 30px rgba(0,255,200,0.4); }
+
+  /* FOOTER */
+  footer {
+    padding: 2.5rem 2rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.62rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    position: relative;
+    z-index: 10;
+  }
+
+  /* DIVIDER LINE */
+  .line-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-bright), transparent);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up { animation: fadeUp 0.7s ease forwards; }
+  .fade-up-d1 { animation-delay: 0.1s; opacity: 0; animation: fadeUp 0.7s 0.1s ease forwards; }
+  .fade-up-d2 { animation-delay: 0.2s; opacity: 0; animation: fadeUp 0.7s 0.2s ease forwards; }
+  .fade-up-d3 { animation-delay: 0.3s; opacity: 0; animation: fadeUp 0.7s 0.3s ease forwards; }
+  .fade-up-d4 { animation-delay: 0.4s; opacity: 0; animation: fadeUp 0.7s 0.4s ease forwards; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .plugins-grid { grid-template-columns: repeat(2, 1fr); }
+    .skills-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .mobile-btn { display: block; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .plugins-grid { grid-template-columns: 1fr; }
+    .socials-grid { grid-template-columns: repeat(2, 1fr); }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .donate-grid { grid-template-columns: 1fr; }
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+  }
+
+  @media (max-width: 480px) {
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .socials-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
 </head>
-<body class="text-slate-200 font-sans antialiased">
+<body>
 
-    <nav class="fixed top-0 left-0 w-full backdrop-blur-xl bg-bg/70 border-b border-white/5 z-50 transition-all duration-300">
-        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="#home" class="text-xl font-extrabold tracking-tight">MF<span class="text-brand2">.</span></a>
-            
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
-                <a href="#about" class="hover:text-slate-100 transition-colors">Vision</a>
-                <a href="#studio" class="hover:text-slate-100 transition-colors">Orinstone</a>
-                <a href="#plugins" class="hover:text-slate-100 transition-colors">Plugins</a>
-                <a href="#archives" class="hover:text-slate-100 transition-colors text-slate-500">Histoire & Fusion</a>
-                <a href="#parcours" class="hover:text-slate-100 transition-colors">Parcours</a>
-                <a href="#donate" class="hover:text-slate-100 transition-colors text-accent">Soutenir</a>
-                <a href="#contact" class="btn-gradient px-5 py-2.5 rounded-xl font-bold shadow-lg shadow-brand/10 hover:opacity-90 transition-opacity text-slate-950">Me contacter</a>
-            </div>
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="scanlines"></div>
 
-            <button id="mobileMenuBtn" class="md:hidden text-2xl p-2 focus:outline-none" aria-label="Menu">
-                <i class="fa-solid fa-bars"></i>
-            </button>
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">MF<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">Vision</a></li>
+      <li><a href="#studio">Studio</a></li>
+      <li><a href="#plugins">Plugins</a></li>
+      <li><a href="#archives" style="color:var(--text-dim)">Archives</a></li>
+      <li><a href="#parcours">Parcours</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#socials">Réseaux</a></li>
+      <li><a href="#donate" style="color:var(--amber)">Soutenir</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Contact</a>
+    <button class="mobile-btn" id="mobileBtn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" class="mobile-link">Vision</a>
+    <a href="#studio" class="mobile-link">Studio</a>
+    <a href="#plugins" class="mobile-link">Plugins</a>
+    <a href="#archives" class="mobile-link">Archives</a>
+    <a href="#parcours" class="mobile-link">Parcours</a>
+    <a href="#skills" class="mobile-link">Skills</a>
+    <a href="#socials" class="mobile-link">Réseaux</a>
+    <a href="#donate" class="mobile-link" style="color:var(--amber)">Soutenir</a>
+    <a href="#contact" class="mobile-link" style="color:var(--cyan)">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header id="home">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow fade-up">Profil Professionnel & Alternance</div>
+        <h1 class="fade-up-d1">
+          Mathéo
+          <span class="name-accent">Favier</span>
+        </h1>
+        <p class="hero-desc fade-up-d2">
+          Sous le pseudo <strong>metal54400_</strong>, je développe un profil hybride unique, alliant compétences de pointe en informatique et formation commerciale stratégique.
+        </p>
+        <div class="hero-actions fade-up-d3">
+          <a href="#studio" class="btn-primary"><i class="fa-solid fa-cubes"></i> Explorer le Studio</a>
+          <a href="#plugins" class="btn-secondary"><i class="fa-brands fa-github"></i> Open Source</a>
         </div>
-        <div id="mobileMenu" class="hidden md:hidden absolute top-20 left-0 w-full bg-panel border-b border-white/10 p-6 flex flex-col gap-4 text-center font-semibold">
-            <a href="#about" class="mobile-link py-2 text-slate-400">Vision</a>
-            <a href="#studio" class="mobile-link py-2 text-slate-400">Orinstone Studio</a>
-            <a href="#plugins" class="mobile-link py-2 text-brand2">Plugins</a>
-            <a href="#archives" class="mobile-link py-2 text-slate-500">Histoire & Fusion</a>
-            <a href="#parcours" class="mobile-link py-2 text-slate-400">Parcours & Diplômes</a>
-            <a href="#skills" class="mobile-link py-2 text-slate-400">Compétences</a>
-            <a href="#donate" class="mobile-link py-2 text-accent">Soutenir</a>
-            <a href="#contact" class="btn-gradient py-3 rounded-xl text-slate-950">Me contacter</a>
+      </div>
+
+      <div class="terminal fade-up-d4">
+        <div class="terminal-bar">
+          <div class="dot dot-r"></div>
+          <div class="dot dot-y"></div>
+          <div class="dot dot-g"></div>
+          <span class="terminal-label">status.js</span>
         </div>
-    </nav>
-
-    <header id="home" class="min-h-screen flex items-center justify-center pt-24 px-6">
-        <div class="max-w-6xl w-full grid md:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
-            <div>
-                <span class="font-mono text-brand2 text-sm tracking-widest uppercase block mb-3">Profil Professionnel & Alternance</span>
-                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight leading-none mb-6">
-                    Mathéo <span class="gradient-text">Favier</span>
-                </h1>
-                <p class="text-xl text-slate-400 max-w-[54ch] mb-8 leading-relaxed">
-                    Sous le pseudo <strong class="text-slate-200 font-semibold">metal54400_</strong>, je développe un profil hybride unique. Alliant compétences de pointe en informatique et formation commerciale stratégique.
-                </p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="#studio" class="btn-gradient px-6 py-3.5 rounded-xl font-bold shadow-xl shadow-brand/10 hover:opacity-90 transition-opacity">Explorer le Studio</a>
-                    <a href="#plugins" class="bg-white/5 border border-white/10 hover:bg-white/10 px-6 py-3.5 rounded-xl font-bold transition-all">Plugins Open Source</a>
-                </div>
-            </div>
-
-            <div class="border border-white/10 bg-panel/60 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden hidden md:block">
-                <div class="flex gap-2 px-4 py-3.5 border-b border-white/5 bg-black/20">
-                    <div class="w-3 h-3 rounded-full bg-[#ff5a5a]/80"></div>
-                    <div class="w-3 h-3 rounded-full bg-[#ffd24a]/80"></div>
-                    <div class="w-3 h-3 rounded-full bg-[#4dff88]/80"></div>
-                </div>
-                <div class="p-6 font-mono text-sm text-brand2/90 space-y-2">
-                    <p><span class="text-slate-500"># Statut Actuel</span></p>
-                    <p><span class="text-slate-400">const</span> entrepreneur = {</p>
-                    <p class="pl-4">nom: <span class="text-accent">"Mathéo Favier"</span>,</p>
-                    <p class="pl-4">statut: <span class="text-accent">"Futur Alternant & Entrepreneur"</span>,</p>
-                    <p class="pl-4">role: <span class="text-accent">"CEO / Fondateur"</span>,</p>
-                    <p class="pl-4">holding: <span class="text-accent">"Orinstone Studio"</span></p>
-                    <p>};</p>
-                </div>
-            </div>
+        <div class="terminal-body">
+          <div class="t-comment">// Statut Actuel</div>
+          <div><span class="t-keyword">const</span> entrepreneur = {</div>
+          <div style="padding-left:1.2em"><span class="t-key">nom:</span> <span class="t-string">"Mathéo Favier"</span>,</div>
+          <div style="padding-left:1.2em"><span class="t-key">alias:</span> <span class="t-string">"metal54400_"</span>,</div>
+          <div style="padding-left:1.2em"><span class="t-key">statut:</span> <span class="t-string">"Futur Alternant"</span>,</div>
+          <div style="padding-left:1.2em"><span class="t-key">role:</span> <span class="t-string">"CEO / Fondateur"</span>,</div>
+          <div style="padding-left:1.2em"><span class="t-key">holding:</span> <span class="t-string">"Orinstone Studio"</span></div>
+          <div>};<span class="t-cursor"></span></div>
         </div>
-    </header>
+      </div>
+    </div>
 
-    <section id="about" class="py-24 px-6 border-t border-white/5 bg-panel/20">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-xs font-mono text-brand uppercase tracking-widest mb-3">Vision Stratégique</h2>
-            <h3 class="text-3xl md:text-4xl font-bold mb-6 text-slate-100">L'alliance de la Tech et du Commerce</h3>
-            <p class="text-lg text-slate-400 leading-relaxed mb-8">
-                Actuellement en classe de Seconde MRC et en route vers la 1ère MCVA en alternance, j'apporte une double plus-value : l'esprit logique et analytique d'un développeur informatique, combiné à la solide expérience de terrain acquise en relation client.
-            </p>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
-                <div class="p-4 bg-panel border border-white/5 rounded-xl"><p class="text-2xl font-bold text-slate-100 mb-1">2MRC</p><p class="text-xs text-slate-500 uppercase font-mono">Année Validée</p></div>
-                <div class="p-4 bg-panel border border-white/5 rounded-xl"><p class="text-2xl font-bold text-brand2 mb-1">1ère MCVA</p><p class="text-xs text-slate-500 uppercase font-mono">Objectif Prochain</p></div>
-                <div class="p-4 bg-panel border border-white/5 rounded-xl"><p class="text-2xl font-bold text-brand mb-1">5 ans</p><p class="text-xs text-slate-500 uppercase font-mono">Visée 42 Lux</p></div>
-                <div class="p-4 bg-panel border border-white/5 rounded-xl"><p class="text-2xl font-bold text-accent mb-1">10+</p><p class="text-xs text-slate-500 uppercase font-mono">Langages Tech</p></div>
-            </div>
+    <div class="stats-row">
+      <div class="stat-item">
+        <span class="stat-value" style="color:var(--text)">2MRC</span>
+        <span class="stat-label">Année Validée</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" style="color:var(--cyan)">1ère MCVA</span>
+        <span class="stat-label">Objectif Prochain</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" style="color:var(--amber)">5 ans</span>
+        <span class="stat-label">Visée 42 Lux</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" style="color:#50fa7b">10+</span>
+        <span class="stat-label">Langages Tech</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container-narrow">
+    <div class="section-header centered">
+      <div class="section-tag">Vision Stratégique</div>
+      <h2 class="section-title">L'alliance de la Tech<br>et du Commerce</h2>
+    </div>
+    <p style="font-size:1.05rem;color:var(--slate);line-height:1.85;text-align:center;max-width:62ch;margin:0 auto">
+      Actuellement en classe de Seconde MRC et en route vers la 1ère MCVA en alternance, j'apporte une double plus-value&nbsp;: l'esprit logique et analytique d'un développeur informatique, combiné à la solide expérience de terrain acquise en relation client.
+    </p>
+  </div>
+</section>
+
+<!-- STUDIO -->
+<section id="studio">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-tag">Structure d'Entreprise</div>
+      <h2 class="section-title">L'Écosystème Orinstone Studio</h2>
+    </div>
+
+    <div class="studio-hero">
+      <div class="studio-hero-bg"><i class="fa-solid fa-cubes"></i></div>
+      <span class="badge badge-cyan" style="margin-bottom:1rem">Vaisseau Mère / Entité Principale</span>
+      <h3 style="font-size:2rem;font-weight:800;color:#fff;margin-bottom:0.75rem">Orinstone Studio</h3>
+      <p style="color:var(--slate);font-size:1rem;line-height:1.75;max-width:56ch">
+        Mon <strong style="color:var(--text)">studio de développement central</strong>. C'est au sein de cette entité que s'organise la création globale&nbsp;: jeux vidéo, sites web et applications innovantes.
+      </p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border)">
+      <div class="card" style="margin:0">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
+          <div style="display:flex;align-items:center;gap:0.75rem">
+            <div style="width:36px;height:36px;background:rgba(255,184,0,0.08);display:flex;align-items:center;justify-content:center;color:var(--amber)"><i class="fa-solid fa-server"></i></div>
+            <h5 style="font-size:1rem;font-weight:700;color:#fff">Orinheberge</h5>
+          </div>
+          <span class="badge badge-amber">Planification</span>
         </div>
-    </section>
+        <p style="color:var(--text-dim);font-size:0.82rem;line-height:1.65;margin-bottom:0.75rem">Infrastructure Cloud et virtualisation VPS via Pterodactyl.</p>
+        <div style="font-family:'Fira Code',monospace;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-dim)">Pôle Cloud & SysAdmin</div>
+      </div>
 
-    <section id="studio" class="py-24 px-6 max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-xs font-mono text-brand2 uppercase tracking-widest mb-3">Structure d'Entreprise</h2>
-            <h3 class="text-3xl md:text-4xl font-bold text-slate-100">L'Écosystème Orinstone Studio</h3>
+      <div class="card" style="margin:0">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
+          <div style="display:flex;align-items:center;gap:0.75rem">
+            <div style="width:36px;height:36px;background:rgba(0,255,200,0.08);display:flex;align-items:center;justify-content:center;color:var(--cyan)"><i class="fa-solid fa-gamepad"></i></div>
+            <h5 style="font-size:1rem;font-weight:700;color:#fff">ᴏʀɪɴꜱᴛᴏɴᴇ ・ꜱᴇʀᴠᴇʀ</h5>
+          </div>
+          <span class="badge badge-green" style="display:flex;align-items:center;gap:0.4rem">
+            <span class="pulse-dot" style="background:#50fa7b;color:#50fa7b"></span> Dev Actif
+          </span>
         </div>
+        <p style="color:var(--text-dim);font-size:0.82rem;line-height:1.65;margin-bottom:0.75rem">Notre serveur Minecraft Survie faisant office de laboratoire d'expérimentation.</p>
+        <div style="font-family:'Fira Code',monospace;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-dim)">Pôle Gaming</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="bg-gradient-to-br from-panel to-panelLight border border-brand/20 p-8 md:p-10 rounded-2xl shadow-xl relative overflow-hidden mb-8 group">
-            <div class="absolute top-0 right-0 p-8 text-brand/5 group-hover:text-brand/10 transition-colors pointer-events-none">
-                <i class="fa-solid fa-cubes text-9xl"></i>
-            </div>
-            <div class="flex items-center gap-3 mb-4">
-                <span class="bg-brand/10 text-brand text-xs font-mono px-3 py-1 rounded-full border border-brand/20 font-bold uppercase tracking-wider">Vaisseau Mère / Entité Principale</span>
-            </div>
-            <h4 class="text-3xl font-extrabold text-slate-100 mb-4">Orinstone Studio</h4>
-            <p class="text-slate-400 text-lg leading-relaxed max-w-4xl">
-                C'est mon <strong>studio de développement central</strong>. C'est au sein de cette entité que s'organise la création globale : jeux vidéo, sites web et applications innovantes.
-            </p>
+<!-- PLUGINS -->
+<section id="plugins">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-tag">Développement Open Source</div>
+      <h2 class="section-title">Plugins Orinstone</h2>
+    </div>
+
+    <div class="plugins-grid">
+
+      <!-- OrinstoneChat -->
+      <div class="plugin-card" style="--pc:#7c5cff" >
+        <style>.plugin-card:nth-child(1)::before{background:var(--brand,#7c5cff)}</style>
+        <div class="plugin-icon" style="color:#7c5cff"><i class="fa-solid fa-comments"></i></div>
+        <div class="plugin-cat" style="color:#7c5cff">Chat</div>
+        <div class="plugin-name">OrinstoneChat</div>
+        <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.75rem">
+          <span class="badge badge-green" style="display:flex;align-items:center;gap:0.3rem;font-size:0.55rem"><span class="pulse-dot" style="background:#50fa7b;color:#50fa7b"></span>Dev Actif</span>
         </div>
-
-        <div class="grid md:grid-cols-2 gap-6">
-            <div class="bg-panel border border-white/5 p-6 md:p-8 rounded-2xl hover:border-brand/40 transition-all duration-300">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-brand/10 flex items-center justify-center text-brand"><i class="fa-solid fa-server"></i></div>
-                        <h5 class="text-xl font-bold text-slate-100">Orinheberge</h5>
-                    </div>
-                    <span class="text-xs bg-amber-500/10 text-amber-400 px-2.5 py-1 rounded-md border border-amber-500/20 font-mono">Planification</span>
-                </div>
-                <p class="text-slate-400 text-sm leading-relaxed mb-4">Infrastructure Cloud et virtualisation VPS via Pterodactyl.</p>
-                <div class="text-xs font-mono text-slate-500 uppercase tracking-wider">Pôle Cloud & SysAdmin</div>
-            </div>
-
-            <div class="bg-panel border border-white/5 p-6 md:p-8 rounded-2xl hover:border-brand2/40 transition-all duration-300">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-brand2/10 flex items-center justify-center text-brand2"><i class="fa-solid fa-gamepad"></i></div>
-                        <h5 class="text-xl font-bold text-slate-100">ᴏʀɪɴꜱᴛᴏɴᴇ ・ꜱᴇʀᴠᴇʀ</h5>
-                    </div>
-                    <div class="flex items-center gap-2 text-xs text-accent font-medium">
-                        <span class="w-2 h-2 rounded-full bg-accent animate-pulse-dot"></span> Dev Actif
-                    </div>
-                </div>
-                <p class="text-slate-400 text-sm leading-relaxed mb-4">Notre serveur Minecraft Survie faisant office de laboratoire d'expérimentation.</p>
-                <div class="text-xs font-mono text-slate-500 uppercase tracking-wider">Pôle Gaming</div>
-            </div>
+        <div class="plugin-desc">Gestion dynamique du tchat, salons isolés et filtres de sécurité avancés.</div>
+        <div class="plugin-links">
+          <a href="https://github.com/metal54400/OrinstoneChat" target="_blank" class="plugin-link" style="color:var(--cyan)"><i class="fa-brands fa-github"></i> Code Source</a>
+          <a href="https://modrinth.com/plugin/orinstonechat" target="_blank" class="plugin-link" style="color:#50fa7b"><i class="fa-solid fa-download"></i> Télécharger</a>
         </div>
-    </section>
+      </div>
 
-    <section id="plugins" class="py-24 px-6 border-t border-white/5 bg-panel/30">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-xs font-mono text-brand uppercase tracking-widest mb-3">Développement open source</h2>
-                <h3 class="text-3xl md:text-4xl font-bold text-slate-100">Liste Complète des Plugins Orinstone</h3>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-panel border border-white/5 p-6 rounded-2xl flex flex-col justify-between hover:border-brand/30 transition-all group">
-                    <div>
-                        <div class="flex justify-between items-start mb-3">
-                            <div class="text-brand text-2xl"><i class="fa-solid fa-comments"></i></div>
-                            <div class="flex items-center gap-1.5 text-[10px] text-accent font-medium font-mono"><span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse-dot"></span> Dev Actif</div>
-                        </div>
-                        <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-brand block mb-1">Chat</span>
-                        <h4 class="text-lg font-bold text-slate-100 mb-2 group-hover:text-brand transition-colors">OrinstoneChat</h4>
-                        <p class="text-slate-400 text-xs leading-relaxed mb-4">Gestion dynamique du tchat, salons isolés et filtres de sécurité avancés.</p>
-                    </div>
-                    <div class="flex flex-col gap-2 mt-auto pt-4 border-t border-white/5">
-                        <a href="https://github.com/metal54400/OrinstoneChat" target="_blank" class="text-xs font-semibold text-brand2 flex items-center gap-1.5 hover:underline">
-                            <i class="fa-brands fa-github text-sm"></i> Code Source
-                        </a>
-                        <a href="https://modrinth.com/plugin/orinstonechat" target="_blank" class="text-xs font-semibold text-accent flex items-center gap-1.5 hover:underline">
-                            <i class="fa-solid fa-download text-sm"></i> Télécharger
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-panel border border-white/5 p-6 rounded-2xl flex flex-col justify-between hover:border-accent/30 transition-all group">
-                    <div>
-                        <div class="flex justify-between items-start mb-3">
-                            <div class="text-accent text-2xl"><i class="fa-solid fa-shield-halved"></i></div>
-                            <div class="flex items-center gap-1.5 text-[10px] text-accent font-medium font-mono"><span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse-dot"></span> Dev Actif</div>
-                        </div>
-                        <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-accent block mb-1">Sécurité</span>
-                        <h4 class="text-lg font-bold text-slate-100 mb-2 group-hover:text-accent transition-colors">OrinstoneAuthy</h4>
-                        <p class="text-slate-400 text-xs leading-relaxed mb-4">Système d'authentification robuste sécurisant les connexions et comptes en jeu.</p>
-                    </div>
-                    <div class="mt-auto pt-4 border-t border-white/5">
-                        <a href="https://github.com/metal54400/OrinstoneAuthy" target="_blank" class="text-xs font-semibold text-brand2 flex items-center gap-1.5 hover:underline">
-                            <i class="fa-brands fa-github text-sm"></i> Code Source
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-panel border border-white/5 p-6 rounded-2xl flex flex-col justify-between hover:border-brand2/30 transition-all group">
-                    <div>
-                        <div class="flex justify-between items-start mb-3">
-                            <div class="text-brand2 text-2xl"><i class="fa-solid fa-users"></i></div>
-                            <div class="flex items-center gap-1.5 text-[10px] text-accent font-medium font-mono"><span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse-dot"></span> Dev Actif</div>
-                        </div>
-                        <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-brand2 block mb-1">Social</span>
-                        <h4 class="text-lg font-bold text-slate-100 mb-2 group-hover:text-brand2 transition-colors">OrinstoneTeams</h4>
-                        <p class="text-slate-400 text-xs leading-relaxed mb-4">Module permettant le regroupement fluide de joueurs et la fondation d'équipes.</p>
-                    </div>
-                    <div class="mt-auto pt-4 border-t border-white/5">
-                        <a href="https://github.com/metal54400/OrinstoneTeams" target="_blank" class="text-xs font-semibold text-brand2 flex items-center gap-1.5 hover:underline">
-                            <i class="fa-brands fa-github text-sm"></i> Code Source
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-panel border border-white/5 p-6 rounded-2xl flex flex-col justify-between hover:border-purple-400/30 transition-all group">
-                    <div>
-                        <div class="flex justify-between items-start mb-3">
-                            <div class="text-purple-400 text-2xl"><i class="fa-solid fa-microphone"></i></div>
-                            <div class="flex items-center gap-1.5 text-[10px] text-accent font-medium font-mono"><span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse-dot"></span> Dev Actif</div>
-                        </div>
-                        <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-purple-400 block mb-1">Audio</span>
-                        <h4 class="text-lg font-bold text-slate-100 mb-2 group-hover:text-purple-400 transition-colors">OrinstoneVoiceChat</h4>
-                        <p class="text-slate-400 text-xs leading-relaxed mb-4">Outils de gestion pour le chat vocal de proximité, maximisant l'immersion RP.</p>
-                    </div>
-                    <div class="mt-auto pt-4 border-t border-white/5">
-                        <a href="https://github.com/metal54400/OrinstoneVoiceChat" target="_blank" class="text-xs font-semibold text-brand2 flex items-center gap-1.5 hover:underline">
-                            <i class="fa-brands fa-github text-sm"></i> Code Source
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-panel border border-white/5 p-6 rounded-2xl flex flex-col justify-between hover:border-amber-500/30 transition-all group">
-                    <div>
-                        <div class="flex justify-between items-start mb-3">
-                            <div class="text-amber-500 text-2xl"><i class="fa-solid fa-gavel"></i></div>
-                            <div class="flex items-center gap-1.5 text-[10px] text-brand2 font-medium font-mono"><span class="w-1.5 h-1.5 rounded-full bg-brand2"></span> Stable</div>
-                        </div>
-                        <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-500 block mb-1">Équilibrage</span>
-                        <h4 class="text-lg font-bold text-slate-100 mb-2 group-hover:text-amber-500 transition-colors">OrinstoneNerf</h4>
-                        <p class="text-slate-400 text-xs leading-relaxed mb-4">Ajustement précis des dégâts, des mécaniques vanilla et de la puissance des équipements.</p>
-                    </div>
-                    <div class="mt-auto pt-4 border-t border-white/5">
-                        <a href="https://github.com/metal54400/OrinstoneNerf" target="_blank" class="text-xs font-semibold text-brand2 flex items-center gap-1.5 hover:underline">
-                            <i class="fa-brands fa-github text-sm"></i> Code Source
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-panel border border-white/5 p-6 rounded-2xl flex flex-col justify-between hover:border-teal-400/30 transition-all group">
-                    <div>
-                        <div class="flex justify-between items-start mb-3">
-                            <div class="text-teal-400 text-2xl"><i class="fa-solid fa-star"></i></div>
-                            <div class="flex items-center gap-1.5 text-[10px] text-brand2 font-medium font-mono"><span class="w-1.5 h-1.5 rounded-full bg-brand2"></span> Stable</div>
-                        </div>
-                        <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-teal-400 block mb-1">Progression</span>
-                        <h4 class="text-lg font-bold text-slate-100 mb-2 group-hover:text-teal-400 transition-colors">OrinstoneRep</h4>
-                        <p class="text-slate-400 text-xs leading-relaxed mb-4">Système interne de réputation et de scoring pour suivre l'activité des joueurs.</p>
-                    </div>
-                    <div class="mt-auto pt-4 border-t border-white/5">
-                        <a href="https://github.com/metal54400/OrinstoneRep" target="_blank" class="text-xs font-semibold text-brand2 flex items-center gap-1.5 hover:underline">
-                            <i class="fa-brands fa-github text-sm"></i> Code Source
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-panel border border-white/5 p-6 rounded-2xl flex flex-col justify-between hover:border-orange-400/30 transition-all group">
-                    <div>
-                        <div class="flex justify-between items-start mb-3">
-                            <div class="text-orange-400 text-2xl"><i class="fa-solid fa-comments-dollar"></i></div>
-                            <div class="flex items-center gap-1.5 text-[10px] text-brand2 font-medium font-mono"><span class="w-1.5 h-1.5 rounded-full bg-brand2"></span> Stable</div>
-                        </div>
-                        <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-orange-400 block mb-1">Économie</span>
-                        <h4 class="text-lg font-bold text-slate-100 mb-2 group-hover:text-orange-400 transition-colors">OrinstoneAuction</h4>
-                        <p class="text-slate-400 text-xs leading-relaxed mb-4">Hôtel des ventes dynamique permettant le commerce régulé inter-joueurs.</p>
-                    </div>
-                    <div class="mt-auto pt-4 border-t border-white/5">
-                        <a href="https://github.com/metal54400/OrinstoneAuction" target="_blank" class="text-xs font-semibold text-brand2 flex items-center gap-1.5 hover:underline">
-                            <i class="fa-brands fa-github text-sm"></i> Code Source
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-panel border border-white/5 p-6 rounded-2xl flex flex-col justify-between hover:border-rose-400/30 transition-all group">
-                    <div>
-                        <div class="flex justify-between items-start mb-3">
-                            <div class="text-rose-400 text-2xl"><i class="fa-solid fa-toolbox"></i></div>
-                            <div class="flex items-center gap-1.5 text-[10px] text-brand2 font-medium font-mono"><span class="w-1.5 h-1.5 rounded-full bg-brand2"></span> Stable</div>
-                        </div>
-                        <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-rose-400 block mb-1">Outils</span>
-                        <h4 class="text-lg font-bold text-slate-100 mb-2 group-hover:text-rose-400 transition-colors">OrinstoneUtils</h4>
-                        <p class="text-slate-400 text-xs leading-relaxed mb-4">Boîte à outils principale regroupant l'ensemble des commandes administratives globales.</p>
-                    </div>
-                    <div class="mt-auto pt-4 border-t border-white/5">
-                        <a href="https://github.com/metal54400/OrinstoneUtils" target="_blank" class="text-xs font-semibold text-brand2 flex items-center gap-1.5 hover:underline">
-                            <i class="fa-brands fa-github text-sm"></i> Code Source
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-12 text-center">
-                <a href="https://github.com/metal54400" target="_blank" class="inline-flex items-center gap-2 text-sm font-mono text-slate-400 hover:text-brand2 transition-colors border border-white/5 bg-panel/40 px-5 py-2.5 rounded-xl">
-                    <i class="fa-brands fa-github text-base"></i> Suivre l'activité complète sur GitHub
-                </a>
-            </div>
+      <!-- OrinstoneAuthy -->
+      <div class="plugin-card">
+        <div class="plugin-icon" style="color:#50fa7b"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="plugin-cat" style="color:#50fa7b">Sécurité</div>
+        <div class="plugin-name">OrinstoneAuthy</div>
+        <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.75rem">
+          <span class="badge badge-green" style="display:flex;align-items:center;gap:0.3rem;font-size:0.55rem"><span class="pulse-dot" style="background:#50fa7b;color:#50fa7b"></span>Dev Actif</span>
         </div>
-    </section>
-
-    <section id="archives" class="py-24 px-6 border-t border-white/5 bg-panel/10">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
-                <div>
-                    <h2 class="text-xs font-mono text-slate-500 uppercase tracking-widest mb-3">Historique & Évolution</h2>
-                    <h3 class="text-3xl md:text-4xl font-bold text-slate-300 italic">Histoire de Deepstone Studio</h3>
-                </div>
-                <div class="text-slate-500 font-mono text-sm border-l-2 border-slate-700 pl-4">
-                    "Intégrer le passé pour consolider les fondations de l'avenir."
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="bg-black/40 border border-brand/20 p-6 rounded-xl relative overflow-hidden flex flex-col justify-between">
-                    <div class="absolute top-0 right-0 p-3 bg-brand/10 text-brand text-[9px] font-mono uppercase font-bold tracking-tight rounded-bl border-l border-b border-brand/20">Fusionné</div>
-                    <div>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 rounded bg-brand/10 flex items-center justify-center text-brand text-xl">
-                                <i class="fa-solid fa-code-merge"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-100">Deepstone Studio</h4>
-                                <span class="text-[10px] font-mono text-slate-500 uppercase tracking-tighter">Ancien Projet</span>
-                            </div>
-                        </div>
-                        <p class="text-xs text-slate-400 leading-relaxed mb-2">Mon premier studio de développement indépendant.</p>
-                        <p class="text-[11px] text-slate-500 italic leading-relaxed">L'entité globale ainsi que l'infrastructure réseau du serveur Deepstone ont officiellement fusionné avec Orinstone Studio. Le serveur autonome n'existe plus.</p>
-                    </div>
-                </div>
-
-                <div class="bg-black/30 border border-white/5 p-6 rounded-xl flex flex-col justify-between hover:border-white/20 transition-all duration-300">
-                    <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="text-slate-400 text-2xl"><i class="fa-solid fa-ban"></i></div>
-                            <span class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 bg-white/5 text-slate-400 rounded border border-white/10">Discontinué</span>
-                        </div>
-                        <h4 class="font-bold text-slate-100 mb-1">DeepstonePlugin</h4>
-                        <p class="text-xs text-slate-500 leading-relaxed">Ancien plugin maître développé pour l'infrastructure réseau originelle de Deepstone.</p>
-                    </div>
-                    <div class="flex flex-col gap-2 mt-4 pt-4 border-t border-white/5">
-                        <a href="https://github.com/DeepstoneStudio/DeepstonePlugin" target="_blank" class="text-xs font-semibold text-slate-400 flex items-center gap-1.5 hover:text-slate-200 transition-colors">
-                            <i class="fa-brands fa-github text-sm"></i> Code Source (Archive)
-                        </a>
-                        <a href="https://github.com/DeepstoneStudio/DeepstonePlugin/releases/tag/v0.21.4" target="_blank" class="text-xs font-semibold text-brand2 flex items-center gap-1.5 hover:underline">
-                            <i class="fa-solid fa-download text-sm"></i> Télécharger v0.21.4
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-black/30 border border-white/5 p-6 rounded-xl flex flex-col justify-between hover:border-white/20 transition-all duration-300">
-                    <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="text-accent text-xl"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-                            <span class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 bg-white/5 text-slate-400 rounded border border-white/10">Discontinué</span>
-                        </div>
-                        <h4 class="font-bold text-slate-100 mb-1">WizardStoneCraft</h4>
-                        <p class="text-xs text-slate-500 leading-relaxed">Extension historique liée à l'ancien serveur de jeu. Projet figé mais toujours public.</p>
-                    </div>
-                    <div class="flex flex-col gap-2 mt-4 pt-4 border-t border-white/5">
-                        <a href="https://github.com/DeepstoneStudio/WizardStoneCraftplugin" target="_blank" class="text-xs font-semibold text-slate-400 flex items-center gap-1.5 hover:text-slate-200 transition-colors">
-                            <i class="fa-brands fa-github text-sm"></i> Code Source
-                        </a>
-                        <a href="https://github.com/DeepstoneStudio/WizardStoneCraftplugin/releases/tag/v0.0.0.87.1-1.21.9" target="_blank" class="text-xs font-semibold text-accent flex items-center gap-1.5 hover:underline">
-                            <i class="fa-solid fa-download text-sm"></i> Télécharger v0.0.0.87.1
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <div class="plugin-desc">Système d'authentification robuste sécurisant les connexions et comptes en jeu.</div>
+        <div class="plugin-links">
+          <a href="https://github.com/metal54400/OrinstoneAuthy" target="_blank" class="plugin-link" style="color:var(--cyan)"><i class="fa-brands fa-github"></i> Code Source</a>
         </div>
-    </section>
+      </div>
 
-    <section id="parcours" class="py-24 px-6 border-t border-white/5 bg-panel/10">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-xs font-mono text-brand uppercase tracking-widest mb-3">Feuille de Route</h2>
-                <h3 class="text-3xl md:text-4xl font-bold text-slate-100">Diplômes & Parcours</h3>
-            </div>
-
-            <div class="space-y-12">
-                <div>
-                    <h4 class="text-sm font-mono text-slate-500 uppercase tracking-widest border-b border-white/5 pb-2 mb-6">Diplômes & Cursus Académique</h4>
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div class="p-5 bg-panel/60 border border-accent/20 rounded-xl relative overflow-hidden">
-                            <div class="absolute top-0 right-0 p-3 text-accent/10"><i class="fa-solid fa-graduation-cap text-4xl"></i></div>
-                            <span class="text-xs font-mono text-accent block mb-1">Diplôme Obtenu</span>
-                            <h5 class="text-lg font-bold text-slate-100 mb-1">Brevet des Collèges</h5>
-                        </div>
-                        <div class="p-5 bg-panel/60 border border-brand2/20 rounded-xl relative overflow-hidden">
-                            <div class="absolute top-0 right-0 p-3 text-brand2/10"><i class="fa-solid fa-graduation-cap text-4xl"></i></div>
-                            <span class="text-xs font-mono text-brand2 block mb-1">Diplôme Obtenu</span>
-                            <h5 class="text-lg font-bold text-slate-100 mb-1">Certification Commerce</h5>
-                        </div>
-                        <div class="p-5 bg-panel border border-white/10 rounded-xl">
-                            <span class="text-xs font-mono text-slate-400 block mb-1">Cursus Suivi</span>
-                            <h5 class="text-lg font-bold text-slate-100 mb-1">Seconde MRC</h5>
-                            <p class="text-sm text-slate-400">Métiers de la Relation Client — Lycée Alfred Reiser.</p>
-                        </div>
-                        <div class="p-5 bg-panel border border-brand/40 rounded-xl relative overflow-hidden">
-                            <div class="absolute top-2 right-2 px-2 py-0.5 bg-brand/20 text-brand text-[10px] font-mono uppercase tracking-wide rounded">L'année prochaine</div>
-                            <span class="text-xs font-mono text-brand block mb-1">Orientation Validée</span>
-                            <h5 class="text-lg font-bold text-slate-100 mb-1">Première MCVA</h5>
-                            <p class="text-sm text-slate-400">Métiers du Commerce et de la Vente (Option A).</p>
-                        </div>
-                    </div>
-                    <div class="mt-4 p-5 bg-panel border border-white/5 rounded-xl max-w-md">
-                        <span class="text-xs font-mono text-slate-500 block mb-1">Objectif Post-Bac</span>
-                        <h5 class="text-lg font-bold text-slate-100 mb-1">École 42 Luxembourg</h5>
-                        <p class="text-sm text-slate-400">Campus Belval.</p>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="text-sm font-mono text-slate-500 uppercase tracking-widest border-b border-white/5 pb-2 mb-6">Expériences Terrain & Entreprises</h4>
-                    <div class="space-y-4">
-                        <div class="border border-brand/30 bg-panel/40 rounded-xl overflow-hidden shadow-lg hover:border-brand/50 transition-all">
-                            <div class="p-5 md:p-6 grid md:grid-cols-[1fr_2fr] gap-4 items-start bg-brand/5">
-                                <div>
-                                    <span class="text-sm font-mono text-brand block mb-1">L'année prochaine</span>
-                                    <h5 class="text-lg font-bold text-slate-100">Carrefour City</h5>
-                                    <p class="text-xs text-slate-400 font-semibold mb-1">Longwy Hauts</p>
-                                    <div class="inline-block text-[10px] font-mono bg-brand/20 text-brand px-2 py-0.5 rounded uppercase tracking-wider font-bold">Contrat d'Alternance</div>
-                                </div>
-                                <p class="text-slate-400 text-sm leading-relaxed">
-                                    Poursuite du parcours de formation en situation réelle : fidélisation et conseil client personnalisé, encaissement autonome, gestion des rayons et optimisation de la performance commerciale du point de vente.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="border border-white/5 bg-panel/40 rounded-xl overflow-hidden shadow-lg hover:border-brand2/30 transition-all">
-                            <div class="p-5 md:p-6 grid md:grid-cols-[1fr_2fr] gap-4 items-start">
-                                <div>
-                                    <span class="text-sm font-mono text-brand2 block mb-1">Stage</span>
-                                    <h5 class="text-lg font-bold text-slate-100">Kiosk P+R Bouillon</h5>
-                                    <div class="inline-block text-[10px] font-mono bg-brand2/10 text-brand2 px-2 py-0.5 rounded mt-1 uppercase tracking-wider font-semibold">Luxembourg</div>
-                                </div>
-                                <p class="text-slate-400 text-sm leading-relaxed">
-                                    Accueil de la clientèle internationale, vente conseil de proximité, gestion quotidienne de la caisse, approvisionnement de l'espace de vente et développement du sens du contact direct.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="border border-white/5 bg-panel/40 rounded-xl overflow-hidden shadow-lg hover:border-slate-500/30 transition-all">
-                            <div class="p-5 md:p-6 grid md:grid-cols-[1fr_2fr] gap-4 items-start">
-                                <div>
-                                    <span class="text-sm font-mono text-slate-400 block mb-1">2e Stage de Seconde</span>
-                                    <h5 class="text-lg font-bold text-slate-100">Carrefour City</h5>
-                                    <p class="text-xs text-slate-400 font-semibold mb-1">Longwy Hauts</p>
-                                    <div class="inline-block text-[10px] font-mono bg-slate-500/10 text-slate-400 px-2 py-0.5 rounded uppercase tracking-wider font-semibold">Stage Validé</div>
-                                </div>
-                                <p class="text-slate-400 text-sm leading-relaxed">
-                                    Première immersion réussie au sein du magasin. Découverte de l'organisation des flux de marchandises, premier contact avec la clientèle de quartier et initiation à la mise en rayon.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <!-- OrinstoneTeams -->
+      <div class="plugin-card">
+        <div class="plugin-icon" style="color:var(--cyan)"><i class="fa-solid fa-users"></i></div>
+        <div class="plugin-cat" style="color:var(--cyan)">Social</div>
+        <div class="plugin-name">OrinstoneTeams</div>
+        <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.75rem">
+          <span class="badge badge-green" style="display:flex;align-items:center;gap:0.3rem;font-size:0.55rem"><span class="pulse-dot" style="background:#50fa7b;color:#50fa7b"></span>Dev Actif</span>
         </div>
-    </section>
-
-    <section id="skills" class="py-24 px-6 max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-xs font-mono text-brand2 uppercase tracking-widest mb-3">Compétences</h2>
-            <h3 class="text-3xl md:text-4xl font-bold text-slate-100">Expertise & Outils</h3>
+        <div class="plugin-desc">Module permettant le regroupement fluide de joueurs et la fondation d'équipes.</div>
+        <div class="plugin-links">
+          <a href="https://github.com/metal54400/OrinstoneTeams" target="_blank" class="plugin-link" style="color:var(--cyan)"><i class="fa-brands fa-github"></i> Code Source</a>
         </div>
+      </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="bg-panel border border-white/5 p-6 rounded-xl flex flex-col justify-between">
-                <div>
-                    <div class="text-brand text-2xl mb-4"><i class="fa-solid fa-code"></i></div>
-                    <h4 class="text-lg font-bold text-slate-100 mb-3">Développement</h4>
-                </div>
-                <div class="flex flex-wrap gap-1.5 text-xs font-mono text-brand2">
-                    Node.js, Python, JS, PHP, Java, C++, Lua
-                </div>
-            </div>
-
-            <div class="bg-panel border border-white/5 p-6 rounded-xl flex flex-col justify-between">
-                <div>
-                    <div class="text-brand2 text-2xl mb-4"><i class="fa-solid fa-network-wired"></i></div>
-                    <h4 class="text-lg font-bold text-slate-100 mb-3">Systèmes</h4>
-                </div>
-                <div class="flex flex-wrap gap-1.5 text-xs font-mono text-accent">
-                    Linux, Pterodactyl, SQL, HTML5, CSS3, DevOps
-                </div>
-            </div>
-
-            <div class="bg-panel border border-white/5 p-6 rounded-xl flex flex-col justify-between">
-                <div>
-                    <div class="text-[#2563eb] text-2xl mb-4"><i class="fa-solid fa-file-invoice"></i></div>
-                    <h4 class="text-lg font-bold text-slate-100 mb-3">Bureautique</h4>
-                </div>
-                <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-300">
-                    Excel, Word, PowerPoint
-                </div>
-            </div>
-
-            <div class="bg-panel border border-white/5 p-6 rounded-xl flex flex-col justify-between">
-                <div>
-                    <div class="text-accent text-2xl mb-4"><i class="fa-solid fa-user-tie"></i></div>
-                    <h4 class="text-lg font-bold text-slate-100 mb-3">Commerce</h4>
-                </div>
-                <div class="flex flex-wrap gap-1.5 text-xs text-slate-300 font-semibold">
-                    Relation Client, Gestion Rayon, Esprit d'équipe
-                </div>
-            </div>
+      <!-- OrinstoneVoiceChat -->
+      <div class="plugin-card">
+        <div class="plugin-icon" style="color:#bd93f9"><i class="fa-solid fa-microphone"></i></div>
+        <div class="plugin-cat" style="color:#bd93f9">Audio</div>
+        <div class="plugin-name">OrinstoneVoiceChat</div>
+        <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.75rem">
+          <span class="badge badge-green" style="display:flex;align-items:center;gap:0.3rem;font-size:0.55rem"><span class="pulse-dot" style="background:#50fa7b;color:#50fa7b"></span>Dev Actif</span>
         </div>
-    </section>
-
-    <section id="socials" class="py-24 px-6 border-t border-white/5 bg-panel/10">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-xs font-mono text-brand uppercase tracking-widest mb-3">Réseaux</h2>
-                <h3 class="text-3xl md:text-4xl font-bold text-slate-100">Me Suivre</h3>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
-                <a href="https://github.com/metal54400" target="_blank" class="bg-panel border border-white/5 p-5 rounded-xl text-center hover:border-white/50 transition-colors group block">
-                    <div class="text-3xl text-slate-400 group-hover:text-white mb-3 transition-colors"><i class="fa-brands fa-github"></i></div>
-                    <p class="text-sm font-bold text-slate-200">GitHub</p>
-                    <span class="text-xs font-mono text-slate-500">metal54400</span>
-                </a>
-                <a href="https://discord.com" target="_blank" class="bg-panel border border-white/5 p-5 rounded-xl text-center hover:border-[#5865F2]/50 transition-colors group block">
-                    <div class="text-3xl text-slate-400 group-hover:text-[#5865F2] mb-3 transition-colors"><i class="fa-brands fa-discord"></i></div>
-                    <p class="text-sm font-bold text-slate-200">Discord</p>
-                    <span class="text-xs font-mono text-slate-500">metal54400</span>
-                </a>
-                <a href="https://tiktok.com/@metal54400" target="_blank" class="bg-panel border border-white/5 p-5 rounded-xl text-center hover:border-[#00f2fe]/50 transition-colors group block">
-                    <div class="text-3xl text-slate-400 group-hover:text-[#00f2fe] mb-3 transition-colors"><i class="fa-brands fa-tiktok"></i></div>
-                    <p class="text-sm font-bold text-slate-200">TikTok</p>
-                    <span class="text-xs font-mono text-slate-500">metal54400</span>
-                </a>
-                <a href="https://open.spotify.com/user/metal54400" target="_blank" class="bg-panel border border-white/5 p-5 rounded-xl text-center hover:border-[#1ED760]/50 transition-colors group block">
-                    <div class="text-3xl text-slate-400 group-hover:text-[#1ED760] mb-3 transition-colors"><i class="fa-brands fa-spotify"></i></div>
-                    <p class="text-sm font-bold text-slate-200">Spotify</p>
-                    <span class="text-xs font-mono text-slate-500">METal54</span>
-                </a>
-            </div>
+        <div class="plugin-desc">Outils de gestion pour le chat vocal de proximité, maximisant l'immersion RP.</div>
+        <div class="plugin-links">
+          <a href="https://github.com/metal54400/OrinstoneVoiceChat" target="_blank" class="plugin-link" style="color:var(--cyan)"><i class="fa-brands fa-github"></i> Code Source</a>
         </div>
-    </section>
+      </div>
 
-    <section id="donate" class="py-24 px-6 border-t border-white/5 bg-gradient-to-b from-transparent to-panel/10">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-xs font-mono text-accent uppercase tracking-widest mb-3">Soutenir</h2>
-            <h3 class="text-3xl md:text-4xl font-bold mb-6 text-slate-100">Contribute to Orinstone Studio</h3>
-            
-            <div class="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-                <a href="https://paypal.me/metal544002009" target="_blank" class="bg-panel border border-white/5 p-6 rounded-2xl flex flex-col items-center hover:border-[#0070ba]/50 transition-all duration-300 group shadow-lg">
-                    <div class="text-[#0070ba] text-2xl mb-4"><i class="fa-brands fa-paypal"></i></div>
-                    <h4 class="text-lg font-bold text-slate-100">PayPal.me</h4>
-                </a>
-
-                <a href="https://buy.stripe.com/6oU8wIdVo1ktf928x18Vi00" target="_blank" class="bg-panel border border-white/5 p-6 rounded-2xl flex flex-col items-center hover:border-[#635bff]/50 transition-all duration-300 group shadow-lg">
-                    <div class="text-[#635bff] text-2xl mb-4"><i class="fa-solid fa-credit-card"></i></div>
-                    <h4 class="text-lg font-bold text-slate-100">Stripe Secure</h4>
-                </a>
-            </div>
+      <!-- OrinstoneNerf -->
+      <div class="plugin-card">
+        <div class="plugin-icon" style="color:var(--amber)"><i class="fa-solid fa-gavel"></i></div>
+        <div class="plugin-cat" style="color:var(--amber)">Équilibrage</div>
+        <div class="plugin-name">OrinstoneNerf</div>
+        <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.75rem">
+          <span class="badge badge-cyan" style="font-size:0.55rem">Stable</span>
         </div>
-    </section>
-
-    <section id="contact" class="py-24 px-6 border-t border-white/5 bg-panel/20">
-        <div class="max-w-xl mx-auto text-center">
-            <h3 class="text-3xl font-bold mb-8 text-slate-100">Collaborer avec moi ?</h3>
-            <form id="contactForm" class="bg-panel border border-white/10 rounded-2xl p-6 text-left space-y-4">
-                <input id="name" name="name" type="text" required class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-slate-200 outline-none focus:border-brand transition-colors text-sm" placeholder="Votre nom" />
-                <textarea id="message" name="message" rows="4" required class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-slate-200 outline-none focus:border-brand transition-colors text-sm resize-none" placeholder="Message..."></textarea>
-                <button type="submit" class="w-full btn-gradient py-3.5 rounded-xl font-bold text-slate-950 text-sm">Envoyer le mail</button>
-            </form>
+        <div class="plugin-desc">Ajustement précis des dégâts, des mécaniques vanilla et de la puissance des équipements.</div>
+        <div class="plugin-links">
+          <a href="https://github.com/metal54400/OrinstoneNerf" target="_blank" class="plugin-link" style="color:var(--cyan)"><i class="fa-brands fa-github"></i> Code Source</a>
         </div>
-    </section>
+      </div>
 
-    <footer class="py-10 border-t border-white/5 text-center text-xs text-slate-500 font-mono">
-        <p>© <span id="year"></span> Mathéo Favier — Longwy, France</p>
-    </footer>
+      <!-- OrinstoneRep -->
+      <div class="plugin-card">
+        <div class="plugin-icon" style="color:#2affd6"><i class="fa-solid fa-star"></i></div>
+        <div class="plugin-cat" style="color:#2affd6">Progression</div>
+        <div class="plugin-name">OrinstoneRep</div>
+        <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.75rem">
+          <span class="badge badge-cyan" style="font-size:0.55rem">Stable</span>
+        </div>
+        <div class="plugin-desc">Système interne de réputation et de scoring pour suivre l'activité des joueurs.</div>
+        <div class="plugin-links">
+          <a href="https://github.com/metal54400/OrinstoneRep" target="_blank" class="plugin-link" style="color:var(--cyan)"><i class="fa-brands fa-github"></i> Code Source</a>
+        </div>
+      </div>
 
-    <script>
-        document.getElementById("year").textContent = new Date().getFullYear();
-        const menuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        menuBtn?.addEventListener('click', () => mobileMenu?.classList.toggle('hidden'));
-        document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', () => mobileMenu?.classList.add('hidden')));
+      <!-- OrinstoneAuction -->
+      <div class="plugin-card">
+        <div class="plugin-icon" style="color:#ffb347"><i class="fa-solid fa-comments-dollar"></i></div>
+        <div class="plugin-cat" style="color:#ffb347">Économie</div>
+        <div class="plugin-name">OrinstoneAuction</div>
+        <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.75rem">
+          <span class="badge badge-cyan" style="font-size:0.55rem">Stable</span>
+        </div>
+        <div class="plugin-desc">Hôtel des ventes dynamique permettant le commerce régulé inter-joueurs.</div>
+        <div class="plugin-links">
+          <a href="https://github.com/metal54400/OrinstoneAuction" target="_blank" class="plugin-link" style="color:var(--cyan)"><i class="fa-brands fa-github"></i> Code Source</a>
+        </div>
+      </div>
 
-        const TARGET_EMAIL = "matheocillierfavier@gmail.com";
-        document.getElementById("contactForm")?.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const name = encodeURIComponent(e.target.name.value);
-            const message = encodeURIComponent(e.target.message.value);
-            window.location.href = `mailto:${TARGET_EMAIL}?subject=Contact Pro - Portfolio&body=Bonjour Mathéo,%0A%0A${message}%0A%0ACordialement,%0A${name}`;
-        });
-    </script>
+      <!-- OrinstoneUtils -->
+      <div class="plugin-card">
+        <div class="plugin-icon" style="color:var(--rose)"><i class="fa-solid fa-toolbox"></i></div>
+        <div class="plugin-cat" style="color:var(--rose)">Outils</div>
+        <div class="plugin-name">OrinstoneUtils</div>
+        <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.75rem">
+          <span class="badge badge-cyan" style="font-size:0.55rem">Stable</span>
+        </div>
+        <div class="plugin-desc">Boîte à outils principale regroupant l'ensemble des commandes administratives globales.</div>
+        <div class="plugin-links">
+          <a href="https://github.com/metal54400/OrinstoneUtils" target="_blank" class="plugin-link" style="color:var(--cyan)"><i class="fa-brands fa-github"></i> Code Source</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:3rem">
+      <a href="https://github.com/metal54400" target="_blank" class="btn-secondary"><i class="fa-brands fa-github"></i> Voir l'activité complète sur GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHIVES -->
+<section id="archives">
+  <div class="container">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;margin-bottom:4rem;gap:1.5rem">
+      <div>
+        <div class="section-tag" style="color:var(--text-dim)">Historique & Évolution</div>
+        <h2 class="section-title" style="color:var(--slate);font-style:italic">Histoire de Deepstone Studio</h2>
+      </div>
+      <div style="font-family:'Fira Code',monospace;font-size:0.7rem;color:var(--text-dim);border-left:2px solid rgba(255,255,255,0.08);padding-left:1rem;max-width:28ch;line-height:1.6">
+        "Intégrer le passé pour consolider les fondations de l'avenir."
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)">
+
+      <div style="background:var(--surface);padding:1.75rem;position:relative;overflow:hidden">
+        <div style="position:absolute;top:0;right:0;padding:0.5rem 0.75rem;background:rgba(0,255,200,0.06);font-family:'Fira Code',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--cyan);border-bottom-left-radius:0">Fusionné</div>
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;margin-top:0.5rem">
+          <div style="width:36px;height:36px;background:rgba(0,255,200,0.06);display:flex;align-items:center;justify-content:center;color:var(--cyan)"><i class="fa-solid fa-code-merge"></i></div>
+          <div>
+            <div style="font-weight:700;color:#fff;font-size:0.95rem">Deepstone Studio</div>
+            <div style="font-family:'Fira Code',monospace;font-size:0.58rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em">Ancien Projet</div>
+          </div>
+        </div>
+        <p style="font-size:0.78rem;color:var(--text-dim);line-height:1.7">Mon premier studio de développement indépendant.</p>
+        <p style="font-size:0.72rem;color:var(--text-dim);line-height:1.7;margin-top:0.5rem;font-style:italic;opacity:0.7">L'entité globale ainsi que l'infrastructure réseau du serveur Deepstone ont officiellement fusionné avec Orinstone Studio. Le serveur autonome n'existe plus.</p>
+      </div>
+
+      <div style="background:var(--surface);padding:1.75rem">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem">
+          <div style="color:var(--slate);font-size:1.5rem"><i class="fa-solid fa-ban"></i></div>
+          <span class="badge badge-slate">Discontinué</span>
+        </div>
+        <div style="font-weight:700;color:#fff;margin-bottom:0.4rem">DeepstonePlugin</div>
+        <p style="font-size:0.78rem;color:var(--text-dim);line-height:1.7;margin-bottom:1.25rem">Ancien plugin maître développé pour l'infrastructure réseau originelle de Deepstone.</p>
+        <div style="display:flex;flex-direction:column;gap:0.5rem;border-top:1px solid var(--border);padding-top:1rem">
+          <a href="https://github.com/DeepstoneStudio/DeepstonePlugin" target="_blank" class="plugin-link" style="color:var(--slate)"><i class="fa-brands fa-github"></i> Code Source (Archive)</a>
+          <a href="https://github.com/DeepstoneStudio/DeepstonePlugin/releases/tag/v0.21.4" target="_blank" class="plugin-link" style="color:var(--cyan)"><i class="fa-solid fa-download"></i> Télécharger v0.21.4</a>
+        </div>
+      </div>
+
+      <div style="background:var(--surface);padding:1.75rem">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem">
+          <div style="color:#50fa7b;font-size:1.25rem"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+          <span class="badge badge-slate">Discontinué</span>
+        </div>
+        <div style="font-weight:700;color:#fff;margin-bottom:0.4rem">WizardStoneCraft</div>
+        <p style="font-size:0.78rem;color:var(--text-dim);line-height:1.7;margin-bottom:1.25rem">Extension historique liée à l'ancien serveur de jeu. Projet figé mais toujours public.</p>
+        <div style="display:flex;flex-direction:column;gap:0.5rem;border-top:1px solid var(--border);padding-top:1rem">
+          <a href="https://github.com/DeepstoneStudio/WizardStoneCraftplugin" target="_blank" class="plugin-link" style="color:var(--slate)"><i class="fa-brands fa-github"></i> Code Source</a>
+          <a href="https://github.com/DeepstoneStudio/WizardStoneCraftplugin/releases/tag/v0.0.0.87.1-1.21.9" target="_blank" class="plugin-link" style="color:#50fa7b"><i class="fa-solid fa-download"></i> Télécharger v0.0.0.87.1</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PARCOURS -->
+<section id="parcours">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-tag">Feuille de Route</div>
+      <h2 class="section-title">Diplômes & Parcours</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem">
+
+      <!-- LEFT: Académique -->
+      <div>
+        <div style="font-family:'Fira Code',monospace;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--text-dim);border-bottom:1px solid var(--border);padding-bottom:0.75rem;margin-bottom:2rem">Diplômes & Cursus Académique</div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:1px">
+          <div style="background:var(--bg);padding:1.25rem;position:relative">
+            <div style="font-family:'Fira Code',monospace;font-size:0.6rem;color:#50fa7b;margin-bottom:0.3rem">Diplôme Obtenu</div>
+            <div style="font-weight:700;color:#fff">Brevet des Collèges</div>
+          </div>
+          <div style="background:var(--bg);padding:1.25rem">
+            <div style="font-family:'Fira Code',monospace;font-size:0.6rem;color:var(--cyan);margin-bottom:0.3rem">Diplôme Obtenu</div>
+            <div style="font-weight:700;color:#fff">Certification Commerce</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-top:none;margin-bottom:1px">
+          <div style="background:var(--bg);padding:1.25rem">
+            <div style="font-family:'Fira Code',monospace;font-size:0.6rem;color:var(--slate);margin-bottom:0.3rem">Cursus Suivi</div>
+            <div style="font-weight:700;color:#fff;margin-bottom:0.25rem">Seconde MRC</div>
+            <div style="font-size:0.78rem;color:var(--text-dim)">Lycée Professionnel Jean Marc Reiser</div>
+          </div>
+          <div style="background:var(--bg);padding:1.25rem;position:relative;overflow:hidden">
+            <div style="position:absolute;top:0;right:0;padding:0.3rem 0.5rem;background:rgba(0,255,200,0.06);font-family:'Fira Code',monospace;font-size:0.5rem;color:var(--cyan);letter-spacing:0.08em">Prochain</div>
+            <div style="font-family:'Fira Code',monospace;font-size:0.6rem;color:var(--cyan);margin-bottom:0.3rem;margin-top:0.4rem">Orientation Validée</div>
+            <div style="font-weight:700;color:#fff;margin-bottom:0.25rem">Première MCVA</div>
+            <div style="font-size:0.78rem;color:var(--text-dim)">Commerce et Vente (Option A)</div>
+          </div>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-top:none;padding:1.25rem">
+          <div style="font-family:'Fira Code',monospace;font-size:0.6rem;color:var(--text-dim);margin-bottom:0.3rem">Objectif Post-Bac</div>
+          <div style="font-weight:700;color:#fff;margin-bottom:0.25rem">École 42 Luxembourg</div>
+          <div style="font-size:0.78rem;color:var(--text-dim)">Campus Belval</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Expériences -->
+      <div>
+        <div style="font-family:'Fira Code',monospace;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--text-dim);border-bottom:1px solid var(--border);padding-bottom:0.75rem;margin-bottom:2rem">Expériences Terrain</div>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-meta">L'année prochaine — Contrat d'Alternance</div>
+            <div class="timeline-title">Carrefour City</div>
+            <div class="timeline-sub">Longwy Hauts</div>
+            <div class="timeline-desc">Fidélisation et conseil client personnalisé, encaissement autonome, gestion des rayons et optimisation de la performance commerciale du point de vente.</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-meta" style="color:var(--cyan)">Stage</div>
+            <div class="timeline-title">Kiosk P+R Bouillon</div>
+            <div class="timeline-sub">Luxembourg</div>
+            <div class="timeline-desc">Accueil de la clientèle internationale, vente conseil de proximité, gestion quotidienne de la caisse, approvisionnement de l'espace de vente.</div>
+          </div>
+
+          <div class="timeline-item" style="padding-bottom:0">
+            <div class="timeline-meta" style="color:var(--slate)">2e Stage de Seconde — Validé</div>
+            <div class="timeline-title">Carrefour City</div>
+            <div class="timeline-sub">Longwy Hauts</div>
+            <div class="timeline-desc">Découverte de l'organisation des flux de marchandises, premier contact avec la clientèle de quartier et initiation à la mise en rayon.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-tag">Expertise & Outils</div>
+      <h2 class="section-title">Compétences & Aptitudes</h2>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon" style="color:#7c5cff"><i class="fa-solid fa-code"></i></div>
+        <div class="skill-title">Développement</div>
+        <div class="skill-tags">Node.js · Python · JS · PHP · Java · C++ · Lua</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon" style="color:var(--cyan)"><i class="fa-solid fa-network-wired"></i></div>
+        <div class="skill-title">Systèmes</div>
+        <div class="skill-tags">Linux · Pterodactyl · SQL · HTML5 · CSS3 · DevOps</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon" style="color:#4d90fe"><i class="fa-solid fa-file-invoice"></i></div>
+        <div class="skill-title">Bureautique</div>
+        <div class="skill-tags">Excel · Word · PowerPoint</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon" style="color:#50fa7b"><i class="fa-solid fa-user-tie"></i></div>
+        <div class="skill-title">Commerce</div>
+        <div class="skill-tags">Relation Client · Vente Conseil · Gestion Rayons</div>
+      </div>
+      <div class="skill-card" style="background:rgba(0,255,200,0.03);border-right:1px solid rgba(0,255,200,0.1)">
+        <div class="skill-icon" style="color:#bd93f9"><i class="fa-solid fa-language"></i></div>
+        <div class="skill-title">Langues</div>
+        <div style="font-family:'Fira Code',monospace;font-size:0.65rem;display:flex;flex-direction:column;gap:0.35rem">
+          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:0.3rem">
+            <span style="color:var(--text)">Français</span><span style="color:#50fa7b">Maternelle</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:0.3rem">
+            <span style="color:var(--slate)">Anglais</span><span style="color:var(--cyan)">A2</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:0.3rem">
+            <span style="color:var(--slate)">Allemand</span><span style="color:var(--cyan)">A2</span>
+          </div>
+          <div style="display:flex;justify-content:space-between">
+            <span style="color:var(--slate)">Luxembourgeois</span><span style="color:var(--text-dim)">A1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIALS -->
+<section id="socials">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-tag">Écosystème Digital</div>
+      <h2 class="section-title">Mes Réseaux Sociaux</h2>
+    </div>
+
+    <div class="socials-grid">
+      <a href="https://github.com/metal54400" target="_blank" class="social-card" style="--sc:#fff">
+        <style>.social-card:nth-child(1)::before,.social-card:nth-child(1):hover .social-icon{background:linear-gradient(90deg,#fff,transparent);}</style>
+        <span class="social-icon"><i class="fa-brands fa-github"></i></span>
+        <span class="social-name">GitHub</span>
+        <span class="social-handle">metal54400</span>
+        <style>.social-card:nth-child(1):hover .social-icon{color:#fff}</style>
+      </a>
+      <a href="https://discord.com" target="_blank" class="social-card">
+        <span class="social-icon" style="transition:color 0.2s"><i class="fa-brands fa-discord"></i></span>
+        <span class="social-name">Discord</span>
+        <span class="social-handle">metal54400</span>
+      </a>
+      <a href="https://tiktok.com/@metal54400" target="_blank" class="social-card">
+        <span class="social-icon"><i class="fa-brands fa-tiktok"></i></span>
+        <span class="social-name">TikTok</span>
+        <span class="social-handle">metal54400</span>
+      </a>
+      <a href="https://open.spotify.com/user/metal54400" target="_blank" class="social-card">
+        <span class="social-icon"><i class="fa-brands fa-spotify"></i></span>
+        <span class="social-name">Spotify</span>
+        <span class="social-handle">METal54</span>
+      </a>
+      <a href="https://instagram.com/matheocillierfavier54" target="_blank" class="social-card">
+        <span class="social-icon"><i class="fa-brands fa-instagram"></i></span>
+        <span class="social-name">Instagram</span>
+        <span class="social-handle">matheocillierfavier54</span>
+      </a>
+      <a href="https://snapchat.com/add/matheo54400" target="_blank" class="social-card">
+        <span class="social-icon"><i class="fa-brands fa-snapchat"></i></span>
+        <span class="social-name">Snapchat</span>
+        <span class="social-handle">matheo54400</span>
+      </a>
+      <a href="https://x.com/MCillierFaviier" target="_blank" class="social-card">
+        <span class="social-icon"><i class="fa-brands fa-x-twitter"></i></span>
+        <span class="social-name">Twitter (X)</span>
+        <span class="social-handle">MCillierFaviier</span>
+      </a>
+      <a href="https://facebook.com" target="_blank" class="social-card">
+        <span class="social-icon"><i class="fa-brands fa-facebook"></i></span>
+        <span class="social-name">Facebook</span>
+        <span class="social-handle">Matheo Rammstein</span>
+      </a>
+    </div>
+
+    <!-- Hover colors via JS -->
+  </div>
+</section>
+
+<!-- DONATE -->
+<section id="donate">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-tag">Soutenir</div>
+      <h2 class="section-title">Contribute to Orinstone Studio</h2>
+    </div>
+    <div class="donate-grid">
+      <a href="https://paypal.me/metal544002009" target="_blank" class="donate-card">
+        <style>.donate-card:nth-child(1)::before{background:linear-gradient(90deg,#0070ba,transparent)}</style>
+        <span class="donate-icon" style="color:#0070ba"><i class="fa-brands fa-paypal"></i></span>
+        <span class="donate-label">PayPal.me</span>
+      </a>
+      <a href="https://buy.stripe.com/6oU8wIdVo1ktf928x18Vi00" target="_blank" class="donate-card">
+        <style>.donate-card:nth-child(2)::before{background:linear-gradient(90deg,#635bff,transparent)}</style>
+        <span class="donate-icon" style="color:#635bff"><i class="fa-solid fa-credit-card"></i></span>
+        <span class="donate-label">Stripe Secure</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-tag">Contact</div>
+      <h2 class="section-title">Collaborer avec moi ?</h2>
+    </div>
+    <div class="contact-form">
+      <form id="contactForm">
+        <div class="form-field">
+          <input id="name" name="name" type="text" required placeholder="Votre nom" />
+        </div>
+        <div class="form-field">
+          <textarea id="message" name="message" rows="5" required placeholder="Message..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Envoyer le mail <i class="fa-solid fa-arrow-right" style="margin-left:0.5rem"></i></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© <span id="year"></span> Mathéo Favier — Longwy, France</p>
+</footer>
+
+<script>
+  // YEAR
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // MOBILE MENU
+  const mobileBtn = document.getElementById('mobileBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  mobileBtn?.addEventListener('click', () => {
+    const open = mobileMenu.style.display === 'flex';
+    mobileMenu.style.display = open ? 'none' : 'flex';
+  });
+  document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => { mobileMenu.style.display = 'none'; }));
+
+  // CONTACT
+  document.getElementById("contactForm")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = encodeURIComponent(e.target.name.value);
+    const message = encodeURIComponent(e.target.message.value);
+    window.location.href = `mailto:matheocillierfavier@gmail.com?subject=Contact Pro - Portfolio&body=Bonjour Mathéo,%0A%0A${message}%0A%0ACordialement,%0A${name}`;
+  });
+
+  // CUSTOM CURSOR
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx - 4 + 'px';
+    cursor.style.top = my - 4 + 'px';
+  });
+
+  function animateRing() {
+    rx += (mx - rx - 16) * 0.12;
+    ry += (my - ry - 16) * 0.12;
+    cursorRing.style.left = rx + 'px';
+    cursorRing.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2.5)'; cursorRing.style.transform = 'scale(1.5)'; });
+    el.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)'; cursorRing.style.transform = 'scale(1)'; });
+  });
+
+  // SOCIAL HOVER COLORS
+  const socialColors = ['#ffffff','#5865F2','#00f2fe','#1ED760','#E1306C','#FFFC00','#ffffff','#1877F2'];
+  document.querySelectorAll('.social-card').forEach((card, i) => {
+    const icon = card.querySelector('.social-icon');
+    const color = socialColors[i];
+    card.addEventListener('mouseenter', () => {
+      icon.style.color = color;
+      card.style.borderColor = color + '33';
+    });
+    card.addEventListener('mouseleave', () => {
+      icon.style.color = '';
+      card.style.borderColor = '';
+    });
+  });
+</script>
 </body>
 </html>
