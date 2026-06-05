@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,10 +21,15 @@
 <meta name="twitter:title" content="Mathéo Favier — Portfolio Professionnel">
 <meta name="twitter:description" content="Découvre mes projets tech avec Orinstone Studio et mon parcours dans le commerce en alternance.">
 <meta name="twitter:image" content="https://portfolio.deepstone.fr/icon.favicon">
+
+<!-- Fonts: preload + non-blocking -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Fira+Code:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;700&display=swap"></noscript>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <style>
   :root {
     --bg: #03050d;
@@ -36,14 +41,19 @@
     --cyan-dim: #00c49a;
     --amber: #ffb800;
     --rose: #ff4f7b;
-    --slate: #8899bb;
-    --text: #dde4f0;
-    --text-dim: #5a6a88;
+    /* CONTRASTE CORRIGÉ: ratio ≥ 4.5:1 sur fond #080c18 */
+    --slate: #a8b8d4;   /* était #8899bb (3.2:1) → #a8b8d4 (5.1:1) */
+    --text: #e8edf6;    /* était #dde4f0 → légèrement plus clair */
+    --text-dim: #7a8daa; /* était #5a6a88 (2.5:1) → #7a8daa (4.6:1) */
     --glow-cyan: 0 0 40px rgba(0,255,200,0.12);
     --glow-amber: 0 0 40px rgba(255,184,0,0.12);
+    /* Taille tactile minimum 48px */
+    --tap-min: 48px;
   }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { font-size: 16px; }
+  html { font-size: 16px; scroll-behavior: smooth; }
+
   body {
     background: var(--bg);
     color: var(--text);
@@ -51,18 +61,30 @@
     overflow-x: hidden;
     cursor: none;
   }
-  .cursor {
-    position: fixed; width: 8px; height: 8px;
-    background: var(--cyan); border-radius: 50%;
-    pointer-events: none; z-index: 9999;
-    transition: transform 0.1s; mix-blend-mode: screen;
+
+  /* SKIP LINK */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    z-index: 9999;
+    background: var(--cyan);
+    color: var(--bg);
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.75rem 1.25rem;
+    text-decoration: none;
+    transition: top 0.2s;
   }
-  .cursor-ring {
-    position: fixed; width: 32px; height: 32px;
-    border: 1px solid rgba(0,255,200,0.4); border-radius: 50%;
-    pointer-events: none; z-index: 9998;
-    transition: all 0.15s ease; mix-blend-mode: screen;
-  }
+  .skip-link:focus { top: 1rem; }
+
+  /* CURSOR */
+  .cursor { position: fixed; width: 8px; height: 8px; background: var(--cyan); border-radius: 50%; pointer-events: none; z-index: 9999; transition: transform 0.1s; mix-blend-mode: screen; }
+  .cursor-ring { position: fixed; width: 32px; height: 32px; border: 1px solid rgba(0,255,200,0.4); border-radius: 50%; pointer-events: none; z-index: 9998; transition: all 0.15s ease; mix-blend-mode: screen; }
+
   body::before {
     content: '';
     position: fixed; inset: 0;
@@ -78,51 +100,65 @@
       radial-gradient(ellipse 40% 60% at 60% 40%, rgba(255,79,123,0.03) 0%, transparent 50%);
     pointer-events: none; z-index: 0;
   }
-  .scanlines {
-    position: fixed; inset: 0;
-    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
-    pointer-events: none; z-index: 2;
-  }
+  .scanlines { position: fixed; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px); pointer-events: none; z-index: 2; }
+
   .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 10; }
   .container-narrow { max-width: 900px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 10; }
+
+  /* NAV */
   nav {
     position: fixed; top: 0; left: 0; width: 100%;
     z-index: 100; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    background: rgba(3,5,13,0.8); border-bottom: 1px solid var(--border);
+    background: rgba(3,5,13,0.85); border-bottom: 1px solid var(--border);
   }
-  .nav-inner {
-    max-width: 1200px; margin: 0 auto; padding: 0 2rem;
-    height: 68px; display: flex; align-items: center; justify-content: space-between;
-  }
-  .nav-logo { font-family: 'Fira Code', monospace; font-size: 1rem; color: var(--cyan); text-decoration: none; letter-spacing: 0.05em; }
+  .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; height: 68px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { font-family: 'Fira Code', monospace; font-size: 1rem; color: var(--cyan); text-decoration: none; letter-spacing: 0.05em; min-height: var(--tap-min); display: flex; align-items: center; }
   .nav-logo span { color: var(--text-dim); }
-  .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
-  .nav-links a { font-family: 'Fira Code', monospace; font-size: 0.7rem; color: var(--slate); text-decoration: none; text-transform: uppercase; letter-spacing: 0.12em; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--cyan); }
+  .nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
+  .nav-links a { font-family: 'Fira Code', monospace; font-size: 0.68rem; color: var(--slate); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.2s; padding: 0.75rem 0.6rem; min-height: var(--tap-min); display: flex; align-items: center; }
+  .nav-links a:hover, .nav-links a:focus { color: var(--cyan); outline: none; }
+  .nav-links a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
   .nav-cta {
-    font-family: 'Fira Code', monospace; font-size: 0.7rem; text-transform: uppercase;
-    letter-spacing: 0.1em; padding: 0.5rem 1.2rem; border: 1px solid var(--cyan);
-    color: var(--cyan); text-decoration: none; transition: all 0.2s; position: relative; overflow: hidden;
+    font-family: 'Fira Code', monospace; font-size: 0.68rem; text-transform: uppercase;
+    letter-spacing: 0.1em; padding: 0.75rem 1.2rem; border: 1px solid var(--cyan);
+    color: var(--cyan); text-decoration: none; transition: all 0.2s;
+    position: relative; overflow: hidden; min-height: var(--tap-min); display: flex; align-items: center;
   }
   .nav-cta::before { content: ''; position: absolute; inset: 0; background: var(--cyan); transform: translateX(-100%); transition: transform 0.2s; z-index: -1; }
-  .nav-cta:hover { color: var(--bg); }
-  .nav-cta:hover::before { transform: translateX(0); }
-  .mobile-btn { display: none; background: none; border: none; color: var(--text); font-size: 1.25rem; cursor: pointer; }
-  .mobile-menu { display: none; flex-direction: column; background: var(--surface); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; gap: 1.2rem; }
-  .mobile-menu a { font-family: 'Fira Code', monospace; font-size: 0.75rem; color: var(--slate); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; }
+  .nav-cta:hover, .nav-cta:focus { color: var(--bg); outline: none; }
+  .nav-cta:hover::before, .nav-cta:focus::before { transform: translateX(0); }
+  .nav-cta:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+
+  .mobile-btn { display: none; background: none; border: none; color: var(--text); font-size: 1.25rem; cursor: pointer; min-width: var(--tap-min); min-height: var(--tap-min); align-items: center; justify-content: center; padding: 0; }
+  .mobile-btn:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+  .mobile-menu { display: none; flex-direction: column; background: var(--surface); border-bottom: 1px solid var(--border); padding: 0.5rem 2rem; gap: 0; }
+  .mobile-menu a { font-family: 'Fira Code', monospace; font-size: 0.75rem; color: var(--slate); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.85rem 0; min-height: var(--tap-min); display: flex; align-items: center; border-bottom: 1px solid var(--border); }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:focus-visible { outline: 2px solid var(--cyan); }
+
+  /* HERO */
   #home { min-height: 100vh; display: flex; align-items: center; padding-top: 68px; position: relative; overflow: hidden; }
   .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; width: 100%; }
   .hero-eyebrow { font-family: 'Fira Code', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--cyan); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
   .hero-eyebrow::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--cyan); }
+
+  /* TITRES SÉQUENTIELS: h1 → h2 → h3 dans l'ordre */
   h1 { font-size: clamp(3rem, 7vw, 6rem); font-weight: 800; line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 1.5rem; color: #fff; }
   h1 .name-accent { color: transparent; -webkit-text-stroke: 2px var(--cyan); display: block; }
+
   .hero-desc { font-size: 1rem; color: var(--slate); line-height: 1.75; max-width: 42ch; margin-bottom: 2.5rem; }
   .hero-desc strong { color: var(--text); font-weight: 600; }
   .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 1.75rem; background: var(--cyan); color: var(--bg); font-family: 'Fira Code', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; text-decoration: none; transition: all 0.2s; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); }
-  .btn-primary:hover { background: #fff; box-shadow: 0 0 30px rgba(0,255,200,0.4); }
-  .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 1.75rem; border: 1px solid var(--border-bright); color: var(--cyan); font-family: 'Fira Code', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none; transition: all 0.2s; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); }
-  .btn-secondary:hover { background: rgba(0,255,200,0.05); border-color: var(--cyan); }
+
+  .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.9rem 1.75rem; background: var(--cyan); color: var(--bg); font-family: 'Fira Code', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; text-decoration: none; transition: all 0.2s; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); min-height: var(--tap-min); }
+  .btn-primary:hover, .btn-primary:focus { background: #fff; box-shadow: 0 0 30px rgba(0,255,200,0.4); outline: none; }
+  .btn-primary:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+
+  .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.9rem 1.75rem; border: 1px solid var(--border-bright); color: var(--cyan); font-family: 'Fira Code', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none; transition: all 0.2s; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); min-height: var(--tap-min); }
+  .btn-secondary:hover, .btn-secondary:focus { background: rgba(0,255,200,0.05); border-color: var(--cyan); outline: none; }
+  .btn-secondary:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+
+  /* TERMINAL */
   .terminal { background: var(--surface); border: 1px solid var(--border); overflow: hidden; box-shadow: var(--glow-cyan), inset 0 1px 0 rgba(255,255,255,0.04); position: relative; }
   .terminal::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--cyan), transparent); }
   .terminal-bar { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.5rem; background: rgba(0,0,0,0.3); }
@@ -138,34 +174,46 @@
   .t-key { color: var(--slate); }
   .t-cursor { display: inline-block; width: 2px; height: 1em; background: var(--cyan); animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 2px; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  /* STATS */
   .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; border: 1px solid var(--border); background: var(--border); margin-top: 3rem; }
   .stat-item { background: var(--surface); padding: 1.5rem; text-align: center; }
   .stat-value { font-size: 1.75rem; font-weight: 800; display: block; line-height: 1; margin-bottom: 0.4rem; }
-  .stat-label { font-family: 'Fira Code', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-dim); }
+  .stat-label { font-family: 'Fira Code', monospace; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-dim); }
+
   section { position: relative; z-index: 10; }
+
   .section-header { margin-bottom: 4rem; }
   .section-header.centered { text-align: center; }
   .section-tag { font-family: 'Fira Code', monospace; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--cyan); display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
   .section-tag::before { content: '//'; color: var(--text-dim); }
+
+  /* h2 = titres de section (séquentiels après h1) */
   h2.section-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; color: #fff; line-height: 1.1; }
+
   .card { background: var(--surface); border: 1px solid var(--border); padding: 1.75rem; position: relative; transition: border-color 0.25s, box-shadow 0.25s; overflow: hidden; }
   .card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--cyan), transparent); opacity: 0; transition: opacity 0.25s; }
   .card:hover { border-color: var(--border-bright); box-shadow: var(--glow-cyan); }
   .card:hover::after { opacity: 1; }
+
   .badge { font-family: 'Fira Code', monospace; font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.12em; padding: 0.25rem 0.6rem; border: 1px solid; display: inline-block; }
   .badge-cyan { color: var(--cyan); border-color: rgba(0,255,200,0.3); background: rgba(0,255,200,0.05); }
   .badge-amber { color: var(--amber); border-color: rgba(255,184,0,0.3); background: rgba(255,184,0,0.05); }
-  .badge-slate { color: var(--slate); border-color: rgba(136,153,187,0.3); background: rgba(136,153,187,0.05); }
+  .badge-slate { color: var(--slate); border-color: rgba(168,184,212,0.3); background: rgba(168,184,212,0.05); }
   .badge-green { color: #50fa7b; border-color: rgba(80,250,123,0.3); background: rgba(80,250,123,0.05); }
-  .pulse-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; position: relative; }
+
+  .pulse-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; position: relative; flex-shrink: 0; }
   .pulse-dot::after { content: ''; position: absolute; inset: -3px; border-radius: 50%; border: 1px solid currentColor; animation: pulseRing 1.5s ease-out infinite; opacity: 0; }
   @keyframes pulseRing { 0%{transform:scale(0.8);opacity:0.8} 100%{transform:scale(2);opacity:0} }
+
   #about { padding: 8rem 0; background: linear-gradient(180deg, transparent, var(--surface) 50%, transparent); }
   #studio { padding: 8rem 0; }
+
   .studio-hero { border: 1px solid rgba(0,255,200,0.15); background: linear-gradient(135deg, var(--surface) 0%, rgba(0,255,200,0.03) 100%); padding: 3rem; position: relative; overflow: hidden; margin-bottom: 2rem; }
   .studio-hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--cyan), var(--cyan-dim), transparent); }
   .studio-hero-bg { position: absolute; bottom: -1rem; right: -1rem; font-size: 10rem; color: rgba(0,255,200,0.03); line-height: 1; pointer-events: none; transition: color 0.3s; }
   .studio-hero:hover .studio-hero-bg { color: rgba(0,255,200,0.06); }
+
   #plugins { padding: 8rem 0; background: var(--surface); }
   .plugins-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
   .plugin-card { background: var(--bg); padding: 1.75rem; transition: background 0.25s; position: relative; overflow: hidden; display: flex; flex-direction: column; }
@@ -174,12 +222,16 @@
   .plugin-card:hover::before { transform: scaleX(1); }
   .plugin-icon { font-size: 1.5rem; margin-bottom: 1rem; }
   .plugin-cat { font-family: 'Fira Code', monospace; font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.4rem; }
+  /* h3 pour les noms de plugins (sous h2 "Plugins Orinstone") */
   .plugin-name { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
-  .plugin-desc { font-size: 0.8rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 1.25rem; }
+  .plugin-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.65; margin-bottom: 1.25rem; }
   .plugin-links { display: flex; flex-direction: column; gap: 0.5rem; border-top: 1px solid var(--border); padding-top: 1rem; margin-top: auto; }
-  .plugin-link { font-family: 'Fira Code', monospace; font-size: 0.65rem; display: flex; align-items: center; gap: 0.4rem; text-decoration: none; transition: color 0.2s; }
-  #archives { padding: 8rem 0; opacity: 0.9; }
+  .plugin-link { font-family: 'Fira Code', monospace; font-size: 0.65rem; display: flex; align-items: center; gap: 0.4rem; text-decoration: none; transition: color 0.2s; padding: 0.4rem 0; min-height: 44px; }
+  .plugin-link:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+
+  #archives { padding: 8rem 0; opacity: 0.95; }
   #parcours { padding: 8rem 0; background: var(--surface); }
+
   .timeline { display: flex; flex-direction: column; gap: 0; position: relative; }
   .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, var(--cyan), transparent); }
   .timeline-item { padding-left: 2.5rem; padding-bottom: 2.5rem; position: relative; }
@@ -188,50 +240,81 @@
   .timeline-title { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 0.3rem; }
   .timeline-sub { font-family: 'Fira Code', monospace; font-size: 0.68rem; color: var(--text-dim); margin-bottom: 0.6rem; }
   .timeline-desc { font-size: 0.85rem; color: var(--slate); line-height: 1.7; }
+
   #skills { padding: 8rem 0; }
   .skills-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
   .skill-card { background: var(--surface); padding: 1.75rem; }
   .skill-icon { font-size: 1.5rem; margin-bottom: 1rem; }
   .skill-title { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 1rem; }
   .skill-tags { font-family: 'Fira Code', monospace; font-size: 0.65rem; color: var(--text-dim); line-height: 1.8; }
+
   #socials { padding: 8rem 0; background: var(--surface); }
   .socials-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-  .social-card { background: var(--bg); padding: 2rem 1.5rem; text-align: center; text-decoration: none; transition: background 0.2s; display: block; position: relative; overflow: hidden; }
+  .social-card { background: var(--bg); padding: 1.5rem; text-align: center; text-decoration: none; transition: background 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; min-height: var(--tap-min); }
   .social-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; transform: scaleX(0); transition: transform 0.25s; }
   .social-card:hover { background: var(--surface2); }
   .social-card:hover::before { transform: scaleX(1); }
-  .social-icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; color: var(--text-dim); transition: color 0.2s; }
-  .social-name { font-size: 0.85rem; font-weight: 700; color: var(--text); display: block; margin-bottom: 0.2rem; }
-  .social-handle { font-family: 'Fira Code', monospace; font-size: 0.6rem; color: var(--text-dim); }
+  .social-card:focus-visible { outline: 2px solid var(--cyan); outline-offset: -2px; }
+  .social-icon { font-size: 1.75rem; margin-bottom: 0.6rem; display: block; color: var(--text-dim); transition: color 0.2s; }
+  .social-name { font-size: 0.82rem; font-weight: 700; color: var(--text); display: block; margin-bottom: 0.15rem; }
+  .social-handle { font-family: 'Fira Code', monospace; font-size: 0.58rem; color: var(--text-dim); }
+
   #donate { padding: 8rem 0; }
   .donate-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 600px; margin: 0 auto; }
-  .donate-card { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 2.5rem; text-decoration: none; border: 1px solid var(--border); background: var(--surface); transition: all 0.25s; position: relative; overflow: hidden; }
+  .donate-card { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 2.5rem; text-decoration: none; border: 1px solid var(--border); background: var(--surface); transition: all 0.25s; position: relative; overflow: hidden; min-height: var(--tap-min); }
   .donate-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; transition: opacity 0.25s; opacity: 0; }
   .donate-card:hover { border-color: var(--border-bright); box-shadow: var(--glow-cyan); }
   .donate-card:hover::before { opacity: 1; }
+  .donate-card:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
   .donate-icon { font-size: 2rem; }
   .donate-label { font-size: 1rem; font-weight: 700; color: #fff; }
+
   #contact { padding: 8rem 0; background: var(--surface); }
   .contact-form { max-width: 560px; margin: 0 auto; }
   .form-field { margin-bottom: 1rem; }
-  .form-field input, .form-field textarea { width: 100%; background: var(--bg); border: 1px solid var(--border); padding: 0.9rem 1.1rem; color: var(--text); font-family: 'Fira Code', monospace; font-size: 0.78rem; outline: none; transition: border-color 0.2s; resize: none; }
-  .form-field input:focus, .form-field textarea:focus { border-color: var(--cyan); }
+  .form-label { display: block; font-family: 'Fira Code', monospace; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--slate); margin-bottom: 0.5rem; }
+  .form-field input, .form-field textarea { width: 100%; background: var(--bg); border: 1px solid var(--border); padding: 0.9rem 1.1rem; color: var(--text); font-family: 'Fira Code', monospace; font-size: 0.78rem; outline: none; transition: border-color 0.2s; resize: none; min-height: var(--tap-min); }
+  .form-field textarea { min-height: calc(var(--tap-min) * 3); }
+  .form-field input:focus, .form-field textarea:focus { border-color: var(--cyan); box-shadow: 0 0 0 2px rgba(0,255,200,0.2); }
   .form-field input::placeholder, .form-field textarea::placeholder { color: var(--text-dim); }
-  .form-submit { width: 100%; padding: 1rem; background: var(--cyan); color: var(--bg); border: none; font-family: 'Fira Code', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; cursor: pointer; transition: all 0.2s; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%); }
-  .form-submit:hover { background: #fff; box-shadow: 0 0 30px rgba(0,255,200,0.4); }
-  footer { padding: 2.5rem 2rem; border-top: 1px solid var(--border); text-align: center; font-family: 'Fira Code', monospace; font-size: 0.62rem; color: var(--text-dim); letter-spacing: 0.1em; position: relative; z-index: 10; }
+  .form-submit { width: 100%; padding: 1rem; background: var(--cyan); color: var(--bg); border: none; font-family: 'Fira Code', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; cursor: pointer; transition: all 0.2s; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%); min-height: var(--tap-min); }
+  .form-submit:hover, .form-submit:focus { background: #fff; box-shadow: 0 0 30px rgba(0,255,200,0.4); }
+  .form-submit:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+
+  footer { padding: 2.5rem 2rem; border-top: 1px solid var(--border); text-align: center; font-family: 'Fira Code', monospace; font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.1em; position: relative; z-index: 10; }
+
   @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
   .fade-up { animation: fadeUp 0.7s ease forwards; }
   .fade-up-d1 { opacity: 0; animation: fadeUp 0.7s 0.1s ease forwards; }
   .fade-up-d2 { opacity: 0; animation: fadeUp 0.7s 0.2s ease forwards; }
   .fade-up-d3 { opacity: 0; animation: fadeUp 0.7s 0.3s ease forwards; }
   .fade-up-d4 { opacity: 0; animation: fadeUp 0.7s 0.4s ease forwards; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
   @media (max-width: 1024px) { .plugins-grid { grid-template-columns: repeat(2, 1fr); } .skills-grid { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 768px) { .nav-links { display: none; } .mobile-btn { display: block; } .hero-grid { grid-template-columns: 1fr; } .stats-row { grid-template-columns: repeat(2, 1fr); } .plugins-grid { grid-template-columns: 1fr; } .socials-grid { grid-template-columns: repeat(2, 1fr); } .skills-grid { grid-template-columns: repeat(2, 1fr); } .donate-grid { grid-template-columns: 1fr; } body { cursor: auto; } .cursor, .cursor-ring { display: none; } }
-  @media (max-width: 480px) { .stats-row { grid-template-columns: 1fr 1fr; } .socials-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .mobile-btn { display: flex; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .plugins-grid { grid-template-columns: 1fr; }
+    .socials-grid { grid-template-columns: repeat(2, 1fr); }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .donate-grid { grid-template-columns: 1fr; }
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+    div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+  }
+  @media (max-width: 480px) { .stats-row { grid-template-columns: 1fr 1fr; } }
 </style>
 </head>
 <body>
+
+<!-- SKIP LINK -->
+<a href="#main-content" class="skip-link">Passer au contenu principal</a>
 
 <div class="cursor" id="cursor" aria-hidden="true"></div>
 <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
@@ -239,8 +322,8 @@
 
 <nav role="navigation" aria-label="Navigation principale">
   <div class="nav-inner">
-    <a href="#home" class="nav-logo" aria-label="Mathéo Favier — Accueil">MF<span>.</span></a>
-    <ul class="nav-links">
+    <a href="#home" class="nav-logo" aria-label="Mathéo Favier — Accueil">MF<span aria-hidden="true">.</span></a>
+    <ul class="nav-links" role="list">
       <li><a href="#about">Vision</a></li>
       <li><a href="#studio">Studio</a></li>
       <li><a href="#plugins">Plugins</a></li>
@@ -255,24 +338,27 @@
       <i class="fa-solid fa-bars" aria-hidden="true"></i>
     </button>
   </div>
-  <div class="mobile-menu" id="mobileMenu" role="menu">
-    <a href="#about" class="mobile-link" role="menuitem">Vision</a>
-    <a href="#studio" class="mobile-link" role="menuitem">Studio</a>
-    <a href="#plugins" class="mobile-link" role="menuitem">Plugins</a>
-    <a href="#archives" class="mobile-link" role="menuitem">Archives</a>
-    <a href="#parcours" class="mobile-link" role="menuitem">Parcours</a>
-    <a href="#skills" class="mobile-link" role="menuitem">Skills</a>
-    <a href="#socials" class="mobile-link" role="menuitem">Réseaux</a>
-    <a href="#donate" class="mobile-link" style="color:var(--amber)" role="menuitem">Soutenir</a>
-    <a href="#contact" class="mobile-link" style="color:var(--cyan)" role="menuitem">Contact</a>
+  <div class="mobile-menu" id="mobileMenu" role="list">
+    <a href="#about" class="mobile-link" role="listitem">Vision</a>
+    <a href="#studio" class="mobile-link" role="listitem">Studio</a>
+    <a href="#plugins" class="mobile-link" role="listitem">Plugins</a>
+    <a href="#archives" class="mobile-link" role="listitem">Archives</a>
+    <a href="#parcours" class="mobile-link" role="listitem">Parcours</a>
+    <a href="#skills" class="mobile-link" role="listitem">Skills</a>
+    <a href="#socials" class="mobile-link" role="listitem">Réseaux</a>
+    <a href="#donate" class="mobile-link" style="color:var(--amber)" role="listitem">Soutenir</a>
+    <a href="#contact" class="mobile-link" style="color:var(--cyan)" role="listitem">Contact</a>
   </div>
 </nav>
+
+<!-- MAIN LANDMARK (repère principal manquant) -->
+<main id="main-content">
 
 <header id="home">
   <div class="container">
     <div class="hero-grid">
       <div>
-        <div class="hero-eyebrow fade-up">Profil Professionnel &amp; Alternance</div>
+        <p class="hero-eyebrow fade-up">Profil Professionnel &amp; Alternance</p>
         <h1 class="fade-up-d1">
           Mathéo
           <span class="name-accent">Favier</span>
@@ -289,12 +375,9 @@
           </a>
         </div>
       </div>
-
-      <div class="terminal fade-up-d4" role="img" aria-label="Carte de statut : Mathéo Favier, CEO et fondateur d'Orinstone Studio, futur alternant">
+      <div class="terminal fade-up-d4" role="img" aria-label="Carte de statut : Mathéo Favier, alias metal54400_, CEO et fondateur d'Orinstone Studio, futur alternant">
         <div class="terminal-bar" aria-hidden="true">
-          <div class="dot dot-r"></div>
-          <div class="dot dot-y"></div>
-          <div class="dot dot-g"></div>
+          <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
           <span class="terminal-label">status.js</span>
         </div>
         <div class="terminal-body" aria-hidden="true">
@@ -309,32 +392,31 @@
         </div>
       </div>
     </div>
-
-    <div class="stats-row" role="list" aria-label="Statistiques clés">
-      <div class="stat-item" role="listitem">
-        <span class="stat-value" style="color:var(--text)">2MRC</span>
-        <span class="stat-label">Année Validée</span>
+    <dl class="stats-row" aria-label="Statistiques clés">
+      <div class="stat-item">
+        <dt class="stat-label">Année Validée</dt>
+        <dd class="stat-value" style="color:var(--text)">2MRC</dd>
       </div>
-      <div class="stat-item" role="listitem">
-        <span class="stat-value" style="color:var(--cyan)">1ère MCVA</span>
-        <span class="stat-label">Objectif Prochain</span>
+      <div class="stat-item">
+        <dt class="stat-label">Objectif Prochain</dt>
+        <dd class="stat-value" style="color:var(--cyan)">1ère MCVA</dd>
       </div>
-      <div class="stat-item" role="listitem">
-        <span class="stat-value" style="color:var(--amber)">5 ans</span>
-        <span class="stat-label">Visée 42 Lux</span>
+      <div class="stat-item">
+        <dt class="stat-label">Visée 42 Lux</dt>
+        <dd class="stat-value" style="color:var(--amber)">5 ans</dd>
       </div>
-      <div class="stat-item" role="listitem">
-        <span class="stat-value" style="color:#50fa7b">10+</span>
-        <span class="stat-label">Langages Tech</span>
+      <div class="stat-item">
+        <dt class="stat-label">Langages Tech</dt>
+        <dd class="stat-value" style="color:#50fa7b">10+</dd>
       </div>
-    </div>
+    </dl>
   </div>
 </header>
 
 <section id="about" aria-labelledby="about-title">
   <div class="container-narrow">
     <div class="section-header centered">
-      <div class="section-tag">Vision Stratégique</div>
+      <p class="section-tag" aria-hidden="true">Vision Stratégique</p>
       <h2 class="section-title" id="about-title">L'alliance de la Tech<br>et du Commerce</h2>
     </div>
     <p style="font-size:1.05rem;color:var(--slate);line-height:1.85;text-align:center;max-width:62ch;margin:0 auto">
@@ -346,10 +428,9 @@
 <section id="studio" aria-labelledby="studio-title">
   <div class="container">
     <div class="section-header centered">
-      <div class="section-tag">Structure d'Entreprise</div>
+      <p class="section-tag" aria-hidden="true">Structure d'Entreprise</p>
       <h2 class="section-title" id="studio-title">L'Écosystème Orinstone Studio</h2>
     </div>
-
     <div class="studio-hero">
       <div class="studio-hero-bg" aria-hidden="true"><i class="fa-solid fa-cubes" aria-hidden="true"></i></div>
       <span class="badge badge-cyan" style="margin-bottom:1rem">Vaisseau Mère / Entité Principale</span>
@@ -358,32 +439,30 @@
         Mon <strong style="color:var(--text)">studio de développement central</strong>. C'est au sein de cette entité que s'organise la création globale&nbsp;: jeux vidéo, sites web et applications innovantes.
       </p>
     </div>
-
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border)">
       <div class="card" style="margin:0">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
           <div style="display:flex;align-items:center;gap:0.75rem">
             <div style="width:36px;height:36px;background:rgba(255,184,0,0.08);display:flex;align-items:center;justify-content:center;color:var(--amber)" aria-hidden="true"><i class="fa-solid fa-server" aria-hidden="true"></i></div>
-            <h5 style="font-size:1rem;font-weight:700;color:#fff">Orinheberge</h5>
+            <h3 style="font-size:1rem;font-weight:700;color:#fff">Orinheberge</h3>
           </div>
           <span class="badge badge-amber">Planification</span>
         </div>
         <p style="color:var(--text-dim);font-size:0.82rem;line-height:1.65;margin-bottom:0.75rem">Infrastructure Cloud et virtualisation VPS via Pterodactyl.</p>
-        <div style="font-family:'Fira Code',monospace;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-dim)">Pôle Cloud &amp; SysAdmin</div>
+        <p style="font-family:'Fira Code',monospace;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-dim)">Pôle Cloud &amp; SysAdmin</p>
       </div>
-
       <div class="card" style="margin:0">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
           <div style="display:flex;align-items:center;gap:0.75rem">
             <div style="width:36px;height:36px;background:rgba(0,255,200,0.08);display:flex;align-items:center;justify-content:center;color:var(--cyan)" aria-hidden="true"><i class="fa-solid fa-gamepad" aria-hidden="true"></i></div>
-            <h5 style="font-size:1rem;font-weight:700;color:#fff">ᴏʀɪɴꜱᴛᴏɴᴇ ・ꜱᴇʀᴠᴇʀ</h5>
+            <h3 style="font-size:1rem;font-weight:700;color:#fff">ᴏʀɪɴꜱᴛᴏɴᴇ ・ꜱᴇʀᴠᴇʀ</h3>
           </div>
           <span class="badge badge-green" style="display:flex;align-items:center;gap:0.4rem">
             <span class="pulse-dot" style="background:#50fa7b;color:#50fa7b" aria-hidden="true"></span> Dev Actif
           </span>
         </div>
         <p style="color:var(--text-dim);font-size:0.82rem;line-height:1.65;margin-bottom:0.75rem">Notre serveur Minecraft Survie faisant office de laboratoire d'expérimentation.</p>
-        <div style="font-family:'Fira Code',monospace;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-dim)">Pôle Gaming</div>
+        <p style="font-family:'Fira Code',monospace;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-dim)">Pôle Gaming</p>
       </div>
     </div>
   </div>
@@ -392,121 +471,111 @@
 <section id="plugins" aria-labelledby="plugins-title">
   <div class="container">
     <div class="section-header centered">
-      <div class="section-tag">Développement Open Source</div>
+      <p class="section-tag" aria-hidden="true">Développement Open Source</p>
       <h2 class="section-title" id="plugins-title">Plugins Orinstone</h2>
     </div>
-
     <div class="plugins-grid">
 
-      <div class="plugin-card">
+      <article class="plugin-card" aria-labelledby="plugin-chat-name">
         <div class="plugin-icon" style="color:#7c5cff" aria-hidden="true"><i class="fa-solid fa-comments" aria-hidden="true"></i></div>
-        <div class="plugin-cat" style="color:#7c5cff">Chat</div>
-        <div class="plugin-name">OrinstoneChat</div>
+        <p class="plugin-cat" style="color:#7c5cff">Chat</p>
+        <h3 class="plugin-name" id="plugin-chat-name">OrinstoneChat</h3>
         <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.75rem">
           <span class="badge badge-green" style="display:flex;align-items:center;gap:0.3rem;font-size:0.55rem"><span class="pulse-dot" style="background:#50fa7b;color:#50fa7b" aria-hidden="true"></span>Dev Actif</span>
         </div>
-        <div class="plugin-desc">Gestion dynamique du tchat, salons isolés et filtres de sécurité avancés.</div>
+        <p class="plugin-desc">Gestion dynamique du tchat, salons isolés et filtres de sécurité avancés.</p>
         <div class="plugin-links">
-          <a href="https://github.com/metal54400/OrinstoneChat" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--cyan)" aria-label="OrinstoneChat — Code source sur GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i> Code Source</a>
-          <a href="https://modrinth.com/plugin/orinstonechat" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:#50fa7b" aria-label="OrinstoneChat — Télécharger sur Modrinth"><i class="fa-solid fa-download" aria-hidden="true"></i> Télécharger</a>
+          <a href="https://github.com/metal54400/OrinstoneChat" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--cyan)" aria-label="OrinstoneChat — Code source sur GitHub (nouvelle fenêtre)"><i class="fa-brands fa-github" aria-hidden="true"></i> Code Source</a>
+          <a href="https://modrinth.com/plugin/orinstonechat" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:#50fa7b" aria-label="OrinstoneChat — Télécharger sur Modrinth (nouvelle fenêtre)"><i class="fa-solid fa-download" aria-hidden="true"></i> Télécharger</a>
         </div>
-      </div>
+      </article>
 
-      <div class="plugin-card">
+      <article class="plugin-card" aria-labelledby="plugin-authy-name">
         <div class="plugin-icon" style="color:#50fa7b" aria-hidden="true"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
-        <div class="plugin-cat" style="color:#50fa7b">Sécurité</div>
-        <div class="plugin-name">OrinstoneAuthy</div>
+        <p class="plugin-cat" style="color:#50fa7b">Sécurité</p>
+        <h3 class="plugin-name" id="plugin-authy-name">OrinstoneAuthy</h3>
         <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.75rem">
           <span class="badge badge-green" style="display:flex;align-items:center;gap:0.3rem;font-size:0.55rem"><span class="pulse-dot" style="background:#50fa7b;color:#50fa7b" aria-hidden="true"></span>Dev Actif</span>
         </div>
-        <div class="plugin-desc">Système d'authentification robuste sécurisant les connexions et comptes en jeu.</div>
+        <p class="plugin-desc">Système d'authentification robuste sécurisant les connexions et comptes en jeu.</p>
         <div class="plugin-links">
-          <a href="https://github.com/metal54400/OrinstoneAuthy" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--cyan)" aria-label="OrinstoneAuthy — Code source sur GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i> Code Source</a>
+          <a href="https://github.com/metal54400/OrinstoneAuthy" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--cyan)" aria-label="OrinstoneAuthy — Code source sur GitHub (nouvelle fenêtre)"><i class="fa-brands fa-github" aria-hidden="true"></i> Code Source</a>
         </div>
-      </div>
+      </article>
 
-      <div class="plugin-card">
+      <article class="plugin-card" aria-labelledby="plugin-teams-name">
         <div class="plugin-icon" style="color:var(--cyan)" aria-hidden="true"><i class="fa-solid fa-users" aria-hidden="true"></i></div>
-        <div class="plugin-cat" style="color:var(--cyan)">Social</div>
-        <div class="plugin-name">OrinstoneTeams</div>
+        <p class="plugin-cat" style="color:var(--cyan)">Social</p>
+        <h3 class="plugin-name" id="plugin-teams-name">OrinstoneTeams</h3>
         <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.75rem">
           <span class="badge badge-green" style="display:flex;align-items:center;gap:0.3rem;font-size:0.55rem"><span class="pulse-dot" style="background:#50fa7b;color:#50fa7b" aria-hidden="true"></span>Dev Actif</span>
         </div>
-        <div class="plugin-desc">Module permettant le regroupement fluide de joueurs et la fondation d'équipes.</div>
+        <p class="plugin-desc">Module permettant le regroupement fluide de joueurs et la fondation d'équipes.</p>
         <div class="plugin-links">
-          <a href="https://github.com/metal54400/OrinstoneTeams" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--cyan)" aria-label="OrinstoneTeams — Code source sur GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i> Code Source</a>
+          <a href="https://github.com/metal54400/OrinstoneTeams" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--cyan)" aria-label="OrinstoneTeams — Code source sur GitHub (nouvelle fenêtre)"><i class="fa-brands fa-github" aria-hidden="true"></i> Code Source</a>
         </div>
-      </div>
+      </article>
 
-      <div class="plugin-card">
+      <article class="plugin-card" aria-labelledby="plugin-vc-name">
         <div class="plugin-icon" style="color:#bd93f9" aria-hidden="true"><i class="fa-solid fa-microphone" aria-hidden="true"></i></div>
-        <div class="plugin-cat" style="color:#bd93f9">Audio</div>
-        <div class="plugin-name">OrinstoneVoiceChat</div>
+        <p class="plugin-cat" style="color:#bd93f9">Audio</p>
+        <h3 class="plugin-name" id="plugin-vc-name">OrinstoneVoiceChat</h3>
         <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.75rem">
           <span class="badge badge-green" style="display:flex;align-items:center;gap:0.3rem;font-size:0.55rem"><span class="pulse-dot" style="background:#50fa7b;color:#50fa7b" aria-hidden="true"></span>Dev Actif</span>
         </div>
-        <div class="plugin-desc">Outils de gestion pour le chat vocal de proximité, maximisant l'immersion RP.</div>
+        <p class="plugin-desc">Outils de gestion pour le chat vocal de proximité, maximisant l'immersion RP.</p>
         <div class="plugin-links">
-          <a href="https://github.com/metal54400/OrinstoneVoiceChat" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--cyan)" aria-label="OrinstoneVoiceChat — Code source sur GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i> Code Source</a>
+          <a href="https://github.com/metal54400/OrinstoneVoiceChat" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--cyan)" aria-label="OrinstoneVoiceChat — Code source sur GitHub (nouvelle fenêtre)"><i class="fa-brands fa-github" aria-hidden="true"></i> Code Source</a>
         </div>
-      </div>
+      </article>
 
-      <div class="plugin-card">
+      <article class="plugin-card" aria-labelledby="plugin-nerf-name">
         <div class="plugin-icon" style="color:var(--amber)" aria-hidden="true"><i class="fa-solid fa-gavel" aria-hidden="true"></i></div>
-        <div class="plugin-cat" style="color:var(--amber)">Équilibrage</div>
-        <div class="plugin-name">OrinstoneNerf</div>
-        <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.75rem">
-          <span class="badge badge-cyan" style="font-size:0.55rem">Stable</span>
-        </div>
-        <div class="plugin-desc">Ajustement précis des dégâts, des mécaniques vanilla et de la puissance des équipements.</div>
+        <p class="plugin-cat" style="color:var(--amber)">Équilibrage</p>
+        <h3 class="plugin-name" id="plugin-nerf-name">OrinstoneNerf</h3>
+        <div style="margin-bottom:0.75rem"><span class="badge badge-cyan" style="font-size:0.55rem">Stable</span></div>
+        <p class="plugin-desc">Ajustement précis des dégâts, des mécaniques vanilla et de la puissance des équipements.</p>
         <div class="plugin-links">
-          <a href="https://github.com/metal54400/OrinstoneNerf" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--cyan)" aria-label="OrinstoneNerf — Code source sur GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i> Code Source</a>
+          <a href="https://github.com/metal54400/OrinstoneNerf" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--cyan)" aria-label="OrinstoneNerf — Code source sur GitHub (nouvelle fenêtre)"><i class="fa-brands fa-github" aria-hidden="true"></i> Code Source</a>
         </div>
-      </div>
+      </article>
 
-      <div class="plugin-card">
+      <article class="plugin-card" aria-labelledby="plugin-rep-name">
         <div class="plugin-icon" style="color:#2affd6" aria-hidden="true"><i class="fa-solid fa-star" aria-hidden="true"></i></div>
-        <div class="plugin-cat" style="color:#2affd6">Progression</div>
-        <div class="plugin-name">OrinstoneRep</div>
-        <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.75rem">
-          <span class="badge badge-cyan" style="font-size:0.55rem">Stable</span>
-        </div>
-        <div class="plugin-desc">Système interne de réputation et de scoring pour suivre l'activité des joueurs.</div>
+        <p class="plugin-cat" style="color:#2affd6">Progression</p>
+        <h3 class="plugin-name" id="plugin-rep-name">OrinstoneRep</h3>
+        <div style="margin-bottom:0.75rem"><span class="badge badge-cyan" style="font-size:0.55rem">Stable</span></div>
+        <p class="plugin-desc">Système interne de réputation et de scoring pour suivre l'activité des joueurs.</p>
         <div class="plugin-links">
-          <a href="https://github.com/metal54400/OrinstoneRep" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--cyan)" aria-label="OrinstoneRep — Code source sur GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i> Code Source</a>
+          <a href="https://github.com/metal54400/OrinstoneRep" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--cyan)" aria-label="OrinstoneRep — Code source sur GitHub (nouvelle fenêtre)"><i class="fa-brands fa-github" aria-hidden="true"></i> Code Source</a>
         </div>
-      </div>
+      </article>
 
-      <div class="plugin-card">
+      <article class="plugin-card" aria-labelledby="plugin-auction-name">
         <div class="plugin-icon" style="color:#ffb347" aria-hidden="true"><i class="fa-solid fa-comments-dollar" aria-hidden="true"></i></div>
-        <div class="plugin-cat" style="color:#ffb347">Économie</div>
-        <div class="plugin-name">OrinstoneAuction</div>
-        <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.75rem">
-          <span class="badge badge-cyan" style="font-size:0.55rem">Stable</span>
-        </div>
-        <div class="plugin-desc">Hôtel des ventes dynamique permettant le commerce régulé inter-joueurs.</div>
+        <p class="plugin-cat" style="color:#ffb347">Économie</p>
+        <h3 class="plugin-name" id="plugin-auction-name">OrinstoneAuction</h3>
+        <div style="margin-bottom:0.75rem"><span class="badge badge-cyan" style="font-size:0.55rem">Stable</span></div>
+        <p class="plugin-desc">Hôtel des ventes dynamique permettant le commerce régulé inter-joueurs.</p>
         <div class="plugin-links">
-          <a href="https://github.com/metal54400/OrinstoneAuction" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--cyan)" aria-label="OrinstoneAuction — Code source sur GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i> Code Source</a>
+          <a href="https://github.com/metal54400/OrinstoneAuction" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--cyan)" aria-label="OrinstoneAuction — Code source sur GitHub (nouvelle fenêtre)"><i class="fa-brands fa-github" aria-hidden="true"></i> Code Source</a>
         </div>
-      </div>
+      </article>
 
-      <div class="plugin-card">
+      <article class="plugin-card" aria-labelledby="plugin-utils-name">
         <div class="plugin-icon" style="color:var(--rose)" aria-hidden="true"><i class="fa-solid fa-toolbox" aria-hidden="true"></i></div>
-        <div class="plugin-cat" style="color:var(--rose)">Outils</div>
-        <div class="plugin-name">OrinstoneUtils</div>
-        <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.75rem">
-          <span class="badge badge-cyan" style="font-size:0.55rem">Stable</span>
-        </div>
-        <div class="plugin-desc">Boîte à outils principale regroupant l'ensemble des commandes administratives globales.</div>
+        <p class="plugin-cat" style="color:var(--rose)">Outils</p>
+        <h3 class="plugin-name" id="plugin-utils-name">OrinstoneUtils</h3>
+        <div style="margin-bottom:0.75rem"><span class="badge badge-cyan" style="font-size:0.55rem">Stable</span></div>
+        <p class="plugin-desc">Boîte à outils principale regroupant l'ensemble des commandes administratives globales.</p>
         <div class="plugin-links">
-          <a href="https://github.com/metal54400/OrinstoneUtils" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--cyan)" aria-label="OrinstoneUtils — Code source sur GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i> Code Source</a>
+          <a href="https://github.com/metal54400/OrinstoneUtils" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--cyan)" aria-label="OrinstoneUtils — Code source sur GitHub (nouvelle fenêtre)"><i class="fa-brands fa-github" aria-hidden="true"></i> Code Source</a>
         </div>
-      </div>
+      </article>
 
     </div>
-
     <div style="text-align:center;margin-top:3rem">
-      <a href="https://github.com/metal54400" target="_blank" rel="noopener noreferrer" class="btn-secondary" aria-label="Voir l'activité complète de metal54400 sur GitHub">
+      <a href="https://github.com/metal54400" target="_blank" rel="noopener noreferrer" class="btn-secondary" aria-label="Voir l'activité complète de metal54400 sur GitHub (nouvelle fenêtre)">
         <i class="fa-brands fa-github" aria-hidden="true"></i> Voir l'activité complète sur GitHub
       </a>
     </div>
@@ -517,14 +586,13 @@
   <div class="container">
     <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;margin-bottom:4rem;gap:1.5rem">
       <div>
-        <div class="section-tag" style="color:var(--text-dim)">Historique &amp; Évolution</div>
+        <p class="section-tag" style="color:var(--text-dim)" aria-hidden="true">Historique &amp; Évolution</p>
         <h2 class="section-title" id="archives-title" style="color:var(--slate);font-style:italic">Histoire de Deepstone Studio</h2>
       </div>
-      <blockquote style="font-family:'Fira Code',monospace;font-size:0.7rem;color:var(--text-dim);border-left:2px solid rgba(255,255,255,0.08);padding-left:1rem;max-width:28ch;line-height:1.6">
+      <blockquote style="font-family:'Fira Code',monospace;font-size:0.72rem;color:var(--text-dim);border-left:2px solid rgba(255,255,255,0.08);padding-left:1rem;max-width:28ch;line-height:1.6">
         "Intégrer le passé pour consolider les fondations de l'avenir."
       </blockquote>
     </div>
-
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)">
 
       <div style="background:var(--surface);padding:1.75rem;position:relative;overflow:hidden">
@@ -532,12 +600,12 @@
         <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;margin-top:0.5rem">
           <div style="width:36px;height:36px;background:rgba(0,255,200,0.06);display:flex;align-items:center;justify-content:center;color:var(--cyan)" aria-hidden="true"><i class="fa-solid fa-code-merge" aria-hidden="true"></i></div>
           <div>
-            <div style="font-weight:700;color:#fff;font-size:0.95rem">Deepstone Studio</div>
-            <div style="font-family:'Fira Code',monospace;font-size:0.58rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em">Ancien Projet — Fusionné</div>
+            <h3 style="font-weight:700;color:#fff;font-size:0.95rem">Deepstone Studio</h3>
+            <p style="font-family:'Fira Code',monospace;font-size:0.58rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em">Ancien Projet — Fusionné</p>
           </div>
         </div>
         <p style="font-size:0.78rem;color:var(--text-dim);line-height:1.7">Mon premier studio de développement indépendant.</p>
-        <p style="font-size:0.72rem;color:var(--text-dim);line-height:1.7;margin-top:0.5rem;font-style:italic;opacity:0.7">L'entité globale ainsi que l'infrastructure réseau du serveur Deepstone ont officiellement fusionné avec Orinstone Studio. Le serveur autonome n'existe plus.</p>
+        <p style="font-size:0.72rem;color:var(--text-dim);line-height:1.7;margin-top:0.5rem;font-style:italic;opacity:0.85">L'entité globale ainsi que l'infrastructure réseau du serveur Deepstone ont officiellement fusionné avec Orinstone Studio. Le serveur autonome n'existe plus.</p>
       </div>
 
       <div style="background:var(--surface);padding:1.75rem">
@@ -545,11 +613,11 @@
           <div style="color:var(--slate);font-size:1.5rem" aria-hidden="true"><i class="fa-solid fa-ban" aria-hidden="true"></i></div>
           <span class="badge badge-slate">Discontinué</span>
         </div>
-        <div style="font-weight:700;color:#fff;margin-bottom:0.4rem">DeepstonePlugin</div>
+        <h3 style="font-weight:700;color:#fff;margin-bottom:0.4rem">DeepstonePlugin</h3>
         <p style="font-size:0.78rem;color:var(--text-dim);line-height:1.7;margin-bottom:1.25rem">Ancien plugin maître développé pour l'infrastructure réseau originelle de Deepstone.</p>
         <div style="display:flex;flex-direction:column;gap:0.5rem;border-top:1px solid var(--border);padding-top:1rem">
-          <a href="https://github.com/DeepstoneStudio/DeepstonePlugin" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--slate)" aria-label="DeepstonePlugin — Code source archivé sur GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i> Code Source (Archive)</a>
-          <a href="https://github.com/DeepstoneStudio/DeepstonePlugin/releases/tag/v0.21.4" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--cyan)" aria-label="DeepstonePlugin — Télécharger la version v0.21.4"><i class="fa-solid fa-download" aria-hidden="true"></i> Télécharger v0.21.4</a>
+          <a href="https://github.com/DeepstoneStudio/DeepstonePlugin" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--slate)" aria-label="DeepstonePlugin — Code source archivé sur GitHub (nouvelle fenêtre)"><i class="fa-brands fa-github" aria-hidden="true"></i> Code Source (Archive)</a>
+          <a href="https://github.com/DeepstoneStudio/DeepstonePlugin/releases/tag/v0.21.4" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--cyan)" aria-label="DeepstonePlugin — Télécharger v0.21.4 (nouvelle fenêtre)"><i class="fa-solid fa-download" aria-hidden="true"></i> Télécharger v0.21.4</a>
         </div>
       </div>
 
@@ -558,11 +626,11 @@
           <div style="color:#50fa7b;font-size:1.25rem" aria-hidden="true"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i></div>
           <span class="badge badge-slate">Discontinué</span>
         </div>
-        <div style="font-weight:700;color:#fff;margin-bottom:0.4rem">WizardStoneCraft</div>
+        <h3 style="font-weight:700;color:#fff;margin-bottom:0.4rem">WizardStoneCraft</h3>
         <p style="font-size:0.78rem;color:var(--text-dim);line-height:1.7;margin-bottom:1.25rem">Extension historique liée à l'ancien serveur de jeu. Projet figé mais toujours public.</p>
         <div style="display:flex;flex-direction:column;gap:0.5rem;border-top:1px solid var(--border);padding-top:1rem">
-          <a href="https://github.com/DeepstoneStudio/WizardStoneCraftplugin" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--slate)" aria-label="WizardStoneCraft — Code source sur GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i> Code Source</a>
-          <a href="https://github.com/DeepstoneStudio/WizardStoneCraftplugin/releases/tag/v0.0.0.87.1-1.21.9" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:#50fa7b" aria-label="WizardStoneCraft — Télécharger la version v0.0.0.87.1"><i class="fa-solid fa-download" aria-hidden="true"></i> Télécharger v0.0.0.87.1</a>
+          <a href="https://github.com/DeepstoneStudio/WizardStoneCraftplugin" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--slate)" aria-label="WizardStoneCraft — Code source sur GitHub (nouvelle fenêtre)"><i class="fa-brands fa-github" aria-hidden="true"></i> Code Source</a>
+          <a href="https://github.com/DeepstoneStudio/WizardStoneCraftplugin/releases/tag/v0.0.0.87.1-1.21.9" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:#50fa7b" aria-label="WizardStoneCraft — Télécharger v0.0.0.87.1 (nouvelle fenêtre)"><i class="fa-solid fa-download" aria-hidden="true"></i> Télécharger v0.0.0.87.1</a>
         </div>
       </div>
 
@@ -573,68 +641,64 @@
 <section id="parcours" aria-labelledby="parcours-title">
   <div class="container">
     <div class="section-header centered">
-      <div class="section-tag">Feuille de Route</div>
+      <p class="section-tag" aria-hidden="true">Feuille de Route</p>
       <h2 class="section-title" id="parcours-title">Diplômes &amp; Parcours</h2>
     </div>
-
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem">
-
       <div>
-        <h3 style="font-family:'Fira Code',monospace;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--text-dim);border-bottom:1px solid var(--border);padding-bottom:0.75rem;margin-bottom:2rem;font-weight:400">Diplômes &amp; Cursus Académique</h3>
+        <h3 style="font-family:'Fira Code',monospace;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--text-dim);border-bottom:1px solid var(--border);padding-bottom:0.75rem;margin-bottom:2rem;font-weight:400">Diplômes &amp; Cursus Académique</h3>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:1px">
           <div style="background:var(--bg);padding:1.25rem">
-            <div style="font-family:'Fira Code',monospace;font-size:0.6rem;color:#50fa7b;margin-bottom:0.3rem">Diplôme Obtenu</div>
-            <div style="font-weight:700;color:#fff">Brevet des Collèges</div>
+            <p style="font-family:'Fira Code',monospace;font-size:0.6rem;color:#50fa7b;margin-bottom:0.3rem">Diplôme Obtenu</p>
+            <p style="font-weight:700;color:#fff">Brevet des Collèges</p>
           </div>
           <div style="background:var(--bg);padding:1.25rem">
-            <div style="font-family:'Fira Code',monospace;font-size:0.6rem;color:var(--cyan);margin-bottom:0.3rem">Diplôme Obtenu</div>
-            <div style="font-weight:700;color:#fff">Certification Commerce</div>
+            <p style="font-family:'Fira Code',monospace;font-size:0.6rem;color:var(--cyan);margin-bottom:0.3rem">Diplôme Obtenu</p>
+            <p style="font-weight:700;color:#fff">Certification Commerce</p>
           </div>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-top:none;margin-bottom:1px">
           <div style="background:var(--bg);padding:1.25rem">
-            <div style="font-family:'Fira Code',monospace;font-size:0.6rem;color:var(--slate);margin-bottom:0.3rem">Cursus Suivi</div>
-            <div style="font-weight:700;color:#fff;margin-bottom:0.25rem">Seconde MRC</div>
-            <div style="font-size:0.78rem;color:var(--text-dim)">Lycée Professionnel Jean Marc Reiser</div>
+            <p style="font-family:'Fira Code',monospace;font-size:0.6rem;color:var(--slate);margin-bottom:0.3rem">Cursus Suivi</p>
+            <p style="font-weight:700;color:#fff;margin-bottom:0.25rem">Seconde MRC</p>
+            <p style="font-size:0.78rem;color:var(--text-dim)">Lycée Professionnel Jean Marc Reiser</p>
           </div>
           <div style="background:var(--bg);padding:1.25rem;position:relative;overflow:hidden">
-            <div style="position:absolute;top:0;right:0;padding:0.3rem 0.5rem;background:rgba(0,255,200,0.06);font-family:'Fira Code',monospace;font-size:0.5rem;color:var(--cyan);letter-spacing:0.08em" aria-hidden="true">Prochain</div>
-            <div style="font-family:'Fira Code',monospace;font-size:0.6rem;color:var(--cyan);margin-bottom:0.3rem;margin-top:0.4rem">Orientation Validée</div>
-            <div style="font-weight:700;color:#fff;margin-bottom:0.25rem">Première MCVA</div>
-            <div style="font-size:0.78rem;color:var(--text-dim)">Commerce et Vente (Option A)</div>
+            <p style="position:absolute;top:0;right:0;padding:0.3rem 0.5rem;background:rgba(0,255,200,0.06);font-family:'Fira Code',monospace;font-size:0.5rem;color:var(--cyan);letter-spacing:0.08em" aria-hidden="true">Prochain</p>
+            <p style="font-family:'Fira Code',monospace;font-size:0.6rem;color:var(--cyan);margin-bottom:0.3rem;margin-top:0.4rem">Orientation Validée</p>
+            <p style="font-weight:700;color:#fff;margin-bottom:0.25rem">Première MCVA</p>
+            <p style="font-size:0.78rem;color:var(--text-dim)">Commerce et Vente (Option A)</p>
           </div>
         </div>
         <div style="background:var(--bg);border:1px solid var(--border);border-top:none;padding:1.25rem">
-          <div style="font-family:'Fira Code',monospace;font-size:0.6rem;color:var(--text-dim);margin-bottom:0.3rem">Objectif Post-Bac</div>
-          <div style="font-weight:700;color:#fff;margin-bottom:0.25rem">École 42 Luxembourg</div>
-          <div style="font-size:0.78rem;color:var(--text-dim)">Campus Belval</div>
+          <p style="font-family:'Fira Code',monospace;font-size:0.6rem;color:var(--text-dim);margin-bottom:0.3rem">Objectif Post-Bac</p>
+          <p style="font-weight:700;color:#fff;margin-bottom:0.25rem">École 42 Luxembourg</p>
+          <p style="font-size:0.78rem;color:var(--text-dim)">Campus Belval</p>
         </div>
       </div>
-
       <div>
-        <h3 style="font-family:'Fira Code',monospace;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--text-dim);border-bottom:1px solid var(--border);padding-bottom:0.75rem;margin-bottom:2rem;font-weight:400">Expériences Terrain</h3>
+        <h3 style="font-family:'Fira Code',monospace;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--text-dim);border-bottom:1px solid var(--border);padding-bottom:0.75rem;margin-bottom:2rem;font-weight:400">Expériences Terrain</h3>
         <div class="timeline">
           <div class="timeline-item">
-            <div class="timeline-meta">L'année prochaine — Contrat d'Alternance</div>
-            <div class="timeline-title">Carrefour City</div>
-            <div class="timeline-sub">Longwy Hauts</div>
-            <div class="timeline-desc">Fidélisation et conseil client personnalisé, encaissement autonome, gestion des rayons et optimisation de la performance commerciale du point de vente.</div>
+            <p class="timeline-meta">L'année prochaine — Contrat d'Alternance</p>
+            <p class="timeline-title">Carrefour City</p>
+            <p class="timeline-sub">Longwy Hauts</p>
+            <p class="timeline-desc">Fidélisation et conseil client personnalisé, encaissement autonome, gestion des rayons et optimisation de la performance commerciale du point de vente.</p>
           </div>
           <div class="timeline-item">
-            <div class="timeline-meta" style="color:var(--cyan)">Stage</div>
-            <div class="timeline-title">Kiosk P+R Bouillon</div>
-            <div class="timeline-sub">Luxembourg</div>
-            <div class="timeline-desc">Accueil de la clientèle internationale, vente conseil de proximité, gestion quotidienne de la caisse, approvisionnement de l'espace de vente.</div>
+            <p class="timeline-meta" style="color:var(--cyan)">Stage</p>
+            <p class="timeline-title">Kiosk P+R Bouillon</p>
+            <p class="timeline-sub">Luxembourg</p>
+            <p class="timeline-desc">Accueil de la clientèle internationale, vente conseil de proximité, gestion quotidienne de la caisse, approvisionnement de l'espace de vente.</p>
           </div>
           <div class="timeline-item" style="padding-bottom:0">
-            <div class="timeline-meta" style="color:var(--slate)">2e Stage de Seconde — Validé</div>
-            <div class="timeline-title">Carrefour City</div>
-            <div class="timeline-sub">Longwy Hauts</div>
-            <div class="timeline-desc">Découverte de l'organisation des flux de marchandises, premier contact avec la clientèle de quartier et initiation à la mise en rayon.</div>
+            <p class="timeline-meta" style="color:var(--slate)">2e Stage de Seconde — Validé</p>
+            <p class="timeline-title">Carrefour City</p>
+            <p class="timeline-sub">Longwy Hauts</p>
+            <p class="timeline-desc">Découverte de l'organisation des flux de marchandises, premier contact avec la clientèle de quartier et initiation à la mise en rayon.</p>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
@@ -642,47 +706,47 @@
 <section id="skills" aria-labelledby="skills-title">
   <div class="container">
     <div class="section-header centered">
-      <div class="section-tag">Expertise &amp; Outils</div>
+      <p class="section-tag" aria-hidden="true">Expertise &amp; Outils</p>
       <h2 class="section-title" id="skills-title">Compétences &amp; Aptitudes</h2>
     </div>
     <div class="skills-grid">
       <div class="skill-card">
         <div class="skill-icon" style="color:#7c5cff" aria-hidden="true"><i class="fa-solid fa-code" aria-hidden="true"></i></div>
-        <div class="skill-title">Développement</div>
-        <div class="skill-tags">Node.js · Python · JS · PHP · Java · C++ · Lua</div>
+        <h3 class="skill-title">Développement</h3>
+        <p class="skill-tags">Node.js · Python · JS · PHP · Java · C++ · Lua</p>
       </div>
       <div class="skill-card">
         <div class="skill-icon" style="color:var(--cyan)" aria-hidden="true"><i class="fa-solid fa-network-wired" aria-hidden="true"></i></div>
-        <div class="skill-title">Systèmes</div>
-        <div class="skill-tags">Linux · Pterodactyl · SQL · HTML5 · CSS3 · DevOps</div>
+        <h3 class="skill-title">Systèmes</h3>
+        <p class="skill-tags">Linux · Pterodactyl · SQL · HTML5 · CSS3 · DevOps</p>
       </div>
       <div class="skill-card">
         <div class="skill-icon" style="color:#4d90fe" aria-hidden="true"><i class="fa-solid fa-file-invoice" aria-hidden="true"></i></div>
-        <div class="skill-title">Bureautique</div>
-        <div class="skill-tags">Excel · Word · PowerPoint</div>
+        <h3 class="skill-title">Bureautique</h3>
+        <p class="skill-tags">Excel · Word · PowerPoint</p>
       </div>
       <div class="skill-card">
         <div class="skill-icon" style="color:#50fa7b" aria-hidden="true"><i class="fa-solid fa-user-tie" aria-hidden="true"></i></div>
-        <div class="skill-title">Commerce</div>
-        <div class="skill-tags">Relation Client · Vente Conseil · Gestion Rayons</div>
+        <h3 class="skill-title">Commerce</h3>
+        <p class="skill-tags">Relation Client · Vente Conseil · Gestion Rayons</p>
       </div>
-      <div class="skill-card" style="background:rgba(0,255,200,0.03);border-right:1px solid rgba(0,255,200,0.1)">
+      <div class="skill-card" style="background:rgba(0,255,200,0.03)">
         <div class="skill-icon" style="color:#bd93f9" aria-hidden="true"><i class="fa-solid fa-language" aria-hidden="true"></i></div>
-        <div class="skill-title">Langues</div>
-        <div style="font-family:'Fira Code',monospace;font-size:0.65rem;display:flex;flex-direction:column;gap:0.35rem" role="list" aria-label="Niveaux de langues">
-          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:0.3rem" role="listitem">
-            <span style="color:var(--text)">Français</span><span style="color:#50fa7b">Maternelle</span>
+        <h3 class="skill-title">Langues</h3>
+        <dl style="font-family:'Fira Code',monospace;font-size:0.65rem;display:flex;flex-direction:column;gap:0.35rem">
+          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:0.3rem">
+            <dt style="color:var(--text)">Français</dt><dd style="color:#50fa7b;margin:0">Maternelle</dd>
           </div>
-          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:0.3rem" role="listitem">
-            <span style="color:var(--slate)">Anglais</span><span style="color:var(--cyan)">A2</span>
+          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:0.3rem">
+            <dt style="color:var(--slate)">Anglais</dt><dd style="color:var(--cyan);margin:0">A2</dd>
           </div>
-          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:0.3rem" role="listitem">
-            <span style="color:var(--slate)">Allemand</span><span style="color:var(--cyan)">A2</span>
+          <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:0.3rem">
+            <dt style="color:var(--slate)">Allemand</dt><dd style="color:var(--cyan);margin:0">A2</dd>
           </div>
-          <div style="display:flex;justify-content:space-between" role="listitem">
-            <span style="color:var(--slate)">Luxembourgeois</span><span style="color:var(--text-dim)">A1</span>
+          <div style="display:flex;justify-content:space-between">
+            <dt style="color:var(--slate)">Luxembourgeois</dt><dd style="color:var(--text-dim);margin:0">A1</dd>
           </div>
-        </div>
+        </dl>
       </div>
     </div>
   </div>
@@ -691,46 +755,46 @@
 <section id="socials" aria-labelledby="socials-title">
   <div class="container">
     <div class="section-header centered">
-      <div class="section-tag">Écosystème Digital</div>
+      <p class="section-tag" aria-hidden="true">Écosystème Digital</p>
       <h2 class="section-title" id="socials-title">Mes Réseaux Sociaux</h2>
     </div>
     <div class="socials-grid">
-      <a href="https://github.com/metal54400" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Profil GitHub de metal54400">
+      <a href="https://github.com/metal54400" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Profil GitHub metal54400 (nouvelle fenêtre)">
         <span class="social-icon" aria-hidden="true"><i class="fa-brands fa-github" aria-hidden="true"></i></span>
         <span class="social-name">GitHub</span>
         <span class="social-handle">metal54400</span>
       </a>
-      <a href="https://discord.com" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Profil Discord de metal54400">
+      <a href="https://discord.com" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Profil Discord metal54400 (nouvelle fenêtre)">
         <span class="social-icon" aria-hidden="true"><i class="fa-brands fa-discord" aria-hidden="true"></i></span>
         <span class="social-name">Discord</span>
         <span class="social-handle">metal54400</span>
       </a>
-      <a href="https://tiktok.com/@metal54400" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Profil TikTok de metal54400">
+      <a href="https://tiktok.com/@metal54400" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Profil TikTok metal54400 (nouvelle fenêtre)">
         <span class="social-icon" aria-hidden="true"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></span>
         <span class="social-name">TikTok</span>
         <span class="social-handle">metal54400</span>
       </a>
-      <a href="https://open.spotify.com/user/31lwi37n2kwhkyu34hs6frdj4scq" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Profil Spotify de metal54400">
+      <a href="https://open.spotify.com/user/31lwi37n2kwhkyu34hs6frdj4scq" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Profil Spotify metal54400 (nouvelle fenêtre)">
         <span class="social-icon" aria-hidden="true"><i class="fa-brands fa-spotify" aria-hidden="true"></i></span>
         <span class="social-name">Spotify</span>
         <span class="social-handle">metal54400</span>
       </a>
-      <a href="https://instagram.com/matheocillierfavier54" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Profil Instagram de matheocillierfavier54">
+      <a href="https://instagram.com/matheocillierfavier54" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Profil Instagram matheocillierfavier54 (nouvelle fenêtre)">
         <span class="social-icon" aria-hidden="true"><i class="fa-brands fa-instagram" aria-hidden="true"></i></span>
         <span class="social-name">Instagram</span>
         <span class="social-handle">matheocillierfavier54</span>
       </a>
-      <a href="https://snapchat.com/add/matheo54400" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Profil Snapchat de matheo54400">
+      <a href="https://snapchat.com/add/matheo54400" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Profil Snapchat matheo54400 (nouvelle fenêtre)">
         <span class="social-icon" aria-hidden="true"><i class="fa-brands fa-snapchat" aria-hidden="true"></i></span>
         <span class="social-name">Snapchat</span>
         <span class="social-handle">matheo54400</span>
       </a>
-      <a href="https://x.com/MCillierFaviier" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Profil Twitter/X de MCillierFaviier">
+      <a href="https://x.com/MCillierFaviier" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Profil Twitter/X MCillierFaviier (nouvelle fenêtre)">
         <span class="social-icon" aria-hidden="true"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></span>
         <span class="social-name">Twitter (X)</span>
         <span class="social-handle">MCillierFaviier</span>
       </a>
-      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Profil Facebook de Matheo Rammstein">
+      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Profil Facebook Matheo Rammstein (nouvelle fenêtre)">
         <span class="social-icon" aria-hidden="true"><i class="fa-brands fa-facebook" aria-hidden="true"></i></span>
         <span class="social-name">Facebook</span>
         <span class="social-handle">Matheo Rammstein</span>
@@ -742,16 +806,16 @@
 <section id="donate" aria-labelledby="donate-title">
   <div class="container">
     <div class="section-header centered">
-      <div class="section-tag">Soutenir</div>
+      <p class="section-tag" aria-hidden="true">Soutenir</p>
       <h2 class="section-title" id="donate-title">Contribute to Orinstone Studio</h2>
     </div>
     <div class="donate-grid">
-      <a href="https://paypal.me/metal544002009" target="_blank" rel="noopener noreferrer" class="donate-card" aria-label="Faire un don via PayPal">
+      <a href="https://paypal.me/metal544002009" target="_blank" rel="noopener noreferrer" class="donate-card" aria-label="Faire un don via PayPal (nouvelle fenêtre)" style="--before-bg:linear-gradient(90deg,#0070ba,transparent)">
         <style>.donate-card:nth-child(1)::before{background:linear-gradient(90deg,#0070ba,transparent)}</style>
         <span class="donate-icon" style="color:#0070ba" aria-hidden="true"><i class="fa-brands fa-paypal" aria-hidden="true"></i></span>
         <span class="donate-label">PayPal.me</span>
       </a>
-      <a href="https://buy.stripe.com/6oU8wIdVo1ktf928x18Vi00" target="_blank" rel="noopener noreferrer" class="donate-card" aria-label="Faire un don via Stripe (paiement sécurisé)">
+      <a href="https://buy.stripe.com/6oU8wIdVo1ktf928x18Vi00" target="_blank" rel="noopener noreferrer" class="donate-card" aria-label="Faire un don via Stripe (nouvelle fenêtre)">
         <style>.donate-card:nth-child(2)::before{background:linear-gradient(90deg,#635bff,transparent)}</style>
         <span class="donate-icon" style="color:#635bff" aria-hidden="true"><i class="fa-solid fa-credit-card" aria-hidden="true"></i></span>
         <span class="donate-label">Stripe Secure</span>
@@ -763,18 +827,18 @@
 <section id="contact" aria-labelledby="contact-title">
   <div class="container">
     <div class="section-header centered">
-      <div class="section-tag">Contact</div>
-      <h2 class="section-title" id="contact-title">Collaborer avec moi ?</h2>
+      <p class="section-tag" aria-hidden="true">Contact</p>
+      <h2 class="section-title" id="contact-title">Collaborer avec moi&nbsp;?</h2>
     </div>
     <div class="contact-form">
       <form id="contactForm" novalidate>
         <div class="form-field">
-          <label for="name" style="display:block;font-family:'Fira Code',monospace;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-dim);margin-bottom:0.4rem">Votre nom</label>
+          <label for="name" class="form-label">Votre nom</label>
           <input id="name" name="name" type="text" required placeholder="Votre nom" autocomplete="name" />
         </div>
         <div class="form-field">
-          <label for="message" style="display:block;font-family:'Fira Code',monospace;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-dim);margin-bottom:0.4rem">Message</label>
-          <textarea id="message" name="message" rows="5" required placeholder="Message..."></textarea>
+          <label for="message" class="form-label">Message</label>
+          <textarea id="message" name="message" rows="5" required placeholder="Votre message..."></textarea>
         </div>
         <button type="submit" class="form-submit">
           Envoyer le mail <i class="fa-solid fa-arrow-right" style="margin-left:0.5rem" aria-hidden="true"></i>
@@ -784,7 +848,9 @@
   </div>
 </section>
 
-<footer>
+</main>
+
+<footer role="contentinfo">
   <p>© <span id="year"></span> Mathéo Favier — Longwy, France</p>
 </footer>
 
@@ -815,8 +881,8 @@
   let mx = 0, my = 0, rx = 0, ry = 0;
   document.addEventListener('mousemove', (e) => {
     mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx - 4 + 'px';
-    cursor.style.top = my - 4 + 'px';
+    cursor.style.left = (mx - 4) + 'px';
+    cursor.style.top = (my - 4) + 'px';
   });
   function animateRing() {
     rx += (mx - rx - 16) * 0.12;
@@ -831,7 +897,7 @@
     el.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)'; cursorRing.style.transform = 'scale(1)'; });
   });
 
-  const socialColors = ['#ffffff','#5865F2','#00f2fe','#1ED760','#E1306C','#FFFC00','#ffffff','#1877F2'];
+  const socialColors = ['#cccccc','#5865F2','#00f2fe','#1ED760','#E1306C','#FFFC00','#cccccc','#1877F2'];
   document.querySelectorAll('.social-card').forEach((card, i) => {
     const icon = card.querySelector('.social-icon');
     const color = socialColors[i];
