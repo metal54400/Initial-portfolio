@@ -255,10 +255,32 @@
     </div>
     
     <div style="margin-top:auto">
+       <a href="https://orinstone.deepstone.fr/" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--cyan)">
+          <i class="fa-solid fa-globe" aria-hidden="true"></i> Site Web Orinstone
+        </a>
       <div style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:0.75rem">
         <a href="https://discord.gg/CgpbEE9Uz9" target="_blank" rel="noopener noreferrer" class="plugin-link" style="color:var(--cyan)">
           <i class="fa-brands fa-discord" aria-hidden="true"></i> Discord Orinstone
         </a>
+
+               <button 
+    onclick="copyIP(this, 'java.orinstone.deepstone.fr')" 
+    class="copy-ip-btn" 
+    aria-label="Copier l'adresse IP Java du serveur Orinstone"
+  >
+    <i class="fa-solid fa-copy" aria-hidden="true"></i>
+    <span>Copier l'IP (java.orinstone.deepstone.fr)</span>
+  </button>
+
+           <button 
+    onclick="copyIP(this, 'bedrock.orinstone.deepstone.fr:25565')" 
+    class="copy-ip-btn" 
+    aria-label="Copier l'adresse IP Bedrock du serveur Orinstone"
+  >
+    <i class="fa-solid fa-copy" aria-hidden="true"></i>
+    <span>Copier l'IP (bedrock.orinstone.deepstone.fr:25565)</span>
+  </button>
+   
       </div>
       <p style="font-family:'Fira Code',monospace;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-dim);margin:0">Pôle Gaming</p>
     </div>
@@ -645,6 +667,7 @@
       </form>
     </div>
   </div>
+
 </section>
 
 </main>
